@@ -127,11 +127,14 @@
     <ClCompile Include="include\String.cpp" />
     <ClCompile Include="include\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\helpers\CommandsProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\File.h" />
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Vector.h" />
+    <ClInclude Include="src\config\Config.cpp" />
+    <ClInclude Include="src\helpers\CommandsProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

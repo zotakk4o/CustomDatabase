@@ -225,7 +225,7 @@ const char& String::operator[](const unsigned int& index) const {
 	return this->str[index];
 }
 
-int String::indexOf(const char* str) {
+int String::indexOf(const char* str) const{
 	unsigned int strLength = strLen(str);
 
 	for (size_t i = 0; i < this->length; i++)
@@ -250,7 +250,7 @@ int String::indexOf(const char* str) {
 	return -1;
 }
 
-int String::indexOf(const char& character) {
+int String::indexOf(const char& character) const{
 	for (size_t i = 0; i < this->length; i++)
 	{
 		if (this->str[i] == character) {
@@ -261,7 +261,7 @@ int String::indexOf(const char& character) {
 	return -1;
 }
 
-int String::indexOf(const String& other) {
+int String::indexOf(const String& other) const{
 	return this->indexOf(other.str);
 }
 

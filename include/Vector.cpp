@@ -1,6 +1,8 @@
-#include "Vector.h"
+#ifndef VECTOR_CPP
+#define VECTOR_CPP
 #include<iostream>
 #include<assert.h>
+#include "Vector.h"
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
 
@@ -35,7 +37,7 @@ unsigned int Vector<T>::getCapacity() const {
 
 template<typename T>
 void Vector<T>::reserve() {
-	this->capacity *= 2;
+	this->capacity = this->capacity == 0 ? 1 : this->capacity * 2;
 
 	this->copy(*this);
 }
@@ -59,7 +61,7 @@ void Vector<T>::copy(const Vector<T>& other) {
 		throw NO_FREE_MEM_ERR;
 	}
 
-	for (size_t i = 0; i < other.size; i++)
+	for (unsigned int i = 0; i < other.size; i++)
 	{
 		newArr[i] = other.data[i];
 	}
@@ -67,6 +69,8 @@ void Vector<T>::copy(const Vector<T>& other) {
 	this->deleteInternals();
 	this->data = newArr;
 }
+
+
 
 template<typename T>
 Vector<T>::Vector(const Vector<T>& other) : size(0), capacity(0), data(nullptr) {
@@ -82,6 +86,13 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
 	}
 
 	return *this;
+}
+
+template<typename T>
+Vector<T>::Vector(std::initializer_list<T> list) : size(0), capacity(0), data(nullptr) {
+	for (const T* it = begin(list); it != end(list); ++it) {
+		this->pushBack(*it);
+	}
 }
 
 template<typename T>
@@ -114,9 +125,20 @@ bool Vector<T>::popBack() {
 }
 
 template<typename T>
+int Vector<T>::indexOf(const T& item) const {
+	for (unsigned int i = 0; i < this->size; i++)
+	{
+		if (this->data[i] == item) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+template<typename T>
 void Vector<T>::print() const {
 	std::cout << "[";
-	for (size_t i = 0; i < this->size; i++)
+	for (unsigned int i = 0; i < this->size; i++)
 	{
 		if (i == this->size - 1) {
 			std::cout << this->data[this->size - 1];
@@ -132,3 +154,5 @@ template<typename T>
 void Vector<T>::deleteInternals() {
 	delete[] this->data;
 }
+
+#endif

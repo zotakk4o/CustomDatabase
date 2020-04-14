@@ -1,5 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include<initializer_list>
 
 template<typename T>
 class Vector {
@@ -14,6 +15,7 @@ private:
 public:
 	Vector(const unsigned int& = 1);
 	Vector(const Vector<T>&);
+	Vector(std::initializer_list<T>);
 	~Vector();
 	Vector<T>& operator=(const Vector<T>&);
 
@@ -24,6 +26,8 @@ public:
 	bool popBack();
 	bool isFull() const;
 	bool isEmpty() const;
+
+	int indexOf(const T&) const;
 
 	unsigned int getSize() const;
 	unsigned int getCapacity() const;

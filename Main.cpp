@@ -1,10 +1,8 @@
 #include<iostream>
-#include "include/String.h"
+#include "src/helpers/CommandsProcessor.h"
 
 int main() {
-	String test = "Sosho, Tosho, Pesho, Sasho, Gosho";
-	Vector<String> res = test.split();
-	res.print();
-	
+	CommandsProcessor::start();
+
 	return 0;
 }

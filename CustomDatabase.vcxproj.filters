@@ -27,6 +27,9 @@
     <ClCompile Include="include\Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\helpers\CommandsProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
@@ -37,6 +40,12 @@
     </ClInclude>
     <ClInclude Include="include\Vector.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\helpers\CommandsProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\Config.cpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

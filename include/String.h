@@ -1,7 +1,8 @@
 #ifndef STRING_H
 #define STRING_H
-#include "Vector.cpp"
 #include<ostream>
+#include "Vector.cpp"
+
 
 class String {
 	private:
@@ -43,9 +44,9 @@ class String {
 
 		friend std::ostream& operator<<(std::ostream&, const String&);
 
-		int indexOf(const char*);
-		int indexOf(const char&);
-		int indexOf(const String&);
+		int indexOf(const char*) const;
+		int indexOf(const char&) const;
+		int indexOf(const String&) const;
 
 		String substring(const unsigned int&, const unsigned int& = 0);
 		Vector<String> split(const char& = ',');

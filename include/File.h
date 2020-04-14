@@ -1,8 +1,8 @@
 #ifndef DBFILE_H
 #define DBFILE_H
-
-#include "String.h"
 #include<fstream>
+#include "String.h"
+
 
 class File {
 	private:
