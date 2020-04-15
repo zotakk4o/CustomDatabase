@@ -6,7 +6,7 @@
 
 bool File::open(const String& filename) {
 	std::fstream fs;
-	fs.open(filename.getConstChar(), std::fstream::in| std::fstream::ate);
+	fs.open(filename.getConstChar(), std::fstream::in | std::fstream::ate);
 
 	if (!fs.is_open()) {
 		fs.close();
