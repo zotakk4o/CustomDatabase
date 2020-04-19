@@ -8,6 +8,7 @@ private:
 	T* data;
 	unsigned int size;
 	unsigned int capacity;
+	static const unsigned short defaultCapacity;
 
 	void copy(const Vector<T>&);
 	void deleteInternals();

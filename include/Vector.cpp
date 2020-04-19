@@ -7,6 +7,9 @@
 #define NO_FREE_MEM_ERR "Error: No free memory!"
 
 template<typename T>
+const unsigned short Vector<T>::defaultCapacity = 10;
+
+template<typename T>
 Vector<T>::~Vector() {
 	this->deleteInternals();
 };
@@ -37,13 +40,13 @@ unsigned int Vector<T>::getCapacity() const {
 
 template<typename T>
 void Vector<T>::reserve() {
-	this->capacity = this->capacity == 0 ? 1 : this->capacity * 2;
+	this->capacity = this->capacity == 0 ? this->defaultCapacity : this->capacity * 2;
 
 	this->copy(*this);
 }
 
 template<typename T>
-Vector<T>::Vector(const unsigned int& capacity) : size(0), capacity(capacity), data(nullptr) {
+Vector<T>::Vector(const unsigned int& capacity) : data(nullptr) {
 	assert(capacity > 0);
 
 	this->size = 0;
