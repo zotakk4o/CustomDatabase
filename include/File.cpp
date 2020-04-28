@@ -14,6 +14,7 @@ bool File::open(const String& filename) {
 		if (fs.is_open()) {
 			std::cout << "Successfully opened \"" << filename << "\"." << std::endl;
 			fs.close();
+			this->opened = true;
 			return true;
 		}
 
@@ -44,8 +45,10 @@ bool File::open(const String& filename) {
 	delete[] res;
 
 	fs.close();
+	this->opened = true;
 
 	std::cout << "Successfully opened \"" << filename << "\"." << std::endl;
+
 	return true;
 }
 
@@ -75,13 +78,17 @@ bool File::saveData(const String& filename) {
 	}
 
 	fs.close();
+	this->opened = false;
+
 	std::cout << "Successfully saved \"" << filename << "\"." << std::endl;
+	
 	return true;
 }
 
 void File::close() {
 	this->data = "";
 	this->name = "";
+	this->opened = false;
 }
 
 void File::setData(const String& newData) {
@@ -94,4 +101,8 @@ String File::getData() const {
 
 String File::getName() const {
 	return this->name;
+}
+
+bool File::isOpened() const {
+	return this->opened;
 }

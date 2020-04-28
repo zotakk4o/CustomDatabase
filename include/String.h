@@ -9,10 +9,12 @@ class String {
 		char* str;
 		unsigned int length;
 		unsigned int capacity;
+		static const unsigned short defaultCapacity;
 
-		void reserve(const unsigned int& = 0);
+		void reserve(unsigned int);
 		void copy(const String& other);
 		void deleteInternals();
+		std::istream& readFromStream(std::istream&, bool = false);
 	public:
 		String(const char* = "");
 		String(const String&);
@@ -42,14 +44,16 @@ class String {
 		char& operator[](const unsigned int&);
 		const char& operator[](const unsigned int&) const;
 
+		static std::istream& getLine(std::istream&, String&);
+		friend std::istream& operator>>(std::istream&, String&);
 		friend std::ostream& operator<<(std::ostream&, const String&);
 
 		int indexOf(const char*) const;
 		int indexOf(const char&) const;
 		int indexOf(const String&) const;
 
-		String substring(const unsigned int&, const unsigned int& = 0);
-		Vector<String> split(const char& = ',');
+		String substring(const unsigned int&, const unsigned int& = 0) const;
+		Vector<String> split(const char& = ',') const;
 
 		unsigned int getLength() const;
 		unsigned int getCapacity() const;

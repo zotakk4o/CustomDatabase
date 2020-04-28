@@ -3,11 +3,11 @@
 #include<fstream>
 #include "String.h"
 
-
 class File {
 	private:
 		String data;
 		String name;
+		bool opened;
 
 		bool saveData(const String&);
 	public:
@@ -19,5 +19,6 @@ class File {
 
 		String getData() const;
 		String getName() const;
+		bool isOpened() const;
 };
 #endif

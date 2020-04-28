@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <ObjectFileName>$(IntDir)%(RelativeDir)\</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -87,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <ObjectFileName>$(IntDir)%(RelativeDir)\</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,6 +102,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <ObjectFileName>$(IntDir)%(RelativeDir)\</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,6 +118,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <ObjectFileName>$(IntDir)%(RelativeDir)\</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,18 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\FileCommandsProcessor\config\Config.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\config\Errors.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\config\Messages.cpp" />
     <ClCompile Include="include\File.cpp" />
     <ClCompile Include="include\String.cpp" />
     <ClCompile Include="include\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="src\helpers\CommandsProcessor.cpp" />
+    <ClCompile Include="src\config\Errors.cpp" />
+    <ClCompile Include="src\config\Messages.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp" />
+    <ClCompile Include="src\DBCommandsProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\File.h" />
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="src\config\Config.cpp" />
-    <ClInclude Include="src\helpers\CommandsProcessor.h" />
+    <ClInclude Include="include\FileCommandsProcessor\FileCommandsProcessor.h" />
+    <ClInclude Include="src\DBCommandsProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

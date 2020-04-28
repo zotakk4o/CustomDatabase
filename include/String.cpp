@@ -2,7 +2,6 @@
 #define STRING_CPP
 #include<new>
 #include<assert.h>
-#include<iostream>
 #include "String.h"
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
@@ -79,6 +78,8 @@ void strConcat(char* destination, const char* source) {
 	destination[destinationLength + sourceLength] = '\0';
 }
 
+const unsigned short String::defaultCapacity = 50; //This capacity will be doubled
+
 String::String(const char* _str) : capacity(0), length(0), str(nullptr) {
 	assert(_str != nullptr);
 
@@ -131,7 +132,6 @@ String String::operator+(const String& other) {
 		result.reserve(max(strLength, result.length));
 	}
 
-	strConcat(result.str, this->str);
 	strConcat(result.str, other.str);
 	result.length += strLength;
 
@@ -154,11 +154,10 @@ String String::operator+(const char& character) {
 	String result = *this;
 
 	if (result.length + 1 >= result.capacity) {
-		result.reserve(max(1, result.length));
+		result.reserve(result.length);
 	}
 
-	result.str[result.length] = character;
-	result.length++;
+	result.str[result.length++] = character;
 	result.str[result.length] = '\0';
 
 	return result;
@@ -205,6 +204,14 @@ bool String::operator>=(const String& other) {
 }
 bool String::operator<=(const String& other) {
 	return strCompare(this->str, other.str) <= 0;
+}
+
+std::istream& operator>>(std::istream& stream, String& string) {
+	return string.readFromStream(stream);
+}
+
+std::istream& String::getLine(std::istream& stream, String& string) {
+	return string.readFromStream(stream, true);
 }
 
 std::ostream& operator<<(std::ostream& stream, const String& string) {
@@ -265,7 +272,7 @@ int String::indexOf(const String& other) const{
 	return this->indexOf(other.str);
 }
 
-String String::substring(const unsigned int& first, const unsigned int& length) {
+String String::substring(const unsigned int& first, const unsigned int& length) const {
 	assert(length >= 0 && first >= 0 && length < this->length && first + length <= length);
 
 	String res;
@@ -278,7 +285,7 @@ String String::substring(const unsigned int& first, const unsigned int& length) 
 	return res;
 }
 
-Vector<String> String::split(const char& delimiter) {
+Vector<String> String::split(const char& delimiter) const {
 	Vector<String> res;
 	String currWord;
 
@@ -309,13 +316,10 @@ const char* const String::getConstChar() const{
 	return this->str;
 }
 
-void String::reserve(const unsigned int& capacity) {
-	if (capacity == 0) {
-		this->capacity = this->capacity * 2 + 1;
-	}
-	else {
-		this->capacity += capacity * 2;
-	}
+void String::reserve(unsigned int capacity) {
+	capacity = max(capacity, this->defaultCapacity);
+
+	this->capacity += capacity * 2;
 
 	this->copy(*this);
 }
@@ -338,5 +342,42 @@ void String::copy(const String& other) {
 
 void String::deleteInternals() {
 	delete[] this->str;
+}
+
+std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
+	char currSymbol;
+	unsigned int index = 0;
+	unsigned int currSize = 100;
+	char* tempStr = new (std::nothrow) char[currSize];
+
+	if (tempStr == nullptr) {
+		throw NO_FREE_MEM_ERR;
+	}
+
+	do {
+		stream.get(currSymbol);
+
+		if (index % 100 == 0 && index != 0) {
+			currSize += 100;
+			char* extendedStr = new (std::nothrow) char[currSize];
+
+			if (extendedStr == nullptr) {
+				throw NO_FREE_MEM_ERR;
+			}
+
+			strcpy_s(extendedStr, currSize - 100, tempStr);
+			delete[] tempStr;
+			tempStr = extendedStr;
+		}
+
+		tempStr[index++] = currSymbol;
+
+	} while (whileNewLine ? currSymbol != '\n' : currSymbol != ' ' && currSymbol != '\n');
+
+	tempStr[index - 1] = '\0';
+	*this = tempStr;
+	delete[] tempStr;
+
+	return stream;
 }
 #endif // !STRING_CPP
