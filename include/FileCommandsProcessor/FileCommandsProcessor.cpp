@@ -64,12 +64,7 @@ void FileCommandsProcessor<T>::parseInput() {
 		String::getLine(std::cin, command);
 		FileCommandsProcessor::parseFileCommand(command, file);
 
-		try {
-			T::parseCommands(command, file);
-		}
-		catch (const std::exception & e) {
-			throw FCPErrors::noHookFunctionError;
-		}
+		T::parseCommands(command, file);
 	}
 
 }

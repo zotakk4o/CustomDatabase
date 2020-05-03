@@ -138,6 +138,8 @@
     <ClCompile Include="src\config\Messages.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp" />
     <ClCompile Include="src\DBCommandsProcessor.cpp" />
+    <ClCompile Include="src\FilesHandlers\DBFile.cpp" />
+    <ClCompile Include="src\FilesHandlers\TableFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\File.h" />
@@ -146,6 +148,8 @@
     <ClInclude Include="src\config\Config.cpp" />
     <ClInclude Include="include\FileCommandsProcessor\FileCommandsProcessor.h" />
     <ClInclude Include="src\DBCommandsProcessor.h" />
+    <ClInclude Include="src\FilesHandlers\DBFile.h" />
+    <ClInclude Include="src\FilesHandlers\TableFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

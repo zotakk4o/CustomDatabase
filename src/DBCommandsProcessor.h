@@ -7,7 +7,7 @@
 
 class DBCommandsProcessor : private FileCommandsProcessor<DBCommandsProcessor>{
 	public:
-		static void parseCommands(const String&, File&);
+		static void parseCommands(const String&, const File&);
 		static void start();
 };
 

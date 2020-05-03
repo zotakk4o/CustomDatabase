@@ -4,21 +4,29 @@
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
 
-bool File::open(const String& filename) {
+File::File(const String& path) : data(""), path(path), opened(false) {}
+
+File::File(const File& other) {
+	this->data = other.data;
+	this->path = other.path;
+	this->opened = other.opened;
+}
+
+bool File::open(const String& fileName) {
 	std::fstream fs;
-	fs.open(filename.getConstChar(), std::fstream::in | std::fstream::ate);
+	fs.open(fileName.getConstChar(), std::fstream::in | std::fstream::ate);
 
 	if (!fs.is_open()) {
-		fs.open(filename.getConstChar(), std::fstream::out);
+		fs.open(fileName.getConstChar(), std::fstream::out);
 
 		if (fs.is_open()) {
-			std::cout << "Successfully opened \"" << filename << "\"." << std::endl;
+			std::cout << "Successfully opened \"" << fileName << "\"." << std::endl;
 			fs.close();
 			this->opened = true;
 			return true;
 		}
 
-		std::cout << "\"" << filename << "\" could not be opened due to an error." << std::endl;
+		std::cout << "\"" << fileName << "\" could not be opened due to an error." << std::endl;
 		return false;
 	}
 
@@ -47,14 +55,14 @@ bool File::open(const String& filename) {
 	fs.close();
 	this->opened = true;
 
-	std::cout << "Successfully opened \"" << filename << "\"." << std::endl;
+	std::cout << "Successfully opened \"" << fileName << "\"." << std::endl;
 
 	return true;
 }
 
 
-bool File::save() noexcept {
-	return this->saveData(this->name);
+bool File::save() {
+	return this->saveData(this->path);
 }
 
 bool File::saveAs(const String& filename) {
@@ -87,7 +95,7 @@ bool File::saveData(const String& filename) {
 
 void File::close() {
 	this->data = "";
-	this->name = "";
+	this->path = "";
 	this->opened = false;
 }
 
@@ -99,8 +107,8 @@ String File::getData() const {
 	return this->data;
 }
 
-String File::getName() const {
-	return this->name;
+String File::getPath() const {
+	return this->path;
 }
 
 bool File::isOpened() const {
