@@ -1,12 +1,6 @@
 #include "TableFile.h"
 
-TableFile::TableFile(const String& name, const String& path) : File(path) {
-	if (name.getLength() == 0) {
-		throw;//TODO
-	}
-
-	this->tableName = name;
-}
+TableFile::TableFile(const String& name, const String& path) : File(path), tableName(name) {}
 
 TableFile::TableFile(const File& other) : File(other) {}
 

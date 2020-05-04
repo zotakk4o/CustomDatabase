@@ -13,6 +13,10 @@ File::File(const File& other) {
 }
 
 bool File::open(const String& fileName) {
+	if (this->opened) {
+		return false;
+	}
+
 	std::fstream fs;
 	fs.open(fileName.getConstChar(), std::fstream::in | std::fstream::ate);
 
@@ -70,6 +74,10 @@ bool File::saveAs(const String& filename) {
 }
 
 bool File::saveData(const String& filename) {
+	if (!this->opened) {
+		return false;
+	}
+
 	std::fstream fs;
 	fs.open(filename.getConstChar(), std::fstream::out | std::fstream::trunc);
 
@@ -93,10 +101,16 @@ bool File::saveData(const String& filename) {
 	return true;
 }
 
-void File::close() {
+bool File::close() {
+	if (!this->opened) {
+		return false;
+	}
+
 	this->data = "";
 	this->path = "";
 	this->opened = false;
+
+	return true;
 }
 
 void File::setData(const String& newData) {

@@ -64,7 +64,7 @@ void Vector<T>::copy(const Vector<T>& other) {
 		throw NO_FREE_MEM_ERR;
 	}
 
-	for (unsigned int i = 0; i < other.size; i++)
+	for (unsigned int i = 0; i < this->size; i++)
 	{
 		newArr[i] = other.data[i];
 	}

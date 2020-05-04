@@ -28,18 +28,18 @@ class String {
 		String operator+(const char*);
 		String operator+(const char&);
 
-		bool operator==(const String&);
-		bool operator==(const char*);
-		bool operator!=(const char*);
-		bool operator!=(const String&);
-		bool operator>(const String&);
-		bool operator>(const char*);
-		bool operator<(const char*);
-		bool operator<(const String&);
-		bool operator>=(const char*);
-		bool operator<=(const char*);
-		bool operator>=(const String&);
-		bool operator<=(const String&);
+		bool operator==(const String&) const;
+		bool operator==(const char*) const;
+		bool operator!=(const char*) const;
+		bool operator!=(const String&) const;
+		bool operator>(const String&) const;
+		bool operator>(const char*) const;
+		bool operator<(const char*) const;
+		bool operator<(const String&) const;
+		bool operator>=(const char*) const;
+		bool operator<=(const char*) const;
+		bool operator>=(const String&) const;
+		bool operator<=(const String&) const;
 
 		char& operator[](const unsigned int&);
 		const char& operator[](const unsigned int&) const;
@@ -52,7 +52,7 @@ class String {
 		int indexOf(const char&) const;
 		int indexOf(const String&) const;
 
-		String substring(const unsigned int&, const unsigned int& = 0) const;
+		String substring(const unsigned int& first, const unsigned int& length) const;
 		Vector<String> split(const char& = ',') const;
 
 		unsigned int getLength() const;

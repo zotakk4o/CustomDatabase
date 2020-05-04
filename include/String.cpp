@@ -163,46 +163,46 @@ String String::operator+(const char& character) {
 	return result;
 }
 
-bool String::operator==(const String& other) {
+bool String::operator==(const String& other) const {
 	return strCompare(this->str, other.str) == 0;
 }
-bool String::operator==(const char* str) {
+bool String::operator==(const char* str) const {
 	return strCompare(this->str, str) == 0;
 }
 
-bool String::operator!=(const char* str) {
+bool String::operator!=(const char* str) const {
 	return !(*this == str);
 }
 
-bool String::operator!=(const String& other) {
+bool String::operator!=(const String& other) const {
 	return !(*this == other);
 }
 
-bool String::operator>(const String& other) {
+bool String::operator>(const String& other) const {
 	return strCompare(this->str, other.str) == 1;
 }
-bool String::operator>(const char* str) {
+bool String::operator>(const char* str) const {
 	return strCompare(this->str, str) == 1;
 }
 
-bool String::operator<(const String& other) {
+bool String::operator<(const String& other) const {
 	return strCompare(this->str, other.str) == -1;
 }
 
-bool String::operator<(const char* str) {
+bool String::operator<(const char* str) const {
 	return strCompare(this->str, str) == -1;
 }
 
-bool String::operator>=(const char* str) {
+bool String::operator>=(const char* str) const {
 	return strCompare(this->str, str) >= 0;
 }
-bool String::operator<=(const char* str) {
+bool String::operator<=(const char* str) const {
 	return strCompare(this->str, str) <= 0;
 }
-bool String::operator>=(const String& other) {
+bool String::operator>=(const String& other) const {
 	return strCompare(this->str, other.str) >= 0;
 }
-bool String::operator<=(const String& other) {
+bool String::operator<=(const String& other) const {
 	return strCompare(this->str, other.str) <= 0;
 }
 

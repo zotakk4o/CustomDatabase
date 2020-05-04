@@ -4,12 +4,14 @@
 #include "String.h"
 
 class File {
+	private:
+		bool saveData(const String&);
+
 	protected:
 		String data;
 		String path;
 		bool opened;
-
-		bool saveData(const String&);
+		
 	public:
 		File(const String& = "");
 		File(const File&);
@@ -17,7 +19,7 @@ class File {
 		bool open(const String&);
 		bool save();
 		bool saveAs(const String&);
-		void close();
+		bool close();
 		void setData(const String&);
 
 		String getData() const;

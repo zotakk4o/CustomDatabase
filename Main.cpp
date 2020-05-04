@@ -1,8 +1,8 @@
 #include<iostream>
 #include "src/DBCommandsProcessor.h"
-#include "include/String.h"
 
 int main() {
+	
 	try
 	{
 		DBCommandsProcessor::start();

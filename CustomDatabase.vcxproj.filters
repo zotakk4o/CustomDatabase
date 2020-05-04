@@ -33,16 +33,10 @@
     <ClCompile Include="src\config\Errors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\FileCommandsProcessor\config\Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\FileCommandsProcessor\config\Errors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\FileCommandsProcessor\config\Messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\DBCommandsProcessor.cpp">
@@ -52,6 +46,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\FilesHandlers\TableFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\OpenCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\ExitCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\SaveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\SaveAsCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\HelpCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\CloseCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\config\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +96,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\FilesHandlers\DBFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\OpenCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\ExitCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\SaveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommandParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\SaveAsCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommandValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\HelpCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\CloseCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
