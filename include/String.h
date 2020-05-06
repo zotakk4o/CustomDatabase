@@ -52,6 +52,7 @@ class String {
 		int indexOf(const char&) const;
 		int indexOf(const String&) const;
 
+		String reverse() const;
 		String substring(const unsigned int& first, const unsigned int& length) const;
 		Vector<String> split(const char& = ',') const;
 

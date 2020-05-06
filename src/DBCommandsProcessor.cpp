@@ -2,6 +2,10 @@
 #include "../include/FileCommandsProcessor/FileCommandsProcessor.h"
 #include "FilesHandlers/DBFile.h"
 
+Vector<String> DBCommandsProcessor::getAllowedExtensions() {
+	return {".csv"};
+}
+
 void DBCommandsProcessor::parseCommands() {
 	String command;
 	DBFile dbFile;
@@ -9,8 +13,10 @@ void DBCommandsProcessor::parseCommands() {
 	while (true)
 	{
 		String::getLine(std::cin, command);
-		DBCommandsProcessor::parseFileCommand(command, dbFile);
-		DBCommandsProcessor::parseDBCommand(command, dbFile);
+
+		this->parseFileCommand(command, dbFile);
+
+		this->parseDBCommand(command, dbFile);
 
 	}
 }
@@ -20,5 +26,5 @@ void DBCommandsProcessor::parseDBCommand(const String& command, DBFile& dbFile) 
 }
 
 void DBCommandsProcessor::start() {
-	DBCommandsProcessor::parseCommands();
+	this->parseCommands();
 }

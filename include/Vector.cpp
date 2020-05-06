@@ -46,10 +46,9 @@ void Vector<T>::reserve() {
 }
 
 template<typename T>
-Vector<T>::Vector(const unsigned int& capacity) : data(nullptr) {
+Vector<T>::Vector(const unsigned int& capacity) : size(0), capacity(0), data(nullptr) {
 	assert(capacity > 0);
 
-	this->size = 0;
 	this->capacity = capacity;
 	this->reserve();
 }
@@ -136,6 +135,19 @@ int Vector<T>::indexOf(const T& item) const {
 		}
 	}
 	return -1;
+}
+
+template<typename T>
+Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) {
+	assert(beginning >= 0 && end < this->size && beginning < end);
+
+	Vector<T> res;
+	for (unsigned int i = beginning; i <= end; i++)
+	{
+		res.pushBack(this->data[i]);
+	}
+
+	return res;
 }
 
 template<typename T>

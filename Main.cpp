@@ -2,10 +2,10 @@
 #include "src/DBCommandsProcessor.h"
 
 int main() {
-	
 	try
 	{
-		DBCommandsProcessor::start();
+		DBCommandsProcessor processor;
+		processor.start();
 	}
 	catch (const String& err)
 	{

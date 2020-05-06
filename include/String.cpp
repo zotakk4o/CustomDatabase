@@ -8,7 +8,7 @@
 
 unsigned int strLen(const char* str) {
 	unsigned int res = 0;
-	for (size_t i = 0; str[i]; i++)
+	for (unsigned int i = 0; str[i]; i++)
 	{
 		res++;
 	}
@@ -29,7 +29,7 @@ short strCompare(const char* first, const char* second) {
 	unsigned int secondLength = strLen(second);
 
 	unsigned int minLength = min(firstLength, secondLength);
-	for (size_t i = 0; i < minLength; i++)
+	for (unsigned int i = 0; i < minLength; i++)
 	{
 		if (first[i] < second[i]) {
 			return -1;
@@ -56,7 +56,7 @@ void strCopy(const char* source, char* destination) {
 	
 	assert(destinationLength >= sourceLength);
 
-	for (size_t i = 0; i < sourceLength; i++)
+	for (unsigned int i = 0; i < sourceLength; i++)
 	{
 		destination[i] = source[i];
 	}
@@ -69,7 +69,7 @@ void strConcat(char* destination, const char* source) {
 	unsigned int destinationLength = strLen(destination);
 	unsigned int sourceIndex = 0;
 
-	for (size_t i = destinationLength; i < destinationLength + sourceLength; i++)
+	for (unsigned int i = destinationLength; i < destinationLength + sourceLength; i++)
 	{
 		destination[i] = source[sourceIndex];
 		sourceIndex++;
@@ -235,14 +235,14 @@ const char& String::operator[](const unsigned int& index) const {
 int String::indexOf(const char* str) const{
 	unsigned int strLength = strLen(str);
 
-	for (size_t i = 0; i < this->length; i++)
+	for (unsigned int i = 0; i < this->length; i++)
 	{
 		if (i + strLength - 1 >= this->length) {
 			return -1;
 		}
 
 		if (this->str[i] == str[0]) {
-			for (size_t j = 1; j < strLength; j++)
+			for (unsigned int j = 1; j < strLength; j++)
 			{
 				if (this->str[i + j] != str[j]) {
 					return -1;
@@ -258,7 +258,7 @@ int String::indexOf(const char* str) const{
 }
 
 int String::indexOf(const char& character) const{
-	for (size_t i = 0; i < this->length; i++)
+	for (unsigned int i = 0; i < this->length; i++)
 	{
 		if (this->str[i] == character) {
 			return i;
@@ -272,12 +272,23 @@ int String::indexOf(const String& other) const{
 	return this->indexOf(other.str);
 }
 
+String String::reverse() const {
+	String res;
+
+	for (int i = this->length - 1; i >= 0; i--)
+	{
+		res += this->str[i];
+	}
+
+	return res;
+}
+
 String String::substring(const unsigned int& first, const unsigned int& length) const {
 	assert(length >= 0 && first >= 0 && length < this->length && first + length <= length);
 
 	String res;
 
-	for (size_t i = first; i < first + length; i++)
+	for (unsigned int i = first; i < first + length; i++)
 	{
 		res += this->str[i];
 	}
@@ -289,7 +300,7 @@ Vector<String> String::split(const char& delimiter) const {
 	Vector<String> res;
 	String currWord;
 
-	for (size_t i = 0; i < this->length; i++)
+	for (unsigned int i = 0; i < this->length; i++)
 	{
 		if (this->str[i] == delimiter) {
 			res.pushBack(currWord);
