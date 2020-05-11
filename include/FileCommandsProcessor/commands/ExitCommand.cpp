@@ -2,9 +2,10 @@
 #include <iostream>
 #include "ExitCommand.h"
 #include "../config/Messages.cpp"
+#include "../config/FCPConfig.h"
 
 void ExitCommand::execute() {
-	std::cout << FCPMessages::exitMessage << std::endl;
+	FCPConfig::logger.log(FCPMessages::exitMessage);
 	exit(EXIT_SUCCESS);
 }
 

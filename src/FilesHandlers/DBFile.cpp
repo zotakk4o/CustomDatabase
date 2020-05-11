@@ -1,9 +1,19 @@
 #include<iostream>
 #include "DBFile.h"
 
-DBFile::DBFile(const String& path) : File(path) {}
+DBFile::DBFile(const ILogger* _logger, const String& path) : File(_logger, path) {};
+DBFile::DBFile(const DBFile& other) : File(other), tableFiles(tableFiles) {};
 
-DBFile::DBFile(const File& other) : File(other) {
+bool DBFile::open(const String& fileName) {
+
+	if (!this->File::open(fileName)) {
+		return false;
+	}
+
+	if (!this->data.getLength()) {
+		return true;
+	}
+
 	Vector<String> tableRows = this->data.split('\n');
 
 	for (unsigned int i = 0; i < tableRows.getSize(); i++)
@@ -14,14 +24,16 @@ DBFile::DBFile(const File& other) : File(other) {
 			throw;//TODO
 		}
 
-		this->tableFiles.pushBack(TableFile{tableData[0], tableData[1]});
+		this->tableFiles.pushBack(TableFile{this->logger, tableData[0], tableData[1] });
 	}
+
+	return true;
 }
 
 void DBFile::showTables() const {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
-		std::cout << (i + 1) << ". " << this->tableFiles[i].getTableName() << std::endl;
+		this->logger->log(String{ (i + 1) + "0" } +". " + this->tableFiles[i].getTableName());
 	}
 }
 

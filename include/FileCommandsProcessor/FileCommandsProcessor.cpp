@@ -2,19 +2,18 @@
 #define FILECOMMANDSPROCESSOR_CPP
 
 #include "FileCommandsProcessor.h"
-#include "config/Config.cpp"
+#include "config/FCPConfig.h"
 #include "config/Messages.cpp"
 #include "config/Errors.cpp"
-#include <iostream>
 
 bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) {
 	for (unsigned short i = 0; i < filePaths.getSize(); i++)
 	{
-		unsigned short extensionIndex = filePaths[i].reverse().indexOf('.');
+		unsigned short extensionIndex = filePaths[i].getLength() - filePaths[i].reverse().indexOf('.') - 1;
 		String extension = filePaths[i].substring(extensionIndex, filePaths[i].getLength() - extensionIndex);
 
 		if (this->getAllowedExtensions().indexOf(extension) == -1) {
-			std::cout << FCPMessages::wrongFileFormatMessage;
+			FCPConfig::logger.log(FCPMessages::wrongFileFormatMessage);
 			return false;
 		}
 	}

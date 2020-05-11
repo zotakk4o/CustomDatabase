@@ -1,7 +1,7 @@
 #include "DBCommandsProcessor.h"
 #include "../include/FileCommandsProcessor/FileCommandsProcessor.h"
 #include "FilesHandlers/DBFile.h"
-#include "config/Config.cpp"
+#include "config/DCPConfig.h"
 
 Vector<String> DBCommandsProcessor::getAllowedExtensions() {
 	return {".csv"};
@@ -13,7 +13,7 @@ void DBCommandsProcessor::parseCommands() {
 
 	while (true)
 	{
-		String::getLine(std::cin, command);
+		String::getLine(DCPConfig::inputStream, command);
 
 		this->parseFileCommand(command, dbFile);
 

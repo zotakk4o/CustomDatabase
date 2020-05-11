@@ -1,8 +1,8 @@
 #include "TableFile.h"
 
-TableFile::TableFile(const String& name, const String& path) : File(path), tableName(name) {}
+TableFile::TableFile(const ILogger* _logger, const String& name, const String& path) : File(_logger, path), tableName(name) {};
 
-TableFile::TableFile(const File& other) : File(other) {}
+TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName) {};
 
 void TableFile::describe() const {
 

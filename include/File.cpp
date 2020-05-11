@@ -4,13 +4,11 @@
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
 
-File::File(const String& path) : data(""), path(path), opened(false) {}
+File::~File() {};
 
-File::File(const File& other) {
-	this->data = other.data;
-	this->path = other.path;
-	this->opened = other.opened;
-}
+File::File(const ILogger* _logger, const String& path) : logger(_logger), data(""), path(path), opened(false) {};
+
+File::File(const File& other) : logger(other.logger), data(other.data), path(other.path), opened(other.opened) {};
 
 bool File::open(const String& fileName) {
 	if (this->opened) {
@@ -24,13 +22,13 @@ bool File::open(const String& fileName) {
 		fs.open(fileName.getConstChar(), std::fstream::out);
 
 		if (fs.is_open()) {
-			std::cout << "Successfully opened \"" << fileName << "\"." << std::endl;
+			this->logger->log(String{ "Successfully opened \"" } + fileName + "\".");
 			fs.close();
 			this->opened = true;
 			return true;
 		}
 
-		std::cout << "\"" << fileName << "\" could not be opened due to an error." << std::endl;
+		this->logger->log(String{ "\"" } +fileName + "\" could not be opened due to an error.");
 		return false;
 	}
 
@@ -59,7 +57,7 @@ bool File::open(const String& fileName) {
 	fs.close();
 	this->opened = true;
 
-	std::cout << "Successfully opened \"" << fileName << "\"." << std::endl;
+	this->logger->log(String{ "Successfully opened \"" } + fileName + "\".");
 
 	return true;
 }
@@ -82,7 +80,7 @@ bool File::saveData(const String& filename) {
 	fs.open(filename.getConstChar(), std::fstream::out | std::fstream::trunc);
 
 	if (!fs.is_open()) {
-		std::cout << "Data could not be saved in \"" << filename << "\"." << std::endl;
+		this->logger->log(String{ "Data could not be saved in \"" } + filename + "\".");
 		fs.close();
 		return false;
 	}
@@ -96,7 +94,7 @@ bool File::saveData(const String& filename) {
 	fs.close();
 	this->opened = false;
 
-	std::cout << "Successfully saved \"" << filename << "\"." << std::endl;
+	this->logger->log(String{ "Successfully saved \"" } +filename + "\".");
 	
 	return true;
 }

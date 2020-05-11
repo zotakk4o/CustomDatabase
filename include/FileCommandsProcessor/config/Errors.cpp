@@ -1,5 +1,5 @@
-#ifndef FCP_ERRORS_CPP
-#define FCP_ERRORS_CPP
+#ifndef FCPERRORS_CPP
+#define FCPERRORS_CPP
 
 #include "../../String.h"
 

@@ -9,5 +9,5 @@ bool OpenCommand::isValid(const Vector<String>& keywords) {
 }
 
 void OpenCommand::execute(File& file, const Vector<String>& parameters) {
-	file.open(parameters[1]);
+	file.open(parameters[0]);
 }

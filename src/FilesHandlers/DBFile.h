@@ -10,8 +10,10 @@ class DBFile : public File {
 	private:
 		Vector<TableFile> tableFiles;
 	public:
-		DBFile(const String& = "");
-		DBFile(const File&);
+		DBFile(const ILogger* = nullptr, const String& = "");
+		DBFile(const DBFile&);
+
+		virtual bool open(const String&);
 
 		void showTables() const;
 		void importTable(const String&);

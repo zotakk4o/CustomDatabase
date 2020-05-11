@@ -8,8 +8,8 @@ class TableFile : public File {
 	private:
 		String tableName;
 	public:
-		TableFile(const String& = "", const String& = "");
-		TableFile(const File&);
+		TableFile(const ILogger* = nullptr, const String& = "", const String& = "");
+		TableFile(const TableFile&);
 
 		void describe() const;
 		void print() const;

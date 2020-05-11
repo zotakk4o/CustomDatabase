@@ -1,9 +1,10 @@
 #include <iostream>
 #include "HelpCommand.h"
 #include "../config/Messages.cpp"
+#include "../config/FCPConfig.h"
 
 void HelpCommand::execute() {
-	std::cout << FCPMessages::helpMessage;
+	FCPConfig::logger.log(FCPMessages::helpMessage);
 }
 
 bool HelpCommand::isValid(const Vector<String>& keywords) {

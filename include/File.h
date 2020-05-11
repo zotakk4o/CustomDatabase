@@ -2,6 +2,7 @@
 #define FILE_H
 #include<fstream>
 #include "String.h"
+#include "Loggers/interfaces/ILogger.h"
 
 class File {
 	private:
@@ -11,12 +12,13 @@ class File {
 		String data;
 		String path;
 		bool opened;
-		
+		const ILogger* logger;
 	public:
-		File(const String& = "");
-		File(const File&);
+		File(const ILogger* = nullptr, const String& = "");
+		File(const File& other);
 
-		bool open(const String&);
+		virtual ~File();
+		virtual bool open(const String&);
 		bool save();
 		bool saveAs(const String&);
 		bool close();

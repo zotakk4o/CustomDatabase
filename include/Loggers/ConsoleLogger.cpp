@@ -1,10 +1,9 @@
 #include "ConsoleLogger.h"
 #include<iostream>
 
-ConsoleLogger ConsoleLogger::logger;
-
-ConsoleLogger ConsoleLogger::getInstance() {
-	return ConsoleLogger::logger;
+ConsoleLogger& ConsoleLogger::getInstance() {
+	static ConsoleLogger inst;
+	return inst;
 }
 
 void ConsoleLogger::log(const String& data, bool withNewLine) const {
