@@ -7,6 +7,7 @@
 class IFileCommand : public ICommandValidator
 {
 	public:
+		virtual ~IFileCommand() {};
 		virtual void execute(File&) = 0;
 };
 

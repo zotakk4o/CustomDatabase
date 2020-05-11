@@ -7,6 +7,7 @@
 
 class IFileCommandParameters : public ICommandValidator {
 	public:
+		virtual ~IFileCommandParameters() {};
 		virtual void execute(File&, const Vector<String>&) = 0;
 };
 

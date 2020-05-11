@@ -3,8 +3,12 @@
 
 #include "../../include/String.h"
 #include "../../include/Vector.cpp"
+#include "../interfaces/IDBFileCommand.h"
+#include "../interfaces/IDBFileCommandParameters.h"
 
-namespace Config {
+namespace DCPConfig {
+	const char commandDelimiter = ' ';
+
 	const Vector<String> dbCommandsKeywords{
 		"import",
 		"showtables",
@@ -20,6 +24,14 @@ namespace Config {
 		"rename",
 		"count",
 		"aggregate",
+	};
+
+	const Vector<IDBFileCommand*> dbCommands{
+		
+	};
+
+	const Vector<IDBFileCommandParameters*> dbCommandsParameters{
+		
 	};
 }
 

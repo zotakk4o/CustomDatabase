@@ -1,7 +1,7 @@
 #ifndef ICOMMANDVALIDATOR_H
 #define ICOMMANDVALIDATOR_H
 
-#include "../../../String.h"
+#include "../../include/String.h"
 
 class ICommandValidator
 {
