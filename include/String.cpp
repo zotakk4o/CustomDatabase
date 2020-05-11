@@ -3,8 +3,30 @@
 #include<new>
 #include<assert.h>
 #include "String.h"
+#include<istream>
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
+
+String numToString(unsigned long long num) {
+	String res;
+
+	unsigned short digits = 1;
+	unsigned long long decimals = 1;
+
+	while (decimals * 10 <= num) {
+		digits++;
+		decimals *= 10;
+	}
+
+	while (digits != 0) {
+		res += ((num / decimals) + '0');
+		num %= decimals;
+		decimals /= 10;
+		digits--;
+	}
+
+	return res;
+}
 
 unsigned int strLen(const char* str) {
 	unsigned int res = 0;
@@ -283,12 +305,12 @@ String String::reverse() const {
 	return res;
 }
 
-String String::substring(const unsigned int& first, const unsigned int& length) const {
-	assert(length >= 0 && first >= 0 && length < this->length && first + length <= length);
+String String::substring(const unsigned int& first, const unsigned int& _length) const {
+	assert(_length >= 0 && first >= 0 && first + _length <= this->length);
 
 	String res;
 
-	for (unsigned int i = first; i < first + length; i++)
+	for (unsigned int i = first; i < first + _length; i++)
 	{
 		res += this->str[i];
 	}
@@ -353,6 +375,40 @@ void String::copy(const String& other) {
 
 void String::deleteInternals() {
 	delete[] this->str;
+}
+
+String String::toString(double num, unsigned short precision) {
+
+	assert(precision > 0 && precision < 20);
+
+	String res;
+
+	if (num < 0) {
+		num *= -1;
+		res += '-';
+	}
+
+	res += numToString(num);
+
+	num -= (unsigned int)num;
+
+	if (num == 0) {
+		return res;
+	}
+	
+	res += '.';
+
+	unsigned short currPrecision = 0;
+
+	while (currPrecision != precision)
+	{
+		num *= 10;
+		res += (unsigned short)(num) + '0';
+		num -= (unsigned short)num;
+		currPrecision++;
+	}
+
+	return res;
 }
 
 std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {

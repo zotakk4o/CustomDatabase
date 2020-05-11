@@ -34,8 +34,6 @@ public:
 
 	unsigned int getSize() const;
 	unsigned int getCapacity() const;
-
-	void print() const;
 };
 
 #endif

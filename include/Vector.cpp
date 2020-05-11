@@ -1,6 +1,5 @@
 #ifndef VECTOR_CPP
 #define VECTOR_CPP
-#include<iostream>
 #include<assert.h>
 #include "Vector.h"
 
@@ -139,7 +138,7 @@ int Vector<T>::indexOf(const T& item) const {
 
 template<typename T>
 Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) {
-	assert(beginning >= 0 && end < this->size && beginning < end);
+	assert(beginning >= 0 && end < this->size && beginning <= end);
 
 	Vector<T> res;
 	for (unsigned int i = beginning; i <= end; i++)
@@ -148,21 +147,6 @@ Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& en
 	}
 
 	return res;
-}
-
-template<typename T>
-void Vector<T>::print() const {
-	std::cout << "[";
-	for (unsigned int i = 0; i < this->size; i++)
-	{
-		if (i == this->size - 1) {
-			std::cout << this->data[this->size - 1];
-			continue;
-		}
-
-		std::cout << this->data[i] << ",";
-	}
-	std::cout << "]" << std::endl;
 }
 
 template<typename T>
