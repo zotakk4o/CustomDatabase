@@ -133,9 +133,9 @@
     <ClCompile Include="include\FileCommandsProcessor\commands\SaveAsCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\SaveCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\config\FCPConfig.cpp" />
-    <ClCompile Include="include\FileCommandsProcessor\config\Errors.cpp" />
-    <ClCompile Include="include\FileCommandsProcessor\config\Messages.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\config\FCPErrors.cpp" />
     <ClCompile Include="include\File.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\config\FCPMessages.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp" />
     <ClCompile Include="include\Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="include\String.cpp" />
@@ -153,8 +153,8 @@
     <ClCompile Include="src\commands\ShowTablesCommand.cpp" />
     <ClCompile Include="src\commands\UpdateCommand.cpp" />
     <ClCompile Include="src\config\DCPConfig.cpp" />
-    <ClCompile Include="src\config\Errors.cpp" />
-    <ClCompile Include="src\config\Messages.cpp" />
+    <ClCompile Include="src\config\DCPErrors.cpp" />
+    <ClCompile Include="src\config\DCPMessages.cpp" />
     <ClCompile Include="src\DBCommandsProcessor.cpp" />
     <ClCompile Include="src\FilesHandlers\DBFile.cpp" />
     <ClCompile Include="src\FilesHandlers\TableFile.cpp" />
@@ -171,6 +171,8 @@
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveAsCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\config\FCPConfig.h" />
+    <ClInclude Include="include\FileCommandsProcessor\config\FCPErrors.h" />
+    <ClInclude Include="include\FileCommandsProcessor\config\FCPMessages.h" />
     <ClInclude Include="include\Loggers\ConsoleLogger.h" />
     <ClInclude Include="include\Loggers\interfaces\ILogger.h" />
     <ClInclude Include="include\String.h" />
@@ -191,6 +193,8 @@
     <ClInclude Include="src\commands\UpdateCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\FileCommandsProcessor.h" />
     <ClInclude Include="src\config\DCPConfig.h" />
+    <ClInclude Include="src\config\DCPErrors.h" />
+    <ClInclude Include="src\config\DCPMessages.h" />
     <ClInclude Include="src\DBCommandsProcessor.h" />
     <ClInclude Include="src\FilesHandlers\DBFile.h" />
     <ClInclude Include="src\FilesHandlers\TableFile.h" />

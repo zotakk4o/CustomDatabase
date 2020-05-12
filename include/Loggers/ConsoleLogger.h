@@ -7,7 +7,7 @@ class ConsoleLogger : public ILogger {
 	private:
 		ConsoleLogger() {};
 	public:
-		static ConsoleLogger& getInstance();
+		static const ConsoleLogger& getInstance();
 		virtual void log(const String& data, bool withNewLine = true) const;
 };
 

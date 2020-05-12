@@ -12,6 +12,7 @@ File::File(const File& other) : logger(other.logger), data(other.data), path(oth
 
 bool File::open(const String& fileName) {
 	if (this->opened) {
+		this->logger->log(String{ "Could not open \"" } +fileName + "\". Another file has been opened for processing.");
 		return false;
 	}
 
@@ -73,6 +74,7 @@ bool File::saveAs(const String& filename) {
 
 bool File::saveData(const String& filename) {
 	if (!this->opened) {
+		this->logger->log(String{ "Could not save \"" } +filename + "\". The file has not been opened for processing.");
 		return false;
 	}
 
@@ -101,6 +103,7 @@ bool File::saveData(const String& filename) {
 
 bool File::close() {
 	if (!this->opened) {
+		this->logger->log(String{ "Could not close \"" } + this->getPath() + "\". The file has not been opened for processing.");
 		return false;
 	}
 

@@ -27,18 +27,6 @@
     <ClCompile Include="include\Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\config\Messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\config\Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\FileCommandsProcessor\config\Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\FileCommandsProcessor\config\Messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\DBCommandsProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -102,10 +90,22 @@
     <ClCompile Include="include\FileCommandsProcessor\config\FCPConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\FilesHandlers\DBFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\config\FCPErrors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\config\FCPMessages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\config\DCPConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\FilesHandlers\DBFile.cpp">
+    <ClCompile Include="src\config\DCPErrors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\DCPMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,10 +215,22 @@
     <ClInclude Include="include\FileCommandsProcessor\config\FCPConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\FilesHandlers\DBFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\config\FCPErrors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\config\FCPMessages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\config\DCPConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\FilesHandlers\DBFile.h">
+    <ClInclude Include="src\config\DCPErrors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config\DCPMessages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

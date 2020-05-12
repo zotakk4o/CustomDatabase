@@ -9,7 +9,7 @@ class FileCommandsProcessor {
 		bool areExtensionsValid(const Vector<String>&);
 	protected:
 		virtual Vector<String> getAllowedExtensions() = 0;
-		void parseFileCommand(const String&, File&);
+		bool parseFileCommand(const String&, File&);
 };
 
 #endif

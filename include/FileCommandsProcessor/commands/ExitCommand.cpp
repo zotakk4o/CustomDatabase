@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "ExitCommand.h"
-#include "../config/Messages.cpp"
+#include "../config/FCPMessages.h"
 #include "../config/FCPConfig.h"
 
 void ExitCommand::execute() {

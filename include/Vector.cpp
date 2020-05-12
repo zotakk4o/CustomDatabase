@@ -138,9 +138,14 @@ int Vector<T>::indexOf(const T& item) const {
 
 template<typename T>
 Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) {
+	Vector<T> res;
+
+	if (this->size == 0) {
+		return res;
+	}
+
 	assert(beginning >= 0 && end < this->size && beginning <= end);
 
-	Vector<T> res;
 	for (unsigned int i = beginning; i <= end; i++)
 	{
 		res.pushBack(this->data[i]);
