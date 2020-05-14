@@ -1,6 +1,8 @@
 #include "ConsoleLogger.h"
 #include<iostream>
 
+ConsoleLogger::ConsoleLogger() {};
+
 const ConsoleLogger& ConsoleLogger::getInstance() {
 	static ConsoleLogger inst;
 	return inst;

@@ -1,12 +1,13 @@
 #ifndef HELPCOMMAND_H
 #define HELPCOMMAND_H
 
-#include "interfaces/ICommand.h"
+#include "BaseClasses/Command.h"
 
-class HelpCommand : public ICommand {
-	virtual void execute();
-	virtual bool isValid(const Vector<String>&);
-	virtual String toString();
+class HelpCommand : public Command {
+	public:
+		virtual ~HelpCommand();
+		virtual void execute();
+		virtual String toString();
 };
 
 #endif

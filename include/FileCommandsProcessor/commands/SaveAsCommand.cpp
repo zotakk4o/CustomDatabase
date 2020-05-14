@@ -1,8 +1,11 @@
 #include "SaveAsCommand.h"
 
-bool SaveAsCommand::isValid(const Vector<String>& keywords) {
-	return keywords.getSize() == 2 && keywords[0] == this->toString();
+SaveAsCommand::~SaveAsCommand() {};
+
+const unsigned short SaveAsCommand::getParametersCount() const {
+	return 2;
 }
+
 String SaveAsCommand::toString() {
 	return "saveas";
 }

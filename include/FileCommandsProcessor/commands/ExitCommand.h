@@ -1,12 +1,12 @@
 #ifndef EXITCOMMAND_H
 #define EXITCOMMAND_H
 
-#include "interfaces/ICommand.h"
+#include "BaseClasses/Command.h"
 
-class ExitCommand :	public ICommand {
+class ExitCommand :	public Command {
 	public:
+		virtual ~ExitCommand();
 		virtual void execute();
-		virtual bool isValid(const Vector<String>&);
 		virtual String toString();
 };
 #endif

@@ -6,6 +6,8 @@
 #include "config/FCPMessages.h"
 #include "config/FCPErrors.h"
 
+FileCommandsProcessor::~FileCommandsProcessor() {};
+
 bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) {
 	for (unsigned short i = 0; i < filePaths.getSize(); i++)
 	{

@@ -6,8 +6,9 @@
 #include "../include/FileCommandsProcessor/FileCommandsProcessor.h"
 
 class DBCommandsProcessor : private FileCommandsProcessor {
-	private:
+	protected:
 		virtual Vector<String> getAllowedExtensions();
+	private:
 		void parseCommands();
 		bool parseDBCommand(const String&, DBFile&);
 	public:

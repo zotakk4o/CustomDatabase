@@ -5,8 +5,11 @@
 
 class ConsoleLogger : public ILogger {
 	private:
-		ConsoleLogger() {};
+		ConsoleLogger();
 	public:
+		ConsoleLogger(const ConsoleLogger&) = delete;
+		ConsoleLogger& operator=(const ConsoleLogger&) = delete;
+
 		static const ConsoleLogger& getInstance();
 		virtual void log(const String& data, bool withNewLine = true) const;
 };

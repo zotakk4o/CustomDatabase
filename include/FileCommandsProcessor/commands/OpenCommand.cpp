@@ -1,11 +1,13 @@
 #include "OpenCommand.h"
 
+OpenCommand::~OpenCommand() {};
+
 String OpenCommand::toString() {
 	return "open";
 }
 
-bool OpenCommand::isValid(const Vector<String>& keywords) {
-	return keywords.getSize() == 2 && keywords[0] == this->toString();
+const unsigned short OpenCommand::getParametersCount() const {
+	return 2;
 }
 
 void OpenCommand::execute(File& file, const Vector<String>& parameters) {

@@ -2,18 +2,18 @@
 #define FCPCONFIG_H
 
 #include "../../Vector.h"
-#include "../commands/interfaces/ICommand.h"
-#include "../commands/interfaces/IFileCommand.h"
-#include "../commands/interfaces/IFileCommandParameters.h"
+#include "../commands/BaseClasses/Command.h"
+#include "../commands/BaseClasses/FileCommand.h"
+#include "../commands/BaseClasses/FileCommandParameters.h"
 #include "../../Loggers/interfaces/ILogger.h"
 
 class FCPConfig {
 	public:
 		static const char commandDelimiter;
 		static const ILogger& logger;
-		static const Vector<ICommand*> commands;
-		static const Vector<IFileCommand*> fileCommands;
-		static const Vector<IFileCommandParameters*>fileCommandsParameters;
+		static const Vector<Command*> commands;
+		static const Vector<FileCommand*> fileCommands;
+		static const Vector<FileCommandParameters*>fileCommandsParameters;
 };
 
 #endif

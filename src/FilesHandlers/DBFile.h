@@ -9,6 +9,9 @@
 class DBFile : public File {
 	private:
 		Vector<TableFile> tableFiles;
+
+		TableFile& getTableWithName(const String&);
+		const TableFile& getTableWithName(const String&) const;
 	public:
 		DBFile(const ILogger* = nullptr, const String& = "");
 		DBFile(const DBFile&);

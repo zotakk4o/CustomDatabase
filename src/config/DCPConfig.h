@@ -3,8 +3,8 @@
 
 #include "../../include/String.h"
 #include "../../include/Vector.cpp"
-#include "../interfaces/IDBFileCommand.h"
-#include "../interfaces/IDBFileCommandParameters.h"
+#include "../commands/BaseClasses/DBFileCommand.h"
+#include "../commands/BaseClasses/DBFileCommandParameters.h"
 #include "../../include/Loggers/ConsoleLogger.h"
 #include <iostream>
 
@@ -14,8 +14,8 @@ class DCPConfig {
 		static const char fileDelimiter;
 		static std::istream& inputStream;
 		static const ILogger& logger;
-		static const Vector<IDBFileCommand*> dbCommands;
-		static const Vector<IDBFileCommandParameters*> dbCommandsParameters;
+		static const Vector<DBFileCommand*> dbCommands;
+		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
 };
  
 #endif

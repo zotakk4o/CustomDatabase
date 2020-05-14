@@ -127,9 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\Command.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\CommandValidator.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommand.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommandParameters.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\CloseCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\ExitCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\HelpCommand.cpp" />
+    <ClCompile Include="include\FileCommandsProcessor\commands\OpenCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\SaveAsCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\commands\SaveCommand.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\config\FCPConfig.cpp" />
@@ -141,8 +146,10 @@
     <ClCompile Include="include\String.cpp" />
     <ClCompile Include="include\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="include\FileCommandsProcessor\commands\OpenCommand.cpp" />
     <ClCompile Include="src\commands\AddColumnCommand.cpp" />
+    <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp" />
+    <ClCompile Include="src\commands\BaseClasses\DBFileCommand.cpp" />
+    <ClCompile Include="src\commands\BaseClasses\DBFileCommandParameters.cpp" />
     <ClCompile Include="src\commands\DeleteCommand.cpp" />
     <ClCompile Include="src\commands\DescribeCommand.cpp" />
     <ClCompile Include="src\commands\ExportCommand.cpp" />
@@ -160,14 +167,15 @@
     <ClCompile Include="src\FilesHandlers\TableFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\Command.h" />
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\CommandValidator.h" />
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommand.h" />
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommandParameters.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\CloseCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\ExitCommand.h" />
     <ClInclude Include="include\File.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\HelpCommand.h" />
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommand.h" />
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommandValidator.h" />
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommand.h" />
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommandParameters.h" />
+    <ClInclude Include="include\FileCommandsProcessor\commands\OpenCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveAsCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveCommand.h" />
     <ClInclude Include="include\FileCommandsProcessor\config\FCPConfig.h" />
@@ -177,16 +185,15 @@
     <ClInclude Include="include\Loggers\interfaces\ILogger.h" />
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Vector.h" />
-    <ClInclude Include="include\FileCommandsProcessor\commands\OpenCommand.h" />
     <ClInclude Include="src\commands\AddColumnCommand.h" />
+    <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h" />
+    <ClInclude Include="src\commands\BaseClasses\DBFileCommand.h" />
+    <ClInclude Include="src\commands\BaseClasses\DBFileCommandParameters.h" />
     <ClInclude Include="src\commands\DeleteCommand.h" />
     <ClInclude Include="src\commands\DescribeCommand.h" />
     <ClInclude Include="src\commands\ExportCommand.h" />
     <ClInclude Include="src\commands\ImportCommand.h" />
     <ClInclude Include="src\commands\InsertCommand.h" />
-    <ClInclude Include="src\commands\interfaces\IDBCommandValidator.h" />
-    <ClInclude Include="src\commands\interfaces\IDBFileCommand.h" />
-    <ClInclude Include="src\commands\interfaces\IDBFileCommandParameters.h" />
     <ClInclude Include="src\commands\PrintCommand.h" />
     <ClInclude Include="src\commands\SelectCommand.h" />
     <ClInclude Include="src\commands\ShowTablesCommand.h" />

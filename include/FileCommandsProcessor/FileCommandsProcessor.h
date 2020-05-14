@@ -10,6 +10,8 @@ class FileCommandsProcessor {
 	protected:
 		virtual Vector<String> getAllowedExtensions() = 0;
 		bool parseFileCommand(const String&, File&);
+	public:
+		virtual ~FileCommandsProcessor();
 };
 
 #endif

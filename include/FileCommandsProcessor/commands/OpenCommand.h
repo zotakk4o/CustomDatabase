@@ -1,11 +1,13 @@
 #ifndef OPENCOMMAND_H
 #define OPENCOMMAND_H
 
-#include "interfaces/IFileCommandParameters.h"
+#include "BaseClasses/FileCommandParameters.h"
 
-class OpenCommand : public IFileCommandParameters {
+class OpenCommand : public FileCommandParameters {
+	protected:
+		virtual const unsigned short getParametersCount() const;
 	public:
-		virtual bool isValid(const Vector<String>&);
+		virtual ~OpenCommand();
 		virtual void execute(File&, const Vector<String>&);
 		virtual String toString();
 };

@@ -1,12 +1,13 @@
 #ifndef CLOSECOMMAND_H
 #define CLOSECOMMAND_H
 
-#include "interfaces/IFileCommand.h"
+#include "BaseClasses/FileCommand.h"
 
-class CloseCommand : public IFileCommand {
-	virtual bool isValid(const Vector<String>&);
-	virtual String toString();
-	virtual void execute(File&);
+class CloseCommand : public FileCommand {
+	public:
+		virtual ~CloseCommand();
+		virtual String toString();
+		virtual void execute(File&);
 };
 
 #endif

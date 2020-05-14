@@ -8,6 +8,8 @@ class DCPErrors {
 		static const String wrongCommandError;
 		static const String noSelectedDBError;
 		static const String noFilenameArgumentError;
+		static const String incorrectTableFormatError;
+		static const String tableNotFoundError;
 };
 
 #endif

@@ -1,8 +1,6 @@
 #include "SaveCommand.h"
 
-bool SaveCommand::isValid(const Vector<String>& keywords) {
-	return keywords.getSize() == 1 && keywords[0] == this->toString();
-}
+SaveCommand::~SaveCommand() {};
 
 void SaveCommand::execute(File& file) {
 	file.save();

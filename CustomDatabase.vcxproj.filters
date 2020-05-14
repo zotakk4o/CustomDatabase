@@ -33,9 +33,6 @@
     <ClCompile Include="src\FilesHandlers\TableFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\FileCommandsProcessor\commands\OpenCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\FileCommandsProcessor\commands\ExitCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,6 +105,30 @@
     <ClCompile Include="src\config\DCPMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\OpenCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\CommandValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\Command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommandParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\BaseClasses\DBFileCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\BaseClasses\DBFileCommandParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
@@ -128,28 +149,13 @@
     <ClInclude Include="src\FilesHandlers\TableFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\FileCommandsProcessor\commands\OpenCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\ExitCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\IFileCommandParameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\SaveAsCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\FileCommandsProcessor\commands\interfaces\ICommandValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\HelpCommand.h">
@@ -197,15 +203,6 @@
     <ClInclude Include="src\commands\UpdateCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\interfaces\IDBCommandValidator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\commands\interfaces\IDBFileCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\commands\interfaces\IDBFileCommandParameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Loggers\ConsoleLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -231,6 +228,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\config\DCPMessages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\OpenCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommandParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\Command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\CommandValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\BaseClasses\DBFileCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\BaseClasses\DBFileCommandParameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
