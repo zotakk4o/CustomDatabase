@@ -6,7 +6,7 @@
 
 File::~File() {};
 
-File::File(const ILogger* _logger, const String& path) : logger(_logger), data(""), path(path), opened(false) {};
+File::File(const ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
 
 File::File(const File& other) : logger(other.logger), data(other.data), path(other.path), opened(other.opened) {};
 
@@ -57,6 +57,7 @@ bool File::open(const String& fileName) {
 
 	fs.close();
 	this->opened = true;
+	this->path = fileName;
 
 	this->logger->log(String{ "Successfully opened \"" } + fileName + "\".");
 
@@ -64,15 +65,15 @@ bool File::open(const String& fileName) {
 }
 
 
-bool File::save() {
+bool File::save() const {
 	return this->saveData(this->path);
 }
 
-bool File::saveAs(const String& filename) {
+bool File::saveAs(const String& filename) const {
 	return this->saveData(filename);
 }
 
-bool File::saveData(const String& filename) {
+bool File::saveData(const String& filename) const {
 	if (!this->opened) {
 		this->logger->log(String{ "Could not save \"" } +filename + "\". The file has not been opened for processing.");
 		return false;
@@ -94,7 +95,6 @@ bool File::saveData(const String& filename) {
 	}
 
 	fs.close();
-	this->opened = false;
 
 	this->logger->log(String{ "Successfully saved \"" } +filename + "\".");
 	
@@ -103,9 +103,11 @@ bool File::saveData(const String& filename) {
 
 bool File::close() {
 	if (!this->opened) {
-		this->logger->log(String{ "Could not close \"" } + this->getPath() + "\". The file has not been opened for processing.");
+		this->logger->log("No file has been opened for processing.");
 		return false;
 	}
+
+	this->logger->log(String{ "Successfully closed \"" } + this->path + "\"");
 
 	this->data = "";
 	this->path = "";

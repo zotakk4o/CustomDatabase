@@ -25,12 +25,27 @@ bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) 
 
 bool FileCommandsProcessor::parseFileCommand(const String& command, File& file) {
 	Vector<String> keywords = command.split(FCPConfig::commandDelimiter);
+	bool wasCommandExecuted = false;
+
+	for (unsigned short i = 0; i < FCPConfig::fileCommandsParameters.getSize(); i++) {
+		Vector<String> parameters = keywords.slice(1, keywords.getSize() - 1);
+		if (FCPConfig::fileCommandsParameters[i]->isValid(keywords) && this->areExtensionsValid(parameters)) {
+			FCPConfig::fileCommandsParameters[i]->execute(file, parameters);
+			wasCommandExecuted = true;
+			break;
+		}
+	}
+
+	if (!file.isOpened()) {
+		throw FCPErrors::noFileOpened;
+	}
 
 	for (unsigned short i = 0; i < FCPConfig::commands.getSize(); i++)
 	{
 		if (FCPConfig::commands[i]->isValid(keywords)) {
 			FCPConfig::commands[i]->execute();
-			return true;
+			wasCommandExecuted = true;
+			break;
 		}
 	}
 
@@ -38,23 +53,12 @@ bool FileCommandsProcessor::parseFileCommand(const String& command, File& file) 
 	{
 		if (FCPConfig::fileCommands[i]->isValid(keywords)) {
 			FCPConfig::fileCommands[i]->execute(file);
-			return true;
+			wasCommandExecuted = true;
+			break;
 		}
 	}
 
-	if (keywords.getSize() < 2) {
-		return false;
-	}
-
-	for (unsigned short i = 0; i < FCPConfig::fileCommandsParameters.getSize(); i++) {
-		Vector<String> parameters = keywords.slice(1, keywords.getSize() - 1);
-		if (FCPConfig::fileCommandsParameters[i]->isValid(keywords) && this->areExtensionsValid(parameters)) {
-			FCPConfig::fileCommandsParameters[i]->execute(file, parameters);
-			return true;
-		}
-	}
-
-	return false;
+	return wasCommandExecuted;
 }
 
 

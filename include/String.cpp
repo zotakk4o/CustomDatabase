@@ -146,7 +146,7 @@ String& String::operator+=(const char& character) {
 	return *this;
 }
 
-String String::operator+(const String& other) {
+String String::operator+(const String& other) const {
 	String result = *this;
 	unsigned int strLength = strLen(other.str);
 
@@ -159,7 +159,7 @@ String String::operator+(const String& other) {
 
 	return result;
 }
-String String::operator+(const char* str) {
+String String::operator+(const char* str) const {
 	String result = *this;
 	unsigned int strLength = strLen(str);
 
@@ -172,7 +172,7 @@ String String::operator+(const char* str) {
 
 	return result;
 }
-String String::operator+(const char& character) {
+String String::operator+(const char& character) const {
 	String result = *this;
 
 	if (result.length + 1 >= result.capacity) {
@@ -406,6 +406,20 @@ String String::toString(double num, unsigned short precision) {
 		res += (unsigned short)(num) + '0';
 		num -= (unsigned short)num;
 		currPrecision++;
+	}
+
+	return res;
+}
+
+String String::join(const Vector<String>& elements, const char& delimiter) {
+	String res;
+
+	for (unsigned int i = 0; i < elements.getSize(); i++)
+	{
+		res += elements[i];
+		if (i != elements.getSize() - 1) {
+			res += delimiter;
+		}
 	}
 
 	return res;

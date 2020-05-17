@@ -1,8 +1,14 @@
 #include "DBFile.h"
 #include "../config/DCPErrors.h"
+#include "../config/DCPConfig.h"
+
 #include<iostream>
 
-DBFile::DBFile(const ILogger* _logger, const String& path) : File(_logger, path) {};
+DBFile::DBFile(const ILogger* _logger, const String& _path) : File(_logger, _path) {
+	if (_path.getLength()) {
+		this->open(_path);
+	}
+};
 DBFile::DBFile(const DBFile& other) : File(other), tableFiles(tableFiles) {};
 
 bool DBFile::open(const String& fileName) {
@@ -19,16 +25,20 @@ bool DBFile::open(const String& fileName) {
 
 	for (unsigned int i = 0; i < tableRows.getSize(); i++)
 	{
-		Vector<String> rowData = tableRows[i].split(',');
+		Vector<String> rowData = tableRows[i].split(DCPConfig::fileDelimiter);
 
-		if (rowData.getSize() != 2 || rowData[0].getLength() == 0 || rowData[1].getLength() == 0) {
+		if (rowData.getSize() != 2) {
 			throw DCPErrors::incorrectTableFormatError;
 		}
 
-		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1] });
+		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1]});
 	}
 
 	return true;
+}
+
+void DBFile::addColumnToTable(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).addColumn(parameters[1], parameters[2]);
 }
 
 void DBFile::showTables() const {
@@ -39,7 +49,19 @@ void DBFile::showTables() const {
 }
 
 void DBFile::importTable(const String& fileName) {
+	try
+	{
+		this->getTableWithName(fileName);
+	}
+	catch (const String&)
+	{
+		TableFile newTable{ this->logger, fileName, fileName };
+		this->tableFiles.pushBack(newTable);
+		newTable.saveAs(DCPConfig::defaultFilesLocation + "test.csv");
+		return;
+	}
 
+	throw DCPErrors::tableAlreadyExistsError;
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) const {
@@ -59,7 +81,7 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {
-	return const_cast<TableFile&>(this->getTableWithName(tableName));
+	return const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
 }
 
 const TableFile& DBFile::getTableWithName(const String& tableName) const {

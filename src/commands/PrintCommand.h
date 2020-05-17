@@ -8,8 +8,8 @@ class PrintCommand : public DBFileCommandParameters {
 		virtual const unsigned short getParametersCount() const;
 	public:
 		virtual ~PrintCommand();
-		virtual void execute(DBFile&, const Vector<String>&);
-		virtual String toString();
+		virtual void execute(DBFile&, const Vector<String>&) const;
+		virtual String toString() const;
 };
 
 #endif

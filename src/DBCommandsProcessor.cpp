@@ -5,7 +5,7 @@
 #include "config/DCPErrors.h"
 
 Vector<String> DBCommandsProcessor::getAllowedExtensions() {
-	return {".csv"};
+	return DCPConfig::fileExtensions;
 }
 
 void DBCommandsProcessor::parseCommands() {

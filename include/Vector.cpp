@@ -1,7 +1,7 @@
 #ifndef VECTOR_CPP
 #define VECTOR_CPP
-#include<assert.h>
 #include "Vector.h"
+#include<assert.h>
 
 #define NO_FREE_MEM_ERR "Error: No free memory!"
 

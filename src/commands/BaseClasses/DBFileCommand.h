@@ -10,7 +10,7 @@ class DBFileCommand : public DBCommandValidator
 		virtual const unsigned short getParametersCount() const;
 	public:
 		virtual ~DBFileCommand();
-		virtual void execute(DBFile&) = 0;
+		virtual void execute(DBFile&) const = 0;
 };
 
 #endif

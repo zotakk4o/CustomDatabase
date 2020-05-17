@@ -12,6 +12,13 @@ class DCPConfig {
 	public:
 		static const char commandDelimiter;
 		static const char fileDelimiter;
+		static const char columnConfigDelimiter;
+		static const String defaultFilesLocation;
+		static const String tableFileExtension;
+		static const String dbFileExtension;
+		static const String nullValue;
+		static const Vector<String> fileExtensions;
+		static const Vector<String> allowedDataTypes;
 		static std::istream& inputStream;
 		static const ILogger& logger;
 		static const Vector<DBFileCommand*> dbCommands;

@@ -8,6 +8,7 @@ class DCPMessages {
 		static const String welcomeMessage;
 		static const String helpMessage;
 		static const String exitMessage;
+		static const String supportedDataTypesMessage;
 };
 
 #endif

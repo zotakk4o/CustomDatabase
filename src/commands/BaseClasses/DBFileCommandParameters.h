@@ -8,7 +8,7 @@
 class DBFileCommandParameters : public DBCommandValidator {
 	public:
 		virtual ~DBFileCommandParameters();
-		virtual void execute(DBFile&, const Vector<String>&) = 0;
+		virtual void execute(DBFile&, const Vector<String>&) const = 0;
 };
 
 #endif

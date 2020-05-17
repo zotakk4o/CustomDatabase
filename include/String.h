@@ -3,7 +3,6 @@
 #include<ostream>
 #include "Vector.cpp"
 
-
 class String {
 	private:
 		char* str;
@@ -24,9 +23,9 @@ class String {
 		String& operator+=(const String&);
 		String& operator+=(const char*);
 		String& operator+=(const char&);
-		String operator+(const String&);
-		String operator+(const char*);
-		String operator+(const char&);
+		String operator+(const String&) const;
+		String operator+(const char*) const;
+		String operator+(const char&) const;
 
 		bool operator==(const String&) const;
 		bool operator==(const char*) const;
@@ -53,6 +52,7 @@ class String {
 		int indexOf(const String&) const;
 
 		static String toString(double, unsigned short = 6);
+		static String join(const Vector<String>&, const char& = ',');
 		String reverse() const;
 		String substring(const unsigned int& first, const unsigned int& length) const;
 		Vector<String> split(const char& = ',') const;

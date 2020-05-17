@@ -10,8 +10,8 @@ class DBCommandValidator
 		virtual const unsigned short getParametersCount() const = 0;
 	public:
 		virtual ~DBCommandValidator();
-		virtual bool isValid(const Vector<String>&);
-		virtual String toString() = 0;
+		virtual bool isValid(const Vector<String>&) const;
+		virtual String toString() const = 0;
 };
 
 #endif

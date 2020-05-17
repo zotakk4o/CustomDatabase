@@ -205,9 +205,6 @@
     <ClInclude Include="src\DBCommandsProcessor.h" />
     <ClInclude Include="src\FilesHandlers\DBFile.h" />
     <ClInclude Include="src\FilesHandlers\TableFile.h" />
-    <ClInclude Include="src\interfaces\ICommandValidator.h" />
-    <ClInclude Include="src\interfaces\IDBFileCommand.h" />
-    <ClInclude Include="src\interfaces\IDBFileCommandParameters.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

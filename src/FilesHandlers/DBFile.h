@@ -18,6 +18,7 @@ class DBFile : public File {
 
 		virtual bool open(const String&);
 
+		void addColumnToTable(const Vector<String>&);
 		void showTables() const;
 		void importTable(const String&);
 		void exportTable(const String&, const String&) const;

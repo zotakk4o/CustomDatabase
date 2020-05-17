@@ -6,7 +6,7 @@
 
 class File {
 	private:
-		bool saveData(const String&);
+		bool saveData(const String&) const;
 
 	protected:
 		String data;
@@ -18,9 +18,9 @@ class File {
 		File(const File& other);
 
 		virtual ~File();
-		virtual bool open(const String&);
-		bool save();
-		bool saveAs(const String&);
+		virtual bool open(const String&) = 0;
+		bool save() const;
+		bool saveAs(const String&) const;
 		bool close();
 		void setData(const String&);
 

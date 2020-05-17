@@ -24,9 +24,6 @@
     <ClCompile Include="include\String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\DBCommandsProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,15 +126,15 @@
     <ClCompile Include="src\commands\BaseClasses\DBFileCommandParameters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\File.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\FileCommandsProcessor.h">
@@ -162,15 +159,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\CloseCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\interfaces\ICommandValidator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\interfaces\IDBFileCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\interfaces\IDBFileCommandParameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\AddColumnCommand.h">
@@ -252,6 +240,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\BaseClasses\DBFileCommandParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

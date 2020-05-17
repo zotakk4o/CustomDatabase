@@ -5,9 +5,8 @@
 #include "../../include/File.h"
 
 class FileCommandsProcessor {
-	private:
-		bool areExtensionsValid(const Vector<String>&);
 	protected:
+		bool areExtensionsValid(const Vector<String>&);
 		virtual Vector<String> getAllowedExtensions() = 0;
 		bool parseFileCommand(const String&, File&);
 	public:

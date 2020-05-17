@@ -10,6 +10,8 @@ class DCPErrors {
 		static const String noFilenameArgumentError;
 		static const String incorrectTableFormatError;
 		static const String tableNotFoundError;
+		static const String tableAlreadyExistsError;
+		static const String incorrectTableDataFormatError;
 };
 
 #endif

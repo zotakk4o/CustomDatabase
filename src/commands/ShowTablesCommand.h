@@ -7,8 +7,8 @@
 class ShowTablesCommand : public DBFileCommand {
 	public:
 		virtual ~ShowTablesCommand();
-		virtual void execute(DBFile&);
-		virtual String toString();
+		virtual void execute(DBFile&) const;
+		virtual String toString() const;
 };
 
 #endif
