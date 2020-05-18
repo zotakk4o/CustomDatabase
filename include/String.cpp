@@ -102,6 +102,12 @@ void strConcat(char* destination, const char* source) {
 
 const unsigned short String::defaultCapacity = 50; //This capacity will be doubled
 
+String::String(const char& character) : capacity(0), length(1), str(nullptr) {
+	this->reserve(1);
+
+	strCopy(&character, this->str);
+}
+
 String::String(const char* _str) : capacity(0), length(0), str(nullptr) {
 	assert(_str != nullptr);
 
@@ -318,15 +324,33 @@ String String::substring(const unsigned int& first, const unsigned int& _length)
 	return res;
 }
 
-Vector<String> String::split(const char& delimiter) const {
+Vector<String> String::split(const String& delimiter) const {
 	Vector<String> res;
+
+	if (!delimiter.getLength()) {
+		res.pushBack(*this);
+		return res;
+	}
+
 	String currWord;
 
 	for (unsigned int i = 0; i < this->length; i++)
 	{
-		if (this->str[i] == delimiter) {
-			res.pushBack(currWord);
-			currWord = "";
+		if (delimiter[0] == this->str[i] && i + delimiter.getLength() < this->length) {
+			bool wasDelimFound = true;
+			for (unsigned short j = 1; j < delimiter.getLength(); j++)
+			{
+				if (delimiter[j] != this->str[i + j]) {
+					wasDelimFound = false;
+					break;
+				}
+			}
+
+			if (wasDelimFound) {
+				res.pushBack(currWord);
+				currWord = "";
+				i += delimiter.getLength() - 1;
+			}
 		}
 		else {
 			currWord += this->str[i];
@@ -411,7 +435,7 @@ String String::toString(double num, unsigned short precision) {
 	return res;
 }
 
-String String::join(const Vector<String>& elements, const char& delimiter) {
+String String::join(const Vector<String>& elements, const String& delimiter) {
 	String res;
 
 	for (unsigned int i = 0; i < elements.getSize(); i++)

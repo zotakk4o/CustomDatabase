@@ -24,6 +24,7 @@ class File {
 		bool close();
 		void setData(const String&);
 
+		static String getFileName(const String&, bool = true);
 		String getData() const;
 		String getPath() const;
 		bool isOpened() const;

@@ -12,6 +12,12 @@ const char DCPConfig::commandDelimiter = ' ';
 
 const char DCPConfig::fileDelimiter = ',';
 
+#ifdef _WIN32
+const String DCPConfig::newLineSymbol = "\r\n";
+#else
+const String DCPConfig::newLineSymbol = "\r\n";
+#endif
+
 const char DCPConfig::columnConfigDelimiter = '-';
 
 const String DCPConfig::tableFileExtension = ".csv";

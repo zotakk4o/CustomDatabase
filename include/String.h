@@ -15,6 +15,7 @@ class String {
 		void deleteInternals();
 		std::istream& readFromStream(std::istream&, bool = false);
 	public:
+		String(const char&);
 		String(const char* = "");
 		String(const String&);
 		~String();
@@ -52,10 +53,10 @@ class String {
 		int indexOf(const String&) const;
 
 		static String toString(double, unsigned short = 6);
-		static String join(const Vector<String>&, const char& = ',');
+		static String join(const Vector<String>&, const String& = ',');
 		String reverse() const;
 		String substring(const unsigned int& first, const unsigned int& length) const;
-		Vector<String> split(const char& = ',') const;
+		Vector<String> split(const String& = ',') const;
 
 		unsigned int getLength() const;
 		unsigned int getCapacity() const;

@@ -3,8 +3,8 @@
 #include "../config/DCPMessages.h"
 #include "../config/DCPErrors.h"
 
-TableFile::TableFile(const ILogger* _logger, const String& _name, const String& _path) : File(_logger, _path), tableName(_name) {
-	if (_path.getLength()) {
+TableFile::TableFile(const ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name) {
+	if (openOnCreation) {
 		this->open(_path);
 	}
 };
@@ -12,7 +12,9 @@ TableFile::TableFile(const ILogger* _logger, const String& _name, const String& 
 TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName) {};
 
 bool TableFile::open(const String& fileName) {
-	if (!this->File::open(fileName)) {
+	String filePath = fileName == "" ? this->path : fileName;
+
+	if (!this->File::open(filePath)) {
 		return false;
 	}
 
@@ -20,8 +22,8 @@ bool TableFile::open(const String& fileName) {
 		return true;
 	}
 
-	Vector<String> tableRows = this->data.split('\n');
-	Vector<String> rowData = tableRows[0].split(',');
+	Vector<String> tableRows = this->data.split(DCPConfig::newLineSymbol);
+	Vector<String> rowData = tableRows[0].split(DCPConfig::fileDelimiter);
 
 	for (unsigned int j = 0; j < rowData.getSize(); j++)
 	{
@@ -35,7 +37,7 @@ bool TableFile::open(const String& fileName) {
 }
 
 void TableFile::addColumn(const String& columnName, const String& columnType) {
-	Vector<String> lines = this->data.split('\n');
+	Vector<String> lines = this->data.split(DCPConfig::newLineSymbol);
 	lines[0] = lines[0] + DCPConfig::fileDelimiter + columnName + DCPConfig::columnConfigDelimiter + columnType;
 
 	for (unsigned int i = 1; i < lines.getSize(); i++)
@@ -43,7 +45,7 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 		lines[i] = lines[i] + DCPConfig::fileDelimiter + DCPConfig::nullValue;
 	}
 
-	this->data = String::join(lines, '\n');
+	this->data = String::join(lines, DCPConfig::newLineSymbol);
 }
 
 void TableFile::describe() const {

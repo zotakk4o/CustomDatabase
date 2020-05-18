@@ -13,6 +13,7 @@ class DCPConfig {
 		static const char commandDelimiter;
 		static const char fileDelimiter;
 		static const char columnConfigDelimiter;
+		static const String newLineSymbol;
 		static const String defaultFilesLocation;
 		static const String tableFileExtension;
 		static const String dbFileExtension;

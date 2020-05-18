@@ -4,12 +4,9 @@
 
 #include<iostream>
 
-DBFile::DBFile(const ILogger* _logger, const String& _path) : File(_logger, _path) {
-	if (_path.getLength()) {
-		this->open(_path);
-	}
-};
-DBFile::DBFile(const DBFile& other) : File(other), tableFiles(tableFiles) {};
+DBFile::DBFile(const ILogger* _logger, const String& _path) : File(_logger, _path) {};
+
+DBFile::DBFile(const DBFile& other) : File(other), tableFiles(other.tableFiles) {};
 
 bool DBFile::open(const String& fileName) {
 
@@ -21,7 +18,7 @@ bool DBFile::open(const String& fileName) {
 		return true;
 	}
 
-	Vector<String> tableRows = this->data.split('\n');
+	Vector<String> tableRows = this->data.split(DCPConfig::newLineSymbol);
 
 	for (unsigned int i = 0; i < tableRows.getSize(); i++)
 	{
@@ -51,13 +48,21 @@ void DBFile::showTables() const {
 void DBFile::importTable(const String& fileName) {
 	try
 	{
-		this->getTableWithName(fileName);
+		static_cast<const DBFile>(*this).getTableWithName(DBFile::getFileName(fileName, false));
 	}
 	catch (const String&)
 	{
-		TableFile newTable{ this->logger, fileName, fileName };
-		this->tableFiles.pushBack(newTable);
-		newTable.saveAs(DCPConfig::defaultFilesLocation + "test.csv");
+		String tableName = DBFile::getFileName(fileName, false);
+		String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
+		TableFile newTable{ this->logger, tableName, fileName, true };
+		
+		this->tableFiles.pushBack(TableFile{this->logger, tableName, newPath});
+
+		newTable.saveAs(newPath);
+	
+		this->data += newTable.getTableName() + DCPConfig::fileDelimiter + newTable.getPath() + DCPConfig::newLineSymbol;
+
+		this->save();
 		return;
 	}
 
@@ -81,14 +86,16 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {
-	return const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
+	TableFile table = const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
+	table.open();
+	return table;
 }
 
 const TableFile& DBFile::getTableWithName(const String& tableName) const {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
-		if (tableFiles[i].getTableName() == tableName) {
-			return tableFiles[i];
+		if (this->tableFiles[i].getTableName() == tableName) {
+			return this->tableFiles[i];
 		}
 	}
 

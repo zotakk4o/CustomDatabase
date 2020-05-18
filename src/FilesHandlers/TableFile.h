@@ -8,10 +8,10 @@ class TableFile : public File {
 	private:
 		String tableName;
 	public:
-		TableFile(const ILogger* = nullptr, const String& = "", const String& = "");
+		TableFile(const ILogger* = nullptr, const String& = "", const String& = "", bool = false);
 		TableFile(const TableFile&);
 
-		virtual bool open(const String&);
+		virtual bool open(const String& = "");
 
 		void describe() const;
 		void print() const;

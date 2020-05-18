@@ -12,19 +12,20 @@ File::File(const File& other) : logger(other.logger), data(other.data), path(oth
 
 bool File::open(const String& fileName) {
 	if (this->opened) {
-		this->logger->log(String{ "Could not open \"" } +fileName + "\". Another file has been opened for processing.");
+		this->logger->log(String{ "Could not open \"" } + fileName + "\". Another file has been opened for processing.");
 		return false;
 	}
 
 	std::fstream fs;
-	fs.open(fileName.getConstChar(), std::fstream::in | std::fstream::ate);
+	fs.open(fileName.getConstChar(), std::fstream::in | std::fstream::ate | std::fstream::binary);
 
 	if (!fs.is_open()) {
 		fs.open(fileName.getConstChar(), std::fstream::out);
 
 		if (fs.is_open()) {
-			this->logger->log(String{ "Successfully opened \"" } + fileName + "\".");
+			this->logger->log(String{ "Successfully opened \"" } +fileName + "\".");
 			fs.close();
+			this->path = fileName;
 			this->opened = true;
 			return true;
 		}
@@ -33,8 +34,9 @@ bool File::open(const String& fileName) {
 		return false;
 	}
 
+	fs.seekg(0, fs.end);
 	unsigned int length = fs.tellg();
-	fs.seekg(0, std::fstream::beg);
+	fs.seekg(0, fs.beg);
 
 	char* res = new (std::nothrow) char[length + 1];
 
@@ -45,11 +47,12 @@ bool File::open(const String& fileName) {
 
 	fs.read(res, length);
 
-	if (fs.fail() || fs.bad()) {
+	/*if (fs.fail() || fs.bad()) {
 		delete[] res;
 		fs.close();
+		this->logger->log(String{ "\"" } + fileName + "\" hasn't been processed successfully due to an error.");
 		return false;
-	}
+	}*/
 
 	res[length] = '\0';
 	this->data = res;
@@ -114,6 +117,29 @@ bool File::close() {
 	this->opened = false;
 
 	return true;
+}
+
+String File::getFileName(const String& path, bool withExtension) {
+	char dirSeparator = '/';
+
+	#ifdef _WIN32
+		dirSeparator = '\\';
+	#endif
+
+	String reversedPath = path.reverse();
+
+	unsigned short lastSeparatorIndex = path.getLength() - reversedPath.indexOf(dirSeparator);
+	unsigned short extensionIndex = path.getLength() - reversedPath.indexOf('.') - 1;
+
+	if (lastSeparatorIndex > path.getLength()) {
+		lastSeparatorIndex = 0;
+	}
+
+	if (!withExtension) {
+		return path.substring(lastSeparatorIndex, extensionIndex - lastSeparatorIndex);
+	}
+
+	return path.substring(lastSeparatorIndex, path.getLength() - lastSeparatorIndex);
 }
 
 void File::setData(const String& newData) {
