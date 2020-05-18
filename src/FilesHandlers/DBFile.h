@@ -11,7 +11,6 @@ class DBFile : public File {
 		Vector<TableFile> tableFiles;
 
 		TableFile& getTableWithName(const String&);
-		const TableFile& getTableWithName(const String&) const;
 	public:
 		DBFile(const ILogger* = nullptr, const String& = "");
 		DBFile(const DBFile&);
@@ -19,11 +18,11 @@ class DBFile : public File {
 		virtual bool open(const String&);
 
 		void addColumnToTable(const Vector<String>&);
-		void showTables() const;
+		void showTables();
 		void importTable(const String&);
-		void exportTable(const String&, const String&) const;
-		void describeTable(const String&) const;
-		void printTable(const String&) const;
+		void exportTable(const String&, const String&);
+		void describeTable(const String&);
+		void printTable(const String&);
 		void renameTable(const String&, const String&);
 };
 

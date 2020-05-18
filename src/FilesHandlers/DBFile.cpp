@@ -38,7 +38,7 @@ void DBFile::addColumnToTable(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).addColumn(parameters[1], parameters[2]);
 }
 
-void DBFile::showTables() const {
+void DBFile::showTables() {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
 		this->logger->log(String{ (i + 1) + "0" } +". " + this->tableFiles[i].getTableName());
@@ -48,7 +48,7 @@ void DBFile::showTables() const {
 void DBFile::importTable(const String& fileName) {
 	try
 	{
-		static_cast<const DBFile>(*this).getTableWithName(DBFile::getFileName(fileName, false));
+		this->getTableWithName(DBFile::getFileName(fileName, false));
 	}
 	catch (const String&)
 	{
@@ -69,15 +69,15 @@ void DBFile::importTable(const String& fileName) {
 	throw DCPErrors::tableAlreadyExistsError;
 }
 
-void DBFile::exportTable(const String& tableName, const String& fileName) const {
+void DBFile::exportTable(const String& tableName, const String& fileName) {
 	this->getTableWithName(tableName).exportData(fileName);
 }
 
-void DBFile::describeTable(const String& tableName) const {
+void DBFile::describeTable(const String& tableName) {
 	this->getTableWithName(tableName).describe();
 }
 
-void DBFile::printTable(const String& tableName) const {
+void DBFile::printTable(const String& tableName) {
 	this->getTableWithName(tableName).print();
 }
 
@@ -86,15 +86,12 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {
-	TableFile& table = const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
-	table.open();
-	return table;
-}
-
-const TableFile& DBFile::getTableWithName(const String& tableName) const {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
+			if (!this->tableFiles[i].isOpened()) {
+				this->tableFiles[i].open();
+			}
 			return this->tableFiles[i];
 		}
 	}

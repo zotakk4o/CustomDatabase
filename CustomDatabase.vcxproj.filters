@@ -27,9 +27,6 @@
     <ClCompile Include="src\DBCommandsProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\FilesHandlers\TableFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\FileCommandsProcessor\commands\ExitCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -117,9 +114,6 @@
     <ClCompile Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommandParameters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\commands\BaseClasses\DBFileCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -127,6 +121,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FilesHandlers\TableFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\commands\BaseClasses\PaginationCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\commands\NextCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\commands\PrevCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\Pagination.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\config\PaginationConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\config\PaginationErrors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Pagination\config\PaginationMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -141,9 +162,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\DBCommandsProcessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FilesHandlers\TableFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileCommandsProcessor\commands\ExitCommand.h">
@@ -233,9 +251,6 @@
     <ClInclude Include="include\FileCommandsProcessor\commands\BaseClasses\FileCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\commands\BaseClasses\DBFileCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -243,6 +258,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FilesHandlers\TableFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\commands\BaseClasses\PaginationCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\commands\NextCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\commands\PrevCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\Pagination.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\config\PaginationConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\config\PaginationErrors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pagination\config\PaginationMessages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

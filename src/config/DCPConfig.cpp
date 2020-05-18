@@ -20,6 +20,8 @@ const String DCPConfig::newLineSymbol = "\n";
 
 const char DCPConfig::columnConfigDelimiter = '-';
 
+const unsigned short DCPConfig::perPageEntries = 5;
+
 const String DCPConfig::tableFileExtension = ".csv";
 
 const String DCPConfig::dbFileExtension = ".csv";

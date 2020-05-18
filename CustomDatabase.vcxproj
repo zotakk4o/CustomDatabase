@@ -143,6 +143,13 @@
     <ClCompile Include="include\FileCommandsProcessor\config\FCPMessages.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp" />
     <ClCompile Include="include\Loggers\ConsoleLogger.cpp" />
+    <ClCompile Include="include\Pagination\commands\BaseClasses\PaginationCommand.cpp" />
+    <ClCompile Include="include\Pagination\commands\NextCommand.cpp" />
+    <ClCompile Include="include\Pagination\commands\PrevCommand.cpp" />
+    <ClCompile Include="include\Pagination\config\PaginationConfig.cpp" />
+    <ClCompile Include="include\Pagination\config\PaginationErrors.cpp" />
+    <ClCompile Include="include\Pagination\config\PaginationMessages.cpp" />
+    <ClCompile Include="include\Pagination\Pagination.cpp" />
     <ClCompile Include="include\String.cpp" />
     <ClCompile Include="include\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -183,6 +190,13 @@
     <ClInclude Include="include\FileCommandsProcessor\config\FCPMessages.h" />
     <ClInclude Include="include\Loggers\ConsoleLogger.h" />
     <ClInclude Include="include\Loggers\interfaces\ILogger.h" />
+    <ClInclude Include="include\Pagination\commands\BaseClasses\PaginationCommand.h" />
+    <ClInclude Include="include\Pagination\commands\NextCommand.h" />
+    <ClInclude Include="include\Pagination\commands\PrevCommand.h" />
+    <ClInclude Include="include\Pagination\config\PaginationConfig.h" />
+    <ClInclude Include="include\Pagination\config\PaginationErrors.h" />
+    <ClInclude Include="include\Pagination\config\PaginationMessages.h" />
+    <ClInclude Include="include\Pagination\Pagination.h" />
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="src\commands\AddColumnCommand.h" />

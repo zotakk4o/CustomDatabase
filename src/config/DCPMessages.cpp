@@ -5,3 +5,4 @@ const String DCPMessages::helpMessage = "The following commands are supported:\n
 const String DCPMessages::exitMessage = "Exiting the program...";
 const String DCPMessages::supportedDataTypesMessage = "The only supported data types are: ";
 const String DCPMessages::columnAlreadyExistsMessage = "The column you wanted to add already exists.";
+const String DCPMessages::emptyTableMessage = "Table is empty.";

@@ -20,7 +20,8 @@ class TableFile : public File {
 		void addColumn(const String&, const String&);
 
 		void setTableName(const String&);
-		const Vector<String> getColumnNames() const;
+		const Vector<String> getColumnNames(bool = false) const;
+		const Vector<String> getTableData() const;
 		String getTableName() const;
 };
 

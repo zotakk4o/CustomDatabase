@@ -2,6 +2,7 @@
 #include "../config/DCPConfig.h"
 #include "../config/DCPMessages.h"
 #include "../config/DCPErrors.h"
+#include "../../include/Pagination/Pagination.h"
 
 TableFile::TableFile(const ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name) {
 	if (openOnCreation) {
@@ -61,11 +62,23 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 }
 
 void TableFile::describe() const {
-
+	const Vector<String>& fields = this->getColumnNames(true);
+	for (unsigned short i = 0; i < fields.getSize(); i++)
+	{
+		this->logger->log(fields[i]);
+	}
 }
 
 void TableFile::print() const {
+	Vector<String> rows = this->getTableData();
 
+	if (!rows.getSize()) {
+		this->logger->log(DCPMessages::emptyTableMessage);
+		return;
+	}
+
+	Pagination tablesList{*this->logger, rows, DCPConfig::perPageEntries};
+	
 }
 
 void TableFile::exportData(const String& fileName) const {
@@ -78,7 +91,7 @@ void TableFile::rename(const String& newName) {
 	}
 }
 
-const Vector<String> TableFile::getColumnNames() const {
+const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
 	Vector<String> res;
 
 	if (this->data.getLength() == 0) {
@@ -87,12 +100,22 @@ const Vector<String> TableFile::getColumnNames() const {
 
 	Vector<String> withTypes = this->data.split(DCPConfig::newLineSymbol)[0].split(DCPConfig::fileDelimiter);
 
+	if (getWithTypes) {
+		return withTypes;
+	}
+
 	for (unsigned short i = 0; i < withTypes.getSize(); i++)
 	{
 		res.pushBack(withTypes[i].split('-')[0]);
 	}
 
 	return res;
+}
+
+const Vector<String> TableFile::getTableData() const {
+	Vector<String> dataOnly;
+	dataOnly = this->data.split(DCPConfig::newLineSymbol);
+	return dataOnly.getSize() <= 1 ? Vector<String>{} : dataOnly.slice(1, dataOnly.getSize() - 1);
 }
 
 void TableFile::setTableName(const String& name) {
