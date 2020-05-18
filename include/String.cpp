@@ -328,7 +328,9 @@ Vector<String> String::split(const String& delimiter) const {
 	Vector<String> res;
 
 	if (!delimiter.getLength()) {
-		res.pushBack(*this);
+		if (this->length) {
+			res.pushBack(*this);
+		}
 		return res;
 	}
 
@@ -336,7 +338,7 @@ Vector<String> String::split(const String& delimiter) const {
 
 	for (unsigned int i = 0; i < this->length; i++)
 	{
-		if (delimiter[0] == this->str[i] && i + delimiter.getLength() < this->length) {
+		if (delimiter[0] == this->str[i] && i + delimiter.getLength() <= this->length) {
 			bool wasDelimFound = true;
 			for (unsigned short j = 1; j < delimiter.getLength(); j++)
 			{
@@ -347,9 +349,14 @@ Vector<String> String::split(const String& delimiter) const {
 			}
 
 			if (wasDelimFound) {
-				res.pushBack(currWord);
+				if (currWord.length) {
+					res.pushBack(currWord);
+				}
 				currWord = "";
 				i += delimiter.getLength() - 1;
+			}
+			else {
+				currWord += this->str[i];
 			}
 		}
 		else {
@@ -357,7 +364,9 @@ Vector<String> String::split(const String& delimiter) const {
 		}
 	}
 
-	res.pushBack(currWord);
+	if (currWord.length) {
+		res.pushBack(currWord);
+	}
 
 	return res;
 }

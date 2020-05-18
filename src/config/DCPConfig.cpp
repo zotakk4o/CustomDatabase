@@ -15,7 +15,7 @@ const char DCPConfig::fileDelimiter = ',';
 #ifdef _WIN32
 const String DCPConfig::newLineSymbol = "\r\n";
 #else
-const String DCPConfig::newLineSymbol = "\r\n";
+const String DCPConfig::newLineSymbol = "\n";
 #endif
 
 const char DCPConfig::columnConfigDelimiter = '-';

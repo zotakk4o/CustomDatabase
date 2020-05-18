@@ -60,7 +60,7 @@ void DBFile::importTable(const String& fileName) {
 
 		newTable.saveAs(newPath);
 	
-		this->data += newTable.getTableName() + DCPConfig::fileDelimiter + newTable.getPath() + DCPConfig::newLineSymbol;
+		this->data += newTable.getTableName() + DCPConfig::fileDelimiter + newPath + '\n';
 
 		this->save();
 		return;

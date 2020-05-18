@@ -45,7 +45,7 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 		lines[i] = lines[i] + DCPConfig::fileDelimiter + DCPConfig::nullValue;
 	}
 
-	this->data = String::join(lines, DCPConfig::newLineSymbol);
+	this->data = String::join(lines, '\n');
 }
 
 void TableFile::describe() const {
