@@ -86,7 +86,7 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {
-	TableFile table = const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
+	TableFile& table = const_cast<TableFile&>(static_cast<const DBFile&>(*this).getTableWithName(tableName));
 	table.open();
 	return table;
 }

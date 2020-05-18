@@ -12,7 +12,7 @@ TableFile::TableFile(const ILogger* _logger, const String& _name, const String& 
 TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName) {};
 
 bool TableFile::open(const String& fileName) {
-	String filePath = fileName == "" ? this->path : fileName;
+	String filePath = fileName.getLength() == 0 ? this->path : fileName;
 
 	if (!this->File::open(filePath)) {
 		return false;
@@ -38,14 +38,26 @@ bool TableFile::open(const String& fileName) {
 
 void TableFile::addColumn(const String& columnName, const String& columnType) {
 	Vector<String> lines = this->data.split(DCPConfig::newLineSymbol);
-	lines[0] = lines[0] + DCPConfig::fileDelimiter + columnName + DCPConfig::columnConfigDelimiter + columnType;
 
-	for (unsigned int i = 1; i < lines.getSize(); i++)
-	{
-		lines[i] = lines[i] + DCPConfig::fileDelimiter + DCPConfig::nullValue;
+	if (this->getColumnNames().indexOf(columnName) != -1) {
+		this->logger->log(DCPMessages::columnAlreadyExistsMessage);
+		return;
+	}
+
+	if (lines.getSize() == 0) {
+		lines.pushBack(columnName + DCPConfig::columnConfigDelimiter + columnType);
+	}
+	else {
+		lines[0] = lines[0] + DCPConfig::fileDelimiter + columnName + DCPConfig::columnConfigDelimiter + columnType;
+
+		for (unsigned int i = 1; i < lines.getSize(); i++)
+		{
+			lines[i] = lines[i] + DCPConfig::fileDelimiter + DCPConfig::nullValue;
+		}
 	}
 
 	this->data = String::join(lines, '\n');
+	this->save();
 }
 
 void TableFile::describe() const {
@@ -64,6 +76,23 @@ void TableFile::rename(const String& newName) {
 	if (newName.getLength()) {
 		this->tableName = newName;
 	}
+}
+
+const Vector<String> TableFile::getColumnNames() const {
+	Vector<String> res;
+
+	if (this->data.getLength() == 0) {
+		return res;
+	}
+
+	Vector<String> withTypes = this->data.split(DCPConfig::newLineSymbol)[0].split(DCPConfig::fileDelimiter);
+
+	for (unsigned short i = 0; i < withTypes.getSize(); i++)
+	{
+		res.pushBack(withTypes[i].split('-')[0]);
+	}
+
+	return res;
 }
 
 void TableFile::setTableName(const String& name) {

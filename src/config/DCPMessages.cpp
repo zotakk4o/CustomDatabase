@@ -4,3 +4,4 @@ const String DCPMessages::welcomeMessage = "Welcome to CDB! The application is n
 const String DCPMessages::helpMessage = "The following commands are supported:\nopen <file>	opens <file>\nclose		closes currently opened file\nsave		saves the currently open file\nsaveas <file>	saves the currently open file in <file>\nhelp		prints this information\n";
 const String DCPMessages::exitMessage = "Exiting the program...";
 const String DCPMessages::supportedDataTypesMessage = "The only supported data types are: ";
+const String DCPMessages::columnAlreadyExistsMessage = "The column you wanted to add already exists.";

@@ -9,6 +9,7 @@ class DCPMessages {
 		static const String helpMessage;
 		static const String exitMessage;
 		static const String supportedDataTypesMessage;
+		static const String columnAlreadyExistsMessage;
 };
 
 #endif
