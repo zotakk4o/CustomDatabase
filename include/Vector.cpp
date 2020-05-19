@@ -137,7 +137,7 @@ int Vector<T>::indexOf(const T& item) const {
 }
 
 template<typename T>
-Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) {
+Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) const {
 	Vector<T> res;
 
 	if (this->size == 0) {

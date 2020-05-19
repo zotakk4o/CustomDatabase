@@ -11,6 +11,8 @@ class DCPMessages {
 		static const String supportedDataTypesMessage;
 		static const String columnAlreadyExistsMessage;
 		static const String emptyTableMessage;
+		static const String noRecordsFoundMessage;
+		static const String typeMissmatchMessage;
 };
 
 #endif

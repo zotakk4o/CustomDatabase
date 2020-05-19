@@ -25,7 +25,7 @@ bool DBFile::open(const String& fileName) {
 		Vector<String> rowData = tableRows[i].split(DCPConfig::fileDelimiter);
 
 		if (rowData.getSize() != 2) {
-			throw DCPErrors::incorrectTableFormatError;
+			this->logger->log(DCPErrors::incorrectTableFormatError);
 		}
 
 		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1]});
@@ -72,6 +72,14 @@ void DBFile::addColumnToTable(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).addColumn(parameters[1], parameters[2]);
 }
 
+void DBFile::selectFromTable(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[2]).select(parameters[0], parameters[1]);
+}
+
+void DBFile::updateTableEntry(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).update(parameters.slice(1, parameters.getSize() - 1));
+}
+
 void DBFile::showTables() {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
@@ -100,7 +108,7 @@ void DBFile::importTable(const String& fileName) {
 		return;
 	}
 
-	throw DCPErrors::tableAlreadyExistsError;
+	this->logger->log(DCPErrors::tableAlreadyExistsError);
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) {
@@ -130,5 +138,5 @@ TableFile& DBFile::getTableWithName(const String& tableName) {
 		}
 	}
 
-	throw DCPErrors::tableNotFoundError;
+	this->logger->log(DCPErrors::tableNotFoundError);
 }

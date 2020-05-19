@@ -14,11 +14,10 @@ void DBCommandsProcessor::parseCommands() {
 
 	while (true)
 	{
-		
 		String::getLine(DCPConfig::inputStream, command);
 
 		if (!this->parseFileCommand(command, dbFile) && !this->parseDBCommand(command, dbFile)) {
-			throw DCPErrors::wrongCommandError;
+			DCPConfig::logger.log(DCPErrors::wrongCommandError);
 		}
 	}
 }

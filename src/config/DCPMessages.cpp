@@ -6,3 +6,5 @@ const String DCPMessages::exitMessage = "Exiting the program...";
 const String DCPMessages::supportedDataTypesMessage = "The only supported data types are: ";
 const String DCPMessages::columnAlreadyExistsMessage = "The column you wanted to add already exists.";
 const String DCPMessages::emptyTableMessage = "Table is empty.";
+const String DCPMessages::noRecordsFoundMessage = "No records match the criteria you entered.";
+const String DCPMessages::typeMissmatchMessage = "Incorrect data type entered.";

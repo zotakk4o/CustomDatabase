@@ -52,6 +52,7 @@ class String {
 		int indexOf(const char&) const;
 		int indexOf(const String&) const;
 
+		static int isNumeric(const String&);
 		static String toString(double, unsigned short = 6);
 		static String join(const Vector<String>&, const String& = ',');
 		String reverse() const;

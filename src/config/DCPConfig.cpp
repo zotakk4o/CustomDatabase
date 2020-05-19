@@ -5,6 +5,8 @@
 #include "../commands/ShowTablesCommand.h"
 #include "../commands/ImportCommand.h"
 #include "../commands/AddColumnCommand.h"
+#include "../commands/SelectCommand.h"
+#include "../commands/UpdateCommand.h"
 
 const String DCPConfig::defaultFilesLocation = "C:\\Users\\zotak\\Desktop\\project\\";
 
@@ -22,7 +24,11 @@ const String DCPConfig::dbFileExtension = ".csv";
 
 const String DCPConfig::nullValue = "NULL";
 
-const Vector<String> DCPConfig::allowedDataTypes{ "INT", "STRING", "DOUBLE" };
+const String DCPConfig::doubleType = "DOUBLE";
+const String DCPConfig::stringType = "STRING";
+const String DCPConfig::intType = "INT";
+
+const Vector<String> DCPConfig::allowedDataTypes{ doubleType, intType, stringType };
 
 const Vector<String> DCPConfig::fileExtensions{ DCPConfig::tableFileExtension }; //In case of different file extensions, add them all.
 
@@ -39,5 +45,7 @@ const Vector<DBFileCommandParameters*> DCPConfig::dbCommandsParameters{
 	new PrintCommand(),
 	new DescribeCommand(),
 	new ImportCommand(),
-	new AddColumnCommand()
+	new AddColumnCommand(),
+	new SelectCommand(),
+	new UpdateCommand()
 };

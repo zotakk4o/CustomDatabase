@@ -30,11 +30,88 @@ bool TableFile::open(const String& fileName) {
 	{
 		Vector<String> columnData = rowData[j].split(DCPConfig::columnConfigDelimiter);
 		if (columnData.getSize() != 2 || columnData[0].getLength() == 0 || DCPConfig::allowedDataTypes.indexOf(columnData[1]) == -1) {
-			throw DCPErrors::incorrectTableDataFormatError;
+			this->logger->log(DCPErrors::incorrectTableDataFormatError);
 		}
 	}
 
 	return true;
+}
+
+Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnName, const String& columnValue) {
+	Vector<String> rows = this->getTableData();
+	Vector<unsigned int> res;
+
+	if (!rows.getSize()) {
+		this->logger->log(DCPMessages::emptyTableMessage);
+		return res;
+	}
+
+	for (unsigned int i = 0; i < rows.getSize(); i++)
+	{
+		int columnIndex = this->getColumnIndex(columnName);
+
+		if (columnIndex != -1 && rows[i].split(DCPConfig::fileDelimiter)[columnIndex] == columnValue) {
+			res.pushBack(i);
+		}
+
+	}
+
+	if (!res.getSize()) {
+		this->logger->log(DCPMessages::noRecordsFoundMessage);
+	}
+
+	return res;
+}
+
+void TableFile::select(const String& columnName, const String& columnValue) {
+	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(columnName, columnValue);
+	
+	if (!rows.getSize()) {
+		return;
+	}
+
+	Vector<String> selected = this->getTableData(rows);
+
+	Pagination tablesList{ *this->logger, selected, DCPConfig::perPageEntries };
+}
+
+void TableFile::update(const Vector<String>& parameters) {
+	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(parameters[0], parameters[1]);
+	
+	if (!selected.getSize()) {
+		return;
+	}
+
+	Vector<String> rows = this->getTableData();
+
+	int targetColumnIndex = this->getColumnIndex(parameters[2]);
+
+	if (targetColumnIndex == -1) {
+		this->logger->log(DCPMessages::noRecordsFoundMessage);
+		return;
+	}
+
+	int isNumeric = String::isNumeric(parameters[3]);
+	String type = this->getColumnType(targetColumnIndex);
+
+	if (isNumeric == 1 && type != DCPConfig::doubleType
+		|| isNumeric == 0 && type != DCPConfig::intType) {
+		this->logger->log(DCPMessages::typeMissmatchMessage);
+		return;
+	}
+	
+
+	for (unsigned int i = 0; i < selected.getSize(); i++)
+	{
+		Vector<String> columns = rows[i].split(DCPConfig::fileDelimiter);
+		columns[targetColumnIndex] = parameters[3];
+		rows[i] = String::join(columns, DCPConfig::fileDelimiter);
+	}
+
+	this->data = String::join(this->getColumnNames(true), DCPConfig::columnConfigDelimiter) 
+		+ '\n' 
+		+  String::join(rows, '\n')
+		+ '\n';
 }
 
 void TableFile::addColumn(const String& columnName, const String& columnType) {
@@ -89,7 +166,7 @@ void TableFile::rename(const String& newName) {
 	}
 }
 
-const Vector<String> TableFile::getColumnNames(bool getWithTypes) {
+const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
 	Vector<String> res;
 
 	if (this->data.getLength() == 0) {
@@ -110,9 +187,27 @@ const Vector<String> TableFile::getColumnNames(bool getWithTypes) {
 	return res;
 }
 
-const Vector<String> TableFile::getTableData() {
+const Vector<String> TableFile::getTableData(const Vector<unsigned int>& selected) const {
 	Vector<String> dataOnly = this->data.split('\n');
-	return dataOnly.getSize() <= 1 ? Vector<String>{} : dataOnly.slice(1, dataOnly.getSize() - 1);
+
+	if (dataOnly.getSize() <= 1) {
+		return Vector<String>{};
+	}
+
+	dataOnly = dataOnly.slice(1, dataOnly.getSize() - 1);
+
+	if (!selected.getSize()) {
+		return dataOnly;
+	}
+
+	Vector<String> res;
+
+	for (unsigned int i = 0; i < selected.getSize(); i++)
+	{
+		res.pushBack(dataOnly[selected[i]]);
+	}
+
+	return res;
 }
 
 void TableFile::setTableName(const String& name) {
@@ -121,6 +216,14 @@ void TableFile::setTableName(const String& name) {
 	}
 }
 
-String TableFile::getTableName() const {
+String TableFile::getColumnType(const unsigned int& index) const {
+	return this->getColumnNames(true)[index].split(DCPConfig::columnConfigDelimiter)[1];
+}
+
+const String& TableFile::getTableName() const {
 	return this->tableName;
+}
+
+int TableFile::getColumnIndex(const String& columnName) const {
+	return this->getColumnNames().indexOf(columnName);
 }

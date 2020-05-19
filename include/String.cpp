@@ -495,4 +495,25 @@ std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 
 	return stream;
 }
+
+int String::isNumeric(const String& value) {
+	if (!value.getLength()) {
+		return -1;
+	}
+
+	int dotIndex = value.indexOf('.');
+
+	if (dotIndex == 0 || dotIndex == value.getLength() - 1) {
+		return -1;
+	}
+
+	for (unsigned int i = 0; i < value.getLength(); i++)
+	{
+		if ((value[i] < '0' || value[i] > '9') && value[i] != '.') {
+			return -1;
+		}
+	}
+
+	return dotIndex != -1 ? 1 : 0;
+}
 #endif // !STRING_CPP

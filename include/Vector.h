@@ -30,7 +30,7 @@ public:
 
 	int indexOf(const T&) const;
 
-	Vector<T> slice(const unsigned int& beginning, const unsigned int& end);
+	Vector<T> slice(const unsigned int& beginning, const unsigned int& end) const;
 
 	unsigned int getSize() const;
 	unsigned int getCapacity() const;
