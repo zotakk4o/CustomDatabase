@@ -18,7 +18,7 @@ bool DBFile::open(const String& fileName) {
 		return true;
 	}
 
-	Vector<String> tableRows = this->data.split(DCPConfig::newLineSymbol);
+	Vector<String> tableRows = this->data.split('\n');
 
 	for (unsigned int i = 0; i < tableRows.getSize(); i++)
 	{
@@ -29,6 +29,40 @@ bool DBFile::open(const String& fileName) {
 		}
 
 		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1]});
+	}
+
+	return true;
+}
+
+bool DBFile::saveData(const String& fileName) {
+	if (!this->File::saveData(fileName)) {
+		return false;
+	}
+
+	for (unsigned short i = 0; i < this->tableFiles.getSize(); i++)
+	{
+		if (this->tableFiles[i].isOpened()) {
+			if (!this->tableFiles[i].save()) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+bool DBFile::close() {
+	if (!this->File::close()) {
+		return false;
+	}
+
+	for (unsigned short i = 0; i < this->tableFiles.getSize(); i++)
+	{
+		if (this->tableFiles[i].isOpened()) {
+			if (!this->tableFiles[i].close()) {
+				return false;
+			}
+		}
 	}
 
 	return true;

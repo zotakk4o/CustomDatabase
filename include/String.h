@@ -10,7 +10,7 @@ class String {
 		unsigned int capacity;
 		static const unsigned short defaultCapacity;
 
-		void reserve(unsigned int);
+		void reserve(unsigned int = 0);
 		void copy(const String& other);
 		void deleteInternals();
 		std::istream& readFromStream(std::istream&, bool = false);
@@ -44,7 +44,7 @@ class String {
 		char& operator[](const unsigned int&);
 		const char& operator[](const unsigned int&) const;
 
-		static std::istream& getLine(std::istream&, String&);
+		static bool getLine(std::istream&, String&);
 		friend std::istream& operator>>(std::istream&, String&);
 		friend std::ostream& operator<<(std::ostream&, const String&);
 

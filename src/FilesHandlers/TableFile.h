@@ -13,15 +13,15 @@ class TableFile : public File {
 
 		virtual bool open(const String& = "");
 
-		void describe() const;
-		void print() const;
-		void exportData(const String&) const;
+		void describe();
+		void print();
+		void exportData(const String&);
 		void rename(const String&);
 		void addColumn(const String&, const String&);
 
 		void setTableName(const String&);
-		const Vector<String> getColumnNames(bool = false) const;
-		const Vector<String> getTableData() const;
+		const Vector<String> getColumnNames(bool = false);
+		const Vector<String> getTableData();
 		String getTableName() const;
 };
 

@@ -11,12 +11,13 @@ class DBFile : public File {
 		Vector<TableFile> tableFiles;
 
 		TableFile& getTableWithName(const String&);
+		virtual bool saveData(const String&);
 	public:
 		DBFile(const ILogger* = nullptr, const String& = "");
 		DBFile(const DBFile&);
 
 		virtual bool open(const String&);
-
+		virtual bool close();
 		void addColumnToTable(const Vector<String>&);
 		void showTables();
 		void importTable(const String&);

@@ -12,12 +12,6 @@ const char DCPConfig::commandDelimiter = ' ';
 
 const char DCPConfig::fileDelimiter = ',';
 
-#ifdef _WIN32
-const String DCPConfig::newLineSymbol = "\r\n";
-#else
-const String DCPConfig::newLineSymbol = "\n";
-#endif
-
 const char DCPConfig::columnConfigDelimiter = '-';
 
 const unsigned short DCPConfig::perPageEntries = 5;

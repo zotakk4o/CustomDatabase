@@ -5,23 +5,22 @@
 #include "Loggers/interfaces/ILogger.h"
 
 class File {
-	private:
-		bool saveData(const String&) const;
-
 	protected:
 		String data;
 		String path;
 		bool opened;
 		const ILogger* logger;
+
+		virtual bool saveData(const String&);
 	public:
 		File(const ILogger* = nullptr, const String& = "");
 		File(const File& other);
 
 		virtual ~File();
 		virtual bool open(const String&) = 0;
-		bool save() const;
-		bool saveAs(const String&) const;
-		bool close();
+		virtual bool save();
+		virtual bool saveAs(const String&);
+		virtual bool close();
 		void setData(const String&);
 
 		static String getFileName(const String&, bool = true);

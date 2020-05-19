@@ -17,7 +17,8 @@ bool File::open(const String& fileName) {
 	}
 
 	std::fstream fs;
-	fs.open(fileName.getConstChar(), std::fstream::in | std::fstream::ate | std::fstream::binary);
+	fs.open(fileName.getConstChar(), std::fstream::in);
+	fs.seekg(0, fs.beg);
 
 	if (!fs.is_open()) {
 		fs.open(fileName.getConstChar(), std::fstream::out);
@@ -34,18 +35,11 @@ bool File::open(const String& fileName) {
 		return false;
 	}
 
-	fs.seekg(0, fs.end);
-	unsigned int length = fs.tellg();
-	fs.seekg(0, fs.beg);
+	String line;
 
-	char* res = new (std::nothrow) char[length + 1];
-
-	if (res == nullptr) {
-		fs.close();
-		throw NO_FREE_MEM_ERR;
+	while (String::getLine(fs, line)) {
+		this->data += line + '\n';
 	}
-
-	fs.read(res, length);
 
 	/*if (fs.fail() || fs.bad()) {
 		delete[] res;
@@ -53,10 +47,6 @@ bool File::open(const String& fileName) {
 		this->logger->log(String{ "\"" } + fileName + "\" hasn't been processed successfully due to an error.");
 		return false;
 	}*/
-
-	res[length] = '\0';
-	this->data = res;
-	delete[] res;
 
 	fs.close();
 	this->opened = true;
@@ -68,15 +58,15 @@ bool File::open(const String& fileName) {
 }
 
 
-bool File::save() const {
+bool File::save() {
 	return this->saveData(this->path);
 }
 
-bool File::saveAs(const String& filename) const {
+bool File::saveAs(const String& filename) {
 	return this->saveData(filename);
 }
 
-bool File::saveData(const String& filename) const {
+bool File::saveData(const String& filename) {
 	if (!this->opened) {
 		this->logger->log(String{ "Could not save \"" } +filename + "\". The file has not been opened for processing.");
 		return false;

@@ -23,7 +23,7 @@ bool TableFile::open(const String& fileName) {
 		return true;
 	}
 
-	Vector<String> tableRows = this->data.split(DCPConfig::newLineSymbol);
+	Vector<String> tableRows = this->data.split('\n');
 	Vector<String> rowData = tableRows[0].split(DCPConfig::fileDelimiter);
 
 	for (unsigned int j = 0; j < rowData.getSize(); j++)
@@ -38,12 +38,12 @@ bool TableFile::open(const String& fileName) {
 }
 
 void TableFile::addColumn(const String& columnName, const String& columnType) {
-	Vector<String> lines = this->data.split(DCPConfig::newLineSymbol);
-
 	if (this->getColumnNames().indexOf(columnName) != -1) {
 		this->logger->log(DCPMessages::columnAlreadyExistsMessage);
 		return;
 	}
+
+	Vector<String> lines = this->data.split('\n');
 
 	if (lines.getSize() == 0) {
 		lines.pushBack(columnName + DCPConfig::columnConfigDelimiter + columnType);
@@ -57,11 +57,10 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 		}
 	}
 
-	this->data = String::join(lines, '\n');
-	this->save();
+	this->data = String::join(lines, '\n') + '\n';
 }
 
-void TableFile::describe() const {
+void TableFile::describe() {
 	const Vector<String>& fields = this->getColumnNames(true);
 	for (unsigned short i = 0; i < fields.getSize(); i++)
 	{
@@ -69,7 +68,7 @@ void TableFile::describe() const {
 	}
 }
 
-void TableFile::print() const {
+void TableFile::print() {
 	Vector<String> rows = this->getTableData();
 
 	if (!rows.getSize()) {
@@ -78,10 +77,9 @@ void TableFile::print() const {
 	}
 
 	Pagination tablesList{*this->logger, rows, DCPConfig::perPageEntries};
-	
 }
 
-void TableFile::exportData(const String& fileName) const {
+void TableFile::exportData(const String& fileName) {
 	this->saveAs(fileName);
 }
 
@@ -91,14 +89,14 @@ void TableFile::rename(const String& newName) {
 	}
 }
 
-const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
+const Vector<String> TableFile::getColumnNames(bool getWithTypes) {
 	Vector<String> res;
 
 	if (this->data.getLength() == 0) {
 		return res;
 	}
 
-	Vector<String> withTypes = this->data.split(DCPConfig::newLineSymbol)[0].split(DCPConfig::fileDelimiter);
+	Vector<String> withTypes = this->data.split('\n')[0].split(DCPConfig::fileDelimiter);
 
 	if (getWithTypes) {
 		return withTypes;
@@ -112,9 +110,8 @@ const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
 	return res;
 }
 
-const Vector<String> TableFile::getTableData() const {
-	Vector<String> dataOnly;
-	dataOnly = this->data.split(DCPConfig::newLineSymbol);
+const Vector<String> TableFile::getTableData() {
+	Vector<String> dataOnly = this->data.split('\n');
 	return dataOnly.getSize() <= 1 ? Vector<String>{} : dataOnly.slice(1, dataOnly.getSize() - 1);
 }
 

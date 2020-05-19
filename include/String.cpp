@@ -103,9 +103,9 @@ void strConcat(char* destination, const char* source) {
 const unsigned short String::defaultCapacity = 50; //This capacity will be doubled
 
 String::String(const char& character) : capacity(0), length(1), str(nullptr) {
-	this->reserve(1);
-
-	strCopy(&character, this->str);
+	this->reserve();
+	this->str[0] = character;
+	this->str[1] = '\0';
 }
 
 String::String(const char* _str) : capacity(0), length(0), str(nullptr) {
@@ -154,14 +154,13 @@ String& String::operator+=(const char& character) {
 
 String String::operator+(const String& other) const {
 	String result = *this;
-	unsigned int strLength = strLen(other.str);
 
-	if (strLength + result.length >= result.capacity) {
-		result.reserve(max(strLength, result.length));
+	if (other.length + result.length >= result.capacity) {
+		result.reserve(max(other.length, result.length));
 	}
 
 	strConcat(result.str, other.str);
-	result.length += strLength;
+	result.length += other.length;
 
 	return result;
 }
@@ -238,8 +237,8 @@ std::istream& operator>>(std::istream& stream, String& string) {
 	return string.readFromStream(stream);
 }
 
-std::istream& String::getLine(std::istream& stream, String& string) {
-	return string.readFromStream(stream, true);
+bool String::getLine(std::istream& stream, String& string) {
+	return string.readFromStream(stream, true).good();
 }
 
 std::ostream& operator<<(std::ostream& stream, const String& string) {
@@ -460,6 +459,7 @@ String String::join(const Vector<String>& elements, const String& delimiter) {
 
 std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 	char currSymbol;
+	bool symbolNotNewLine;
 	unsigned int index = 0;
 	unsigned int currSize = 100;
 	char* tempStr = new (std::nothrow) char[currSize];
@@ -470,6 +470,7 @@ std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 
 	do {
 		stream.get(currSymbol);
+		symbolNotNewLine = currSymbol != '\n' && currSymbol != '\r\n' && currSymbol != '\r';
 
 		if (index % 100 == 0 && index != 0) {
 			currSize += 100;
@@ -479,14 +480,14 @@ std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 				throw NO_FREE_MEM_ERR;
 			}
 
+			tempStr[index - 1] = '\0';
 			strcpy_s(extendedStr, currSize - 100, tempStr);
 			delete[] tempStr;
 			tempStr = extendedStr;
 		}
 
 		tempStr[index++] = currSymbol;
-
-	} while (whileNewLine ? currSymbol != '\n' : currSymbol != ' ' && currSymbol != '\n');
+	} while (stream.good() && (whileNewLine ? symbolNotNewLine : currSymbol != ' ' && symbolNotNewLine));
 
 	tempStr[index - 1] = '\0';
 	*this = tempStr;
