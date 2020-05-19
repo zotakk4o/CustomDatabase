@@ -15,10 +15,15 @@ void DBCommandsProcessor::parseCommands() {
 	while (true)
 	{
 		String::getLine(DCPConfig::inputStream, command);
-
-		if (!this->parseFileCommand(command, dbFile) && !this->parseDBCommand(command, dbFile)) {
-			DCPConfig::logger.log(DCPErrors::wrongCommandError);
+		try {
+			if (!this->parseFileCommand(command, dbFile) && !this->parseDBCommand(command, dbFile)) {
+				DCPConfig::logger.log(DCPErrors::wrongCommandError);
+			}
 		}
+		catch (const String& err) {
+			DCPConfig::logger.log(err);
+		}
+		
 	}
 }
 

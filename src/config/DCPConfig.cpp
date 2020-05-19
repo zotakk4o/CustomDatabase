@@ -7,6 +7,7 @@
 #include "../commands/AddColumnCommand.h"
 #include "../commands/SelectCommand.h"
 #include "../commands/UpdateCommand.h"
+#include "../commands/RenameCommand.h"
 
 const String DCPConfig::defaultFilesLocation = "C:\\Users\\zotak\\Desktop\\project\\";
 
@@ -47,5 +48,6 @@ const Vector<DBFileCommandParameters*> DCPConfig::dbCommandsParameters{
 	new ImportCommand(),
 	new AddColumnCommand(),
 	new SelectCommand(),
-	new UpdateCommand()
+	new UpdateCommand(),
+	new RenameCommand()
 };

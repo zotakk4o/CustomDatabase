@@ -15,7 +15,7 @@ bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) 
 		String extension = filePaths[i].substring(extensionIndex, filePaths[i].getLength() - extensionIndex);
 
 		if (this->getAllowedExtensions().indexOf(extension) == -1) {
-			FCPConfig::logger.log(FCPMessages::wrongFileFormatMessage);
+			throw FCPErrors::wrongFileFormatError;
 			return false;
 		}
 	}

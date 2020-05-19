@@ -7,7 +7,6 @@ class FCPMessages {
 	public:
 		static const String helpMessage;
 		static const String exitMessage;
-		static const String wrongFileFormatMessage;
 };
 
 #endif

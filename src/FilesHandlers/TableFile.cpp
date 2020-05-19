@@ -30,7 +30,7 @@ bool TableFile::open(const String& fileName) {
 	{
 		Vector<String> columnData = rowData[j].split(DCPConfig::columnConfigDelimiter);
 		if (columnData.getSize() != 2 || columnData[0].getLength() == 0 || DCPConfig::allowedDataTypes.indexOf(columnData[1]) == -1) {
-			this->logger->log(DCPErrors::incorrectTableDataFormatError);
+			throw DCPErrors::incorrectTableDataFormatError;
 		}
 	}
 
@@ -108,7 +108,7 @@ void TableFile::update(const Vector<String>& parameters) {
 		rows[i] = String::join(columns, DCPConfig::fileDelimiter);
 	}
 
-	this->data = String::join(this->getColumnNames(true), DCPConfig::columnConfigDelimiter) 
+	this->data = String::join(this->getColumnNames(true), DCPConfig::fileDelimiter) 
 		+ '\n' 
 		+  String::join(rows, '\n')
 		+ '\n';
@@ -161,9 +161,7 @@ void TableFile::exportData(const String& fileName) {
 }
 
 void TableFile::rename(const String& newName) {
-	if (newName.getLength()) {
-		this->tableName = newName;
-	}
+	this->setTableName(newName);
 }
 
 const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
@@ -212,15 +210,17 @@ const Vector<String> TableFile::getTableData(const Vector<unsigned int>& selecte
 
 void TableFile::setTableName(const String& name) {
 	if (name.getLength()) {
-		this->tableName = name;
+		return;
 	}
+
+	this->tableName = name;
 }
 
 String TableFile::getColumnType(const unsigned int& index) const {
 	return this->getColumnNames(true)[index].split(DCPConfig::columnConfigDelimiter)[1];
 }
 
-const String& TableFile::getTableName() const {
+String TableFile::getTableName() const {
 	return this->tableName;
 }
 

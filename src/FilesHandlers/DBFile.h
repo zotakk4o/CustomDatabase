@@ -10,7 +10,7 @@ class DBFile : public File {
 	private:
 		Vector<TableFile> tableFiles;
 
-		TableFile& getTableWithName(const String&);
+		TableFile& getTableWithName(const String&, bool = true);
 		virtual bool saveData(const String&);
 	public:
 		DBFile(const ILogger* = nullptr, const String& = "");

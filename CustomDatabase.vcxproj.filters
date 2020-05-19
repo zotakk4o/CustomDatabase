@@ -150,6 +150,9 @@
     <ClCompile Include="include\Pagination\config\PaginationMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\RenameCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
@@ -285,6 +288,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Pagination\config\PaginationMessages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\RenameCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

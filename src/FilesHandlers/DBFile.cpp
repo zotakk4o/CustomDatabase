@@ -25,7 +25,7 @@ bool DBFile::open(const String& fileName) {
 		Vector<String> rowData = tableRows[i].split(DCPConfig::fileDelimiter);
 
 		if (rowData.getSize() != 2) {
-			this->logger->log(DCPErrors::incorrectTableFormatError);
+			throw DCPErrors::incorrectTableFormatError; 
 		}
 
 		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1]});
@@ -83,14 +83,14 @@ void DBFile::updateTableEntry(const Vector<String>& parameters) {
 void DBFile::showTables() {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
-		this->logger->log(String{ (i + 1) + "0" } +". " + this->tableFiles[i].getTableName());
+		this->logger->log(String::toString(i + 1) + ". " + this->tableFiles[i].getTableName());
 	}
 }
 
 void DBFile::importTable(const String& fileName) {
 	try
 	{
-		this->getTableWithName(DBFile::getFileName(fileName, false));
+		this->getTableWithName(DBFile::getFileName(fileName, false), false);
 	}
 	catch (const String&)
 	{
@@ -108,7 +108,7 @@ void DBFile::importTable(const String& fileName) {
 		return;
 	}
 
-	this->logger->log(DCPErrors::tableAlreadyExistsError);
+	throw DCPErrors::tableAlreadyExistsError;
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) {
@@ -124,19 +124,35 @@ void DBFile::printTable(const String& tableName) {
 }
 
 void DBFile::renameTable(const String& tableName, const String& newName) {
-	this->getTableWithName(tableName).rename(newName);
+	try {
+		this->getTableWithName(newName, false);
+		this->logger->log(DCPErrors::tableAlreadyExistsError);
+	} catch (const String&) {
+		this->data = "";
+		for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+		{
+			if (this->tableFiles[i].getTableName() == tableName) {
+				this->data += newName;
+			}
+			else {
+				this->data += tableName;
+			}
+
+			this->data = this->data + DCPConfig::fileDelimiter + this->tableFiles[i].getPath() + '\n';
+		}
+	}
 }
 
-TableFile& DBFile::getTableWithName(const String& tableName) {
+TableFile& DBFile::getTableWithName(const String& tableName, bool shallOpen) {
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
-			if (!this->tableFiles[i].isOpened()) {
+			if (shallOpen && !this->tableFiles[i].isOpened()) {
 				this->tableFiles[i].open();
 			}
 			return this->tableFiles[i];
 		}
 	}
 
-	this->logger->log(DCPErrors::tableNotFoundError);
+	throw DCPErrors::tableNotFoundError;
 }

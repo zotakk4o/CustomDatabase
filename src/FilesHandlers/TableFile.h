@@ -28,7 +28,7 @@ class TableFile : public File {
 		void setTableName(const String&);
 		const Vector<String> getColumnNames(bool = false) const;
 		const Vector<String> getTableData(const Vector<unsigned int>& = {}) const;
-		const String& getTableName() const;
+		String getTableName() const;
 };
 
 #endif

@@ -6,8 +6,6 @@
 class DCPMessages {
 	public:
 		static const String welcomeMessage;
-		static const String helpMessage;
-		static const String exitMessage;
 		static const String supportedDataTypesMessage;
 		static const String columnAlreadyExistsMessage;
 		static const String emptyTableMessage;

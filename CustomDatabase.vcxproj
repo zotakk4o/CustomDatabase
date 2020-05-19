@@ -163,6 +163,7 @@
     <ClCompile Include="src\commands\ImportCommand.cpp" />
     <ClCompile Include="src\commands\InsertCommand.cpp" />
     <ClCompile Include="src\commands\PrintCommand.cpp" />
+    <ClCompile Include="src\commands\RenameCommand.cpp" />
     <ClCompile Include="src\commands\SelectCommand.cpp" />
     <ClCompile Include="src\commands\ShowTablesCommand.cpp" />
     <ClCompile Include="src\commands\UpdateCommand.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="src\commands\ImportCommand.h" />
     <ClInclude Include="src\commands\InsertCommand.h" />
     <ClInclude Include="src\commands\PrintCommand.h" />
+    <ClInclude Include="src\commands\RenameCommand.h" />
     <ClInclude Include="src\commands\SelectCommand.h" />
     <ClInclude Include="src\commands\ShowTablesCommand.h" />
     <ClInclude Include="src\commands\UpdateCommand.h" />

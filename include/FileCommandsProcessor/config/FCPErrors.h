@@ -5,9 +5,8 @@
 
 class FCPErrors {
 	public:
-		static const String wrongCommandError;
 		static const String noFileOpened;
-		static const String noFilenameArgumentError;
+		static const String wrongFileFormatError;
 };
 
 #endif
