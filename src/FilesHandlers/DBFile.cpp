@@ -123,6 +123,10 @@ void DBFile::describeTable(const String& tableName) {
 	this->getTableWithName(tableName).describe();
 }
 
+void DBFile::deleteFromTable(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).deleteRows(parameters[1], parameters[2]);
+}
+
 void DBFile::printTable(const String& tableName) {
 	this->getTableWithName(tableName).print();
 }

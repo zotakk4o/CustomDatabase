@@ -22,6 +22,7 @@ class DBFile : public File {
 		void selectFromTable(const Vector<String>&);
 		void countRowsFromTable(const Vector<String>&);
 		void insertRow(const Vector<String>&);
+		void deleteFromTable(const Vector<String>&);
 		void updateTableEntry(const Vector<String>&);
 		void showTables();
 		void importTable(const String&);

@@ -11,6 +11,7 @@ class DCPErrors {
 		static const String tableAlreadyExistsError;
 		static const String incorrectTableDataFormatError;
 		static const String insertFailedError;
+		static const String updateFailedError;
 };
 
 #endif

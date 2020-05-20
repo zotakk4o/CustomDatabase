@@ -6,3 +6,4 @@ const String DCPErrors::tableNotFoundError = "Error: no table was found with the
 const String DCPErrors::tableAlreadyExistsError = "Error: table already exists!";
 const String DCPErrors::incorrectTableDataFormatError = "Error: the table file you want to operate with is corrupted!";
 const String DCPErrors::insertFailedError = "Error: insert failed, no data has been changed!";
+const String DCPErrors::updateFailedError = "Error: update failed, no data has been updated!";

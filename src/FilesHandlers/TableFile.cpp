@@ -37,9 +37,15 @@ bool TableFile::open(const String& fileName) {
 	return true;
 }
 
-Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnName, const String& columnValue) {
+Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnName, const String& columnValue, bool notEqualTo) {
 	Vector<String> rows = this->getTableData();
 	Vector<unsigned int> res;
+	int columnIndex = this->getColumnIndex(columnName);
+
+	if (columnIndex == -1) {
+		this->logger->log(DCPMessages::noRecordsFoundMessage);
+		return res;
+	}
 
 	if (!rows.getSize()) {
 		this->logger->log(DCPMessages::emptyTableMessage);
@@ -48,9 +54,8 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnNam
 
 	for (unsigned int i = 0; i < rows.getSize(); i++)
 	{
-		int columnIndex = this->getColumnIndex(columnName);
-
-		if (columnIndex != -1 && rows[i].split(DCPConfig::fileDelimiter)[columnIndex] == columnValue) {
+		String data = rows[i].split(DCPConfig::fileDelimiter)[columnIndex];
+		if (notEqualTo ? data != columnValue : data == columnValue) {
 			res.pushBack(i);
 		}
 
@@ -91,13 +96,9 @@ void TableFile::update(const Vector<String>& parameters) {
 		return;
 	}
 
-	int isNumeric = String::isNumeric(parameters[3]);
-	String type = this->getColumnType(targetColumnIndex);
-
-	if (isNumeric == 1 && type != DCPConfig::doubleType
-		|| isNumeric == 0 && type != DCPConfig::intType) {
+	if (!this->doesMatchColumnType(targetColumnIndex, parameters[3])) {
 		this->logger->log(DCPMessages::typeMissmatchMessage);
-		return;
+		throw DCPErrors::updateFailedError;
 	}
 	
 
@@ -153,6 +154,7 @@ void TableFile::insert(const Vector<String>& parameters) {
 		
 		if (i < parameters.getSize()) {
 			if (!this->doesMatchColumnType(i, parameters[i])) {
+				this->logger->log(DCPMessages::typeMissmatchMessage);
 				throw DCPErrors::insertFailedError;
 			}
 
@@ -164,6 +166,17 @@ void TableFile::insert(const Vector<String>& parameters) {
 	}
 
 	this->data += String::join(newRow, DCPConfig::fileDelimiter) + '\n';
+}
+
+void TableFile::deleteRows(const String& columnName, const String& columnValue) {
+	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(columnName, columnValue, true);
+
+	if (!selected.getSize()) {
+		return;
+	}
+
+	this->data = this->concatData(this->getTableData(selected));
+
 }
 
 void TableFile::describe() {
@@ -269,4 +282,11 @@ bool TableFile::doesMatchColumnType(const unsigned int& colIndex, const String& 
 		|| type == DCPConfig::intType && isNumeric == 0
 		|| type == DCPConfig::stringType && isNumeric == -1;
 	//TODO: separate data types in classes if I have time. SOLID principle is violated rn.
+}
+
+String TableFile::concatData(const Vector<String>& data) {
+	return String::join(this->getColumnNames(true), DCPConfig::fileDelimiter)
+		+ '\n'
+		+ String::join(data, '\n')
+		+ '\n';
 }
