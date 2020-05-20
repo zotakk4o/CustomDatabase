@@ -10,6 +10,7 @@ class TableFile : public File {
 
 		String getColumnType(const unsigned int&) const;
 		int getColumnIndex(const String&) const;
+		bool doesMatchColumnType(const unsigned int&, const String&) const;
 		Vector<unsigned int> getRowsIndexesByCriteria(const String&, const String&);
 	public:
 		TableFile(const ILogger* = nullptr, const String& = "", const String& = "", bool = false);
@@ -22,8 +23,10 @@ class TableFile : public File {
 		void exportData(const String&);
 		void rename(const String&);
 		void addColumn(const String&, const String&);
+		void insert(const Vector<String>&);
 		void select(const String&, const String&);
 		void update(const Vector<String>&);
+		void count(const String&, const String&);
 
 		void setTableName(const String&);
 		const Vector<String> getColumnNames(bool = false) const;

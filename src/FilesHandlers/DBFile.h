@@ -20,6 +20,8 @@ class DBFile : public File {
 		virtual bool close();
 		void addColumnToTable(const Vector<String>&);
 		void selectFromTable(const Vector<String>&);
+		void countRowsFromTable(const Vector<String>&);
+		void insertRow(const Vector<String>&);
 		void updateTableEntry(const Vector<String>&);
 		void showTables();
 		void importTable(const String&);

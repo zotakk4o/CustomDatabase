@@ -140,7 +140,7 @@ template<typename T>
 Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) const {
 	Vector<T> res;
 
-	if (this->size == 0) {
+	if (this->size == 0 || beginning > end) {
 		return res;
 	}
 

@@ -154,9 +154,11 @@
     <ClCompile Include="include\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\commands\AddColumnCommand.cpp" />
+    <ClCompile Include="src\commands\AggregateCommand.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBFileCommand.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBFileCommandParameters.cpp" />
+    <ClCompile Include="src\commands\CountCommand.cpp" />
     <ClCompile Include="src\commands\DeleteCommand.cpp" />
     <ClCompile Include="src\commands\DescribeCommand.cpp" />
     <ClCompile Include="src\commands\ExportCommand.cpp" />
@@ -201,9 +203,11 @@
     <ClInclude Include="include\String.h" />
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="src\commands\AddColumnCommand.h" />
+    <ClInclude Include="src\commands\AggregateCommand.h" />
     <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h" />
     <ClInclude Include="src\commands\BaseClasses\DBFileCommand.h" />
     <ClInclude Include="src\commands\BaseClasses\DBFileCommandParameters.h" />
+    <ClInclude Include="src\commands\CountCommand.h" />
     <ClInclude Include="src\commands\DeleteCommand.h" />
     <ClInclude Include="src\commands\DescribeCommand.h" />
     <ClInclude Include="src\commands\ExportCommand.h" />

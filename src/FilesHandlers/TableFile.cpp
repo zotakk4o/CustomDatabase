@@ -137,6 +137,35 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 	this->data = String::join(lines, '\n') + '\n';
 }
 
+void TableFile::count(const String& columnName, const String& columnValue) {
+	String match = String::toString(this->getRowsIndexesByCriteria(columnName, columnValue).getSize());
+	if (match != '0') {
+		this->logger->log(match);
+	}
+}
+
+void TableFile::insert(const Vector<String>& parameters) {
+	Vector<String> cols = this->getColumnNames();
+	Vector<String> newRow;
+
+	for (unsigned int i = 0; i < cols.getSize(); i++)
+	{
+		
+		if (i < parameters.getSize()) {
+			if (!this->doesMatchColumnType(i, parameters[i])) {
+				throw DCPErrors::insertFailedError;
+			}
+
+			newRow.pushBack(parameters[i]);
+		}
+		else {
+			newRow.pushBack(DCPConfig::nullValue);
+		}
+	}
+
+	this->data += String::join(newRow, DCPConfig::fileDelimiter) + '\n';
+}
+
 void TableFile::describe() {
 	const Vector<String>& fields = this->getColumnNames(true);
 	for (unsigned short i = 0; i < fields.getSize(); i++)
@@ -209,7 +238,7 @@ const Vector<String> TableFile::getTableData(const Vector<unsigned int>& selecte
 }
 
 void TableFile::setTableName(const String& name) {
-	if (name.getLength()) {
+	if (!name.getLength()) {
 		return;
 	}
 
@@ -226,4 +255,18 @@ String TableFile::getTableName() const {
 
 int TableFile::getColumnIndex(const String& columnName) const {
 	return this->getColumnNames().indexOf(columnName);
+}
+
+bool TableFile::doesMatchColumnType(const unsigned int& colIndex, const String& value) const {
+	if (value == DCPConfig::nullValue) {
+		return true;
+	}
+	
+	String type = this->getColumnType(colIndex);
+	int isNumeric = String::isNumeric(value);
+
+	return type == DCPConfig::doubleType && isNumeric == 1
+		|| type == DCPConfig::intType && isNumeric == 0
+		|| type == DCPConfig::stringType && isNumeric == -1;
+	//TODO: separate data types in classes if I have time. SOLID principle is violated rn.
 }

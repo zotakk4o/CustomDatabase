@@ -87,6 +87,10 @@ void DBFile::showTables() {
 	}
 }
 
+void DBFile::countRowsFromTable(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).count(parameters[1], parameters[2]);
+}
+
 void DBFile::importTable(const String& fileName) {
 	try
 	{
@@ -123,6 +127,10 @@ void DBFile::printTable(const String& tableName) {
 	this->getTableWithName(tableName).print();
 }
 
+void DBFile::insertRow(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).insert(parameters.slice(1, parameters.getSize() - 1));
+}
+
 void DBFile::renameTable(const String& tableName, const String& newName) {
 	try {
 		this->getTableWithName(newName, false);
@@ -132,6 +140,7 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 		for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 		{
 			if (this->tableFiles[i].getTableName() == tableName) {
+				this->tableFiles[i].rename(newName);
 				this->data += newName;
 			}
 			else {
