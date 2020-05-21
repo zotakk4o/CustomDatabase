@@ -294,14 +294,18 @@ String TableFile::concatData(const Vector<String>& data) {
 
 TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, const String& firstColumnName, const String& secondColumnName) {
 	String joinedTableName = first.tableName + DCPConfig::columnConfigDelimiter + second.tableName;
-	TableFile res{ first.logger, joinedTableName, DCPConfig::defaultFilesLocation + joinedTableName + DCPConfig::tableFileExtension, true };
 	int firstTableIndex = first.getColumnIndex(firstColumnName);
 	int secondTableIndex = second.getColumnIndex(secondColumnName);
 
 	if (firstTableIndex == -1 || secondTableIndex == -1) {
-		return res;
+		throw DCPErrors::innerJoinColumnMissmatchError;
 	}
 
+	if (first.getColumnType(firstTableIndex) != second.getColumnType(secondTableIndex)) {
+		throw DCPErrors::innerJoinTypeMissmatchError;
+	}
+
+	TableFile res{ first.logger, joinedTableName, DCPConfig::defaultFilesLocation + joinedTableName + DCPConfig::tableFileExtension, true };
 	res.data += String::join(first.getColumnNames(true), DCPConfig::fileDelimiter) + DCPConfig::fileDelimiter;
 	Vector<String> secondTableColumns = second.getColumnNames(true);
 	unsigned int tableSize = secondTableColumns.getSize();
@@ -332,6 +336,7 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 		for (unsigned int j = 0; j < secondTableSize; j++)
 		{
 			Vector<String> secondTableRow = secondTableData[i].split(DCPConfig::fileDelimiter);
+
 			if (firstTableData[i].split(DCPConfig::fileDelimiter)[firstTableIndex] == secondTableRow[secondTableIndex]) {
 				res.data += firstTableData[i] + DCPConfig::fileDelimiter;
 				rowSize = secondTableRow.getSize();

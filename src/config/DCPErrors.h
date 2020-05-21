@@ -12,6 +12,8 @@ class DCPErrors {
 		static const String incorrectTableDataFormatError;
 		static const String insertFailedError;
 		static const String updateFailedError;
+		static const String innerJoinColumnMissmatchError;
+		static const String innerJoinTypeMissmatchError;
 };
 
 #endif

@@ -7,3 +7,5 @@ const String DCPErrors::tableAlreadyExistsError = "Error: table already exists!"
 const String DCPErrors::incorrectTableDataFormatError = "Error: the table file you want to operate with is corrupted!";
 const String DCPErrors::insertFailedError = "Error: insert failed, no data has been changed!";
 const String DCPErrors::updateFailedError = "Error: update failed, no data has been updated!";
+const String DCPErrors::innerJoinColumnMissmatchError = "Error: one of the tables you entered does not have such a column!";
+const String DCPErrors::innerJoinTypeMissmatchError = "Error: cannot join column of different data types!";
