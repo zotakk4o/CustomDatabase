@@ -155,6 +155,11 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\commands\AddColumnCommand.cpp" />
     <ClCompile Include="src\commands\AggregateCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\MaximumCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\MinimumCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\ProductCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\SumCommand.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBCommandValidator.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBFileCommand.cpp" />
     <ClCompile Include="src\commands\BaseClasses\DBFileCommandParameters.cpp" />
@@ -205,6 +210,11 @@
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="src\commands\AddColumnCommand.h" />
     <ClInclude Include="src\commands\AggregateCommand.h" />
+    <ClInclude Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.h" />
+    <ClInclude Include="src\commands\aggregate\MaximumCommand.h" />
+    <ClInclude Include="src\commands\aggregate\MinimumCommand.h" />
+    <ClInclude Include="src\commands\aggregate\ProductCommand.h" />
+    <ClInclude Include="src\commands\aggregate\SumCommand.h" />
     <ClInclude Include="src\commands\BaseClasses\DBCommandValidator.h" />
     <ClInclude Include="src\commands\BaseClasses\DBFileCommand.h" />
     <ClInclude Include="src\commands\BaseClasses\DBFileCommandParameters.h" />

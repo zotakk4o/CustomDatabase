@@ -162,6 +162,21 @@
     <ClCompile Include="src\commands\InnerJoinCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\commands\aggregate\MinimumCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\aggregate\ProductCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\aggregate\SumCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\aggregate\MaximumCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
@@ -309,6 +324,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\InnerJoinCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\aggregate\SumCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\aggregate\MinimumCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\aggregate\ProductCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\aggregate\MaximumCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,6 +12,7 @@ class DCPMessages {
 		static const String noRecordsFoundMessage;
 		static const String typeMissmatchMessage;
 		static const String innerJoinSuccessMessage;
+		static const String emptyAggregateOperands;
 };
 
 #endif

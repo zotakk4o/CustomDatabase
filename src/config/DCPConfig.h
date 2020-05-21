@@ -5,7 +5,9 @@
 #include "../../include/Vector.cpp"
 #include "../commands/BaseClasses/DBFileCommand.h"
 #include "../commands/BaseClasses/DBFileCommandParameters.h"
+#include "../commands/aggregate/BaseClasses/BaseAggregateCommand.h"
 #include "../../include/Loggers/ConsoleLogger.h"
+
 #include <iostream>
 
 class DCPConfig {
@@ -27,6 +29,7 @@ class DCPConfig {
 		static const ILogger& logger;
 		static const Vector<DBFileCommand*> dbCommands;
 		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
+		static const Vector<BaseAggregateCommand*> aggregateCommands;
 };
  
 #endif

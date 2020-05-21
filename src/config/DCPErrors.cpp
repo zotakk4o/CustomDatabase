@@ -9,3 +9,6 @@ const String DCPErrors::insertFailedError = "Error: insert failed, no data has b
 const String DCPErrors::updateFailedError = "Error: update failed, no data has been updated!";
 const String DCPErrors::innerJoinColumnMissmatchError = "Error: one of the tables you entered does not have such a column!";
 const String DCPErrors::innerJoinTypeMissmatchError = "Error: cannot join column of different data types!";
+const String DCPErrors::columnNotFoundError = "Error: column not found!";
+const String DCPErrors::expectedNumericTypeError = "Error: could not execute the current operation, column type is not numeric!";
+const String DCPErrors::wrongAggregateCommand = "Error: unrecognized aggregate command!";

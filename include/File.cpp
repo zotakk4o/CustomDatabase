@@ -2,8 +2,6 @@
 #include<new>
 #include "File.h"
 
-#define NO_FREE_MEM_ERR "Error: No free memory!"
-
 File::~File() {};
 
 File::File(const ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
@@ -40,13 +38,6 @@ bool File::open(const String& fileName) {
 	while (String::getLine(fs, line)) {
 		this->data += line + '\n';
 	}
-
-	/*if (fs.fail() || fs.bad()) {
-		delete[] res;
-		fs.close();
-		this->logger->log(String{ "\"" } + fileName + "\" hasn't been processed successfully due to an error.");
-		return false;
-	}*/
 
 	fs.close();
 	this->opened = true;

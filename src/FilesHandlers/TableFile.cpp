@@ -26,7 +26,8 @@ bool TableFile::open(const String& fileName) {
 	Vector<String> tableRows = this->data.split('\n');
 	Vector<String> rowData = tableRows[0].split(DCPConfig::fileDelimiter);
 
-	for (unsigned int j = 0; j < rowData.getSize(); j++)
+	unsigned int rowDataSize = rowData.getSize();
+	for (unsigned int j = 0; j < rowDataSize; j++)
 	{
 		Vector<String> columnData = rowData[j].split(DCPConfig::columnConfigDelimiter);
 		if (columnData.getSize() != 2 || columnData[0].getLength() == 0 || DCPConfig::allowedDataTypes.indexOf(columnData[1]) == -1) {
@@ -53,7 +54,8 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnNam
 		return res;
 	}
 
-	for (unsigned int i = 0; i < rows.getSize(); i++)
+	unsigned int rowsSize = rows.getSize();
+	for (unsigned int i = 0; i < rowsSize; i++)
 	{
 		String data = rows[i].split(DCPConfig::fileDelimiter)[columnIndex];
 		if (notEqualTo ? data != columnValue : data == columnValue) {
@@ -102,18 +104,15 @@ void TableFile::update(const Vector<String>& parameters) {
 		throw DCPErrors::updateFailedError;
 	}
 	
-
-	for (unsigned int i = 0; i < selected.getSize(); i++)
+	unsigned int selectedSize = selected.getSize();
+	for (unsigned int i = 0; i < selectedSize; i++)
 	{
-		Vector<String> columns = rows[i].split(DCPConfig::fileDelimiter);
+		Vector<String> columns = rows[selected[i]].split(DCPConfig::fileDelimiter);
 		columns[targetColumnIndex] = parameters[3];
-		rows[i] = String::join(columns, DCPConfig::fileDelimiter);
+		rows[selected[i]] = String::join(columns, DCPConfig::fileDelimiter);
 	}
 
-	this->data = String::join(this->getColumnNames(true), DCPConfig::fileDelimiter) 
-		+ '\n' 
-		+  String::join(rows, '\n')
-		+ '\n';
+	this->data = this->concatData(rows);
 }
 
 void TableFile::addColumn(const String& columnName, const String& columnType) {
@@ -130,13 +129,65 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 	else {
 		lines[0] = lines[0] + DCPConfig::fileDelimiter + columnName + DCPConfig::columnConfigDelimiter + columnType;
 
-		for (unsigned int i = 1; i < lines.getSize(); i++)
+		unsigned int linesSize = lines.getSize();
+		for (unsigned int i = 1; i < linesSize; i++)
 		{
 			lines[i] = lines[i] + DCPConfig::fileDelimiter + DCPConfig::nullValue;
 		}
 	}
 
 	this->data = String::join(lines, '\n') + '\n';
+}
+
+void TableFile::aggregate(const Vector<String>& parameters) {
+	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(parameters[0], parameters[1]);
+
+	if (!rows.getSize()) {
+		return;
+	}
+
+	int colIndex = this->getColumnIndex(parameters[2]);
+	if (colIndex == -1) {
+		throw DCPErrors::columnNotFoundError;
+	}
+
+	String colType = this->getColumnType(colIndex);
+
+	if (colType != DCPConfig::intType && colType != DCPConfig::doubleType) {
+		throw DCPErrors::expectedNumericTypeError;
+	}
+
+	Vector<String> selected = this->getTableData(rows);
+	unsigned int selectedSize = selected.getSize();
+	Vector<double> nums;
+
+	for (unsigned int i = 0; i < selectedSize; i++)
+	{
+		String value = selected[i].split(DCPConfig::fileDelimiter)[colIndex];
+
+		if (value == DCPConfig::nullValue) {
+			continue;
+		}
+
+		if (colType == DCPConfig::intType) {
+			nums.pushBack(String::toInt(value));
+		}
+		else {
+			nums.pushBack(String::toDouble(value));
+		}
+	}
+
+	unsigned int commandsSize = DCPConfig::aggregateCommands.getSize();
+
+	for (unsigned int i = 0; i < commandsSize; i++)
+	{
+		if (DCPConfig::aggregateCommands[i]->isValid(parameters[3])) {
+			DCPConfig::aggregateCommands[i]->execute(nums);
+			return;
+		}
+	}
+
+	throw DCPErrors::wrongAggregateCommand;
 }
 
 void TableFile::count(const String& columnName, const String& columnValue) {
@@ -150,10 +201,12 @@ void TableFile::insert(const Vector<String>& parameters) {
 	Vector<String> cols = this->getColumnNames();
 	Vector<String> newRow;
 
-	for (unsigned int i = 0; i < cols.getSize(); i++)
+	unsigned int colsSize = cols.getSize();
+	unsigned int parametersSize = parameters.getSize();
+	for (unsigned int i = 0; i < colsSize; i++)
 	{
 		
-		if (i < parameters.getSize()) {
+		if (i < parametersSize) {
 			if (!this->doesMatchColumnType(i, parameters[i])) {
 				this->logger->log(DCPMessages::typeMissmatchMessage);
 				throw DCPErrors::insertFailedError;
@@ -182,7 +235,9 @@ void TableFile::deleteRows(const String& columnName, const String& columnValue) 
 
 void TableFile::describe() {
 	const Vector<String>& fields = this->getColumnNames(true);
-	for (unsigned short i = 0; i < fields.getSize(); i++)
+
+	unsigned int fieldsSize = fields.getSize();
+	for (unsigned int i = 0; i < fieldsSize; i++)
 	{
 		this->logger->log(fields[i]);
 	}
@@ -220,7 +275,8 @@ const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
 		return withTypes;
 	}
 
-	for (unsigned short i = 0; i < withTypes.getSize(); i++)
+	unsigned int withTypesSize = withTypes.getSize();
+	for (unsigned int i = 0; i < withTypesSize; i++)
 	{
 		res.pushBack(withTypes[i].split('-')[0]);
 	}
@@ -243,7 +299,8 @@ const Vector<String> TableFile::getTableData(const Vector<unsigned int>& selecte
 
 	Vector<String> res;
 
-	for (unsigned int i = 0; i < selected.getSize(); i++)
+	unsigned int selectedSize = selected.getSize();
+	for (unsigned int i = 0; i < selectedSize; i++)
 	{
 		res.pushBack(dataOnly[selected[i]]);
 	}

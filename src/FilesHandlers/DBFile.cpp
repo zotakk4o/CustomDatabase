@@ -20,8 +20,8 @@ bool DBFile::open(const String& fileName) {
 	}
 
 	Vector<String> tableRows = this->data.split('\n');
-
-	for (unsigned int i = 0; i < tableRows.getSize(); i++)
+	unsigned int tableRowsSize = tableRows.getSize();
+	for (unsigned int i = 0; i < tableRowsSize; i++)
 	{
 		Vector<String> rowData = tableRows[i].split(DCPConfig::fileDelimiter);
 
@@ -40,7 +40,8 @@ bool DBFile::saveData(const String& fileName) {
 		return false;
 	}
 
-	for (unsigned short i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].isOpened()) {
 			if (!this->tableFiles[i].save()) {
@@ -57,7 +58,8 @@ bool DBFile::close() {
 		return false;
 	}
 
-	for (unsigned short i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].isOpened()) {
 			if (!this->tableFiles[i].close()) {
@@ -82,7 +84,8 @@ void DBFile::updateTableEntry(const Vector<String>& parameters) {
 }
 
 void DBFile::showTables() {
-	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		this->logger->log(String::toString(i + 1) + ". " + this->tableFiles[i].getTableName());
 	}
@@ -142,13 +145,18 @@ void DBFile::insertRow(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).insert(parameters.slice(1, parameters.getSize() - 1));
 }
 
+void DBFile::aggregate(const Vector<String>& parameters) {
+	this->getTableWithName(parameters[0]).aggregate(parameters.slice(1, parameters.getSize() - 1));
+}
+
 void DBFile::renameTable(const String& tableName, const String& newName) {
 	if (this->doesTableExist(newName)) {
 		throw DCPErrors::tableAlreadyExistsError;
 	}
 
 	this->data = "";
-	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
 			this->tableFiles[i].rename(newName);
@@ -163,7 +171,8 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {
-	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
 			if (!this->tableFiles[i].isOpened()) {
@@ -177,7 +186,8 @@ TableFile& DBFile::getTableWithName(const String& tableName) {
 }
 
 bool DBFile::doesTableExist(const String& tableName) const {
-	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	unsigned int filesSize = this->tableFiles.getSize();
+	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
 			return true;
@@ -190,3 +200,4 @@ bool DBFile::doesTableExist(const String& tableName) const {
 void DBFile::addTableToData(const TableFile& table) {
 	this->data += table.getTableName() + DCPConfig::fileDelimiter + table.getPath() + '\n';
 }
+

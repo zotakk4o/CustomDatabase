@@ -12,6 +12,11 @@
 #include "../commands/InsertCommand.h"
 #include "../commands/DeleteCommand.h"
 #include "../commands/InnerJoinCommand.h"
+#include "../commands/AggregateCommand.h"
+#include "../commands/aggregate/MaximumCommand.h"
+#include "../commands/aggregate/MinimumCommand.h"
+#include "../commands/aggregate/ProductCommand.h"
+#include "../commands/aggregate/SumCommand.h"
 
 const String DCPConfig::defaultFilesLocation = "C:\\Users\\zotak\\Desktop\\project\\";
 
@@ -57,5 +62,13 @@ const Vector<DBFileCommandParameters*> DCPConfig::dbCommandsParameters{
 	new CountCommand(),
 	new InsertCommand(),
 	new DeleteCommand(),
-	new InnerJoinCommand()
+	new InnerJoinCommand(),
+	new AggregateCommand()
+};
+
+const Vector<BaseAggregateCommand*> DCPConfig::aggregateCommands{
+	new SumCommand(),
+	new ProductCommand(),
+	new MaximumCommand(),
+	new MinimumCommand()
 };

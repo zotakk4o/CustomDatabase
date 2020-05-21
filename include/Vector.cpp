@@ -3,8 +3,6 @@
 #include "Vector.h"
 #include<assert.h>
 
-#define NO_FREE_MEM_ERR "Error: No free memory!"
-
 template<typename T>
 const unsigned short Vector<T>::defaultCapacity = 10;
 
@@ -57,10 +55,7 @@ void Vector<T>::copy(const Vector<T>& other) {
 	this->size = other.size;
 	this->capacity = other.capacity;
 
-	T* newArr = new (std::nothrow) T[this->capacity];
-	if (newArr == nullptr) {
-		throw NO_FREE_MEM_ERR;
-	}
+	T* newArr = new T[this->capacity];
 
 	for (unsigned int i = 0; i < this->size; i++)
 	{

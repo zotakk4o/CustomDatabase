@@ -23,7 +23,8 @@ Pagination::Pagination(const ILogger& _logger, const Vector<String>& _data, cons
 			break;
 		}
 
-		for (unsigned short i = 0; i < PaginationConfig::paginationCommands.getSize(); i++)
+		unsigned int commandsSize = PaginationConfig::paginationCommands.getSize();
+		for (unsigned short i = 0; i < commandsSize; i++)
 		{
 			if (PaginationConfig::paginationCommands[i]->isValid(command)) {
 				PaginationConfig::paginationCommands[i]->execute(*this);
@@ -45,7 +46,8 @@ void Pagination::next() {
 		return;
 	}
 
-	for (unsigned int i = this->firstItemIndex; i < this->data.getSize() && i < this->firstItemIndex + this->itemsPerPage; i++)
+	unsigned int size = this->data.getSize();
+	for (unsigned int i = this->firstItemIndex; i < size && i < this->firstItemIndex + this->itemsPerPage; i++)
 	{
 		this->logger.log(String::toString(i + 1) + ". " + this->data[i]);
 	}
@@ -64,8 +66,8 @@ void Pagination::prev() {
 	}
 
 	this->firstItemIndex -= this->itemsPerPage;
-
-	for (unsigned int i = this->firstItemIndex; i < this->data.getSize() && i < this->firstItemIndex + this->itemsPerPage; i++)
+	unsigned int size = this->data.getSize();
+	for (unsigned int i = this->firstItemIndex; i < size && i < this->firstItemIndex + this->itemsPerPage; i++)
 	{
 		this->logger.log(String::toString(i + 1) + ". " + this->data[i]);
 	}

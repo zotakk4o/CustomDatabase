@@ -9,7 +9,8 @@
 FileCommandsProcessor::~FileCommandsProcessor() {};
 
 bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) {
-	for (unsigned short i = 0; i < filePaths.getSize(); i++)
+	unsigned int filePathsSize = filePaths.getSize();
+	for (unsigned int i = 0; i < filePathsSize; i++)
 	{
 		unsigned short extensionIndex = filePaths[i].getLength() - filePaths[i].reverse().indexOf('.') - 1;
 		String extension = filePaths[i].substring(extensionIndex, filePaths[i].getLength() - extensionIndex);
@@ -25,8 +26,9 @@ bool FileCommandsProcessor::areExtensionsValid(const Vector<String>& filePaths) 
 
 bool FileCommandsProcessor::parseFileCommand(const String& command, File& file) {
 	Vector<String> keywords = command.split(FCPConfig::commandDelimiter);
+	unsigned int commandsSize = FCPConfig::commands.getSize();
 
-	for (unsigned short i = 0; i < FCPConfig::commands.getSize(); i++)
+	for (unsigned int i = 0; i < commandsSize; i++)
 	{
 		if (FCPConfig::commands[i]->isValid(keywords)) {
 			FCPConfig::commands[i]->execute();
@@ -34,7 +36,8 @@ bool FileCommandsProcessor::parseFileCommand(const String& command, File& file) 
 		}
 	}
 
-	for (unsigned short i = 0; i < FCPConfig::fileCommands.getSize(); i++)
+	unsigned int fileCommandsSize = FCPConfig::fileCommands.getSize();
+	for (unsigned int i = 0; i < fileCommandsSize; i++)
 	{
 		if (FCPConfig::fileCommands[i]->isValid(keywords)) {
 			FCPConfig::fileCommands[i]->execute(file);
@@ -42,8 +45,9 @@ bool FileCommandsProcessor::parseFileCommand(const String& command, File& file) 
 		}
 	}
 
+	unsigned int fileCommandsParametersSize = FCPConfig::fileCommandsParameters.getSize();
 	if (keywords.getSize() >= 2) {
-		for (unsigned short i = 0; i < FCPConfig::fileCommandsParameters.getSize(); i++) {
+		for (unsigned int i = 0; i < fileCommandsParametersSize; i++) {
 			Vector<String> parameters = keywords.slice(1, keywords.getSize() - 1);
 			if (FCPConfig::fileCommandsParameters[i]->isValid(keywords) && this->areExtensionsValid(parameters)) {
 				FCPConfig::fileCommandsParameters[i]->execute(file, parameters);

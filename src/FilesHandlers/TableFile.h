@@ -29,6 +29,7 @@ class TableFile : public File {
 		void update(const Vector<String>&);
 		void count(const String&, const String&);
 		void deleteRows(const String&, const String&);
+		void aggregate(const Vector<String>&);
 
 		static TableFile innerJoin(const TableFile&, const TableFile&, const String&, const String&);
 

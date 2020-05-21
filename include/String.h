@@ -14,6 +14,7 @@ class String {
 		void copy(const String& other);
 		void deleteInternals();
 		std::istream& readFromStream(std::istream&, bool = false);
+		static const char* noFreeMemErr;
 	public:
 		String(const char&);
 		String(const char* = "");
@@ -54,6 +55,9 @@ class String {
 
 		static int isNumeric(const String&);
 		static String toString(double, unsigned short = 6);
+		static double toDouble(const String&);
+		static int toInt(const String&);
+		static long long toLong(const String&);
 		static String join(const Vector<String>&, const String& = ',');
 		String reverse() const;
 		String substring(const unsigned int& first, const unsigned int& length) const;

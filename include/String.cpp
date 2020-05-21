@@ -4,8 +4,9 @@
 #include<assert.h>
 #include "String.h"
 #include<istream>
+#include <stdexcept>
 
-#define NO_FREE_MEM_ERR "Error: No free memory!"
+const char* String::noFreeMemErr = "Error: Could not create a string instance, no free memory!";
 
 String numToString(unsigned long long num) {
 	String res;
@@ -393,11 +394,7 @@ void String::copy(const String& other) {
 	this->capacity = other.capacity;
 	this->length = other.length;
 
-	char* newStr = new (std::nothrow) char[this->capacity];
-
-	if (newStr == nullptr) {
-		throw NO_FREE_MEM_ERR;
-	}
+	char* newStr = new char[this->capacity];
 
 	strCopy(other.str, newStr);
 
@@ -424,10 +421,10 @@ String String::toString(double num, unsigned short precision) {
 
 	num -= (unsigned int)num;
 
-	if (num == 0) {
+	if (num == 0 || precision == 0) {
 		return res;
 	}
-	
+
 	res += '.';
 
 	unsigned short currPrecision = 0;
@@ -445,11 +442,11 @@ String String::toString(double num, unsigned short precision) {
 
 String String::join(const Vector<String>& elements, const String& delimiter) {
 	String res;
-
-	for (unsigned int i = 0; i < elements.getSize(); i++)
+	unsigned int elsSize = elements.getSize();
+	for (unsigned int i = 0; i < elsSize; i++)
 	{
 		res += elements[i];
-		if (i != elements.getSize() - 1) {
+		if (i != elsSize - 1) {
 			res += delimiter;
 		}
 	}
@@ -462,11 +459,7 @@ std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 	bool symbolNotNewLine;
 	unsigned int index = 0;
 	unsigned int currSize = 100;
-	char* tempStr = new (std::nothrow) char[currSize];
-
-	if (tempStr == nullptr) {
-		throw NO_FREE_MEM_ERR;
-	}
+	char* tempStr = new char[currSize];
 
 	do {
 		stream.get(currSymbol);
@@ -474,11 +467,7 @@ std::istream& String::readFromStream(std::istream& stream, bool whileNewLine) {
 
 		if (index % 100 == 0 && index != 0) {
 			currSize += 100;
-			char* extendedStr = new (std::nothrow) char[currSize];
-
-			if (extendedStr == nullptr) {
-				throw NO_FREE_MEM_ERR;
-			}
+			char* extendedStr = new char[currSize];
 
 			tempStr[index - 1] = '\0';
 			strcpy_s(extendedStr, currSize - 100, tempStr);
@@ -509,11 +498,61 @@ int String::isNumeric(const String& value) {
 
 	for (unsigned int i = 0; i < value.getLength(); i++)
 	{
-		if ((value[i] < '0' || value[i] > '9') && value[i] != '.') {
+		if ((value[i] < '0' || value[i] > '9') && value[i] != '.' && (value[i] == '-' ? i != 0 : true)) {
 			return -1;
 		}
 	}
 
 	return dotIndex != -1 ? 1 : 0;
 }
+
+double String::toDouble(const String& num) {
+	if (String::isNumeric(num) != 1) {
+		throw std::invalid_argument("Error: \"toDouble\" method expects doubles only!");
+	}
+	int dotIndex = num.indexOf('.');
+
+	double exponent = String::toLong(num.substring(0, dotIndex));
+	double fraction = String::toLong(num.substring(dotIndex + 1, num.getLength() - dotIndex - 1));
+
+	while (fraction > 1) {
+		fraction /= 10;
+	}
+
+	return num[0] == '-' ? exponent - fraction : exponent + fraction;
+}
+
+int String::toInt(const String& num) {
+	if (String::isNumeric(num) != 0) {
+		throw std::invalid_argument("Error: \"toInt\" method expects integers only!");
+	}
+
+	return String::toLong(num);
+}
+
+long long String::toLong(const String& num) {
+	if (String::isNumeric(num) != 0) {
+		throw std::invalid_argument("Error: \"toLong\" method expects long long only!");
+	}
+
+	unsigned int numLength = num.getLength();
+	long long res = 0;
+	unsigned int i = num[0] == '-' ? 1 : 0;
+
+	for (; i < numLength; i++)
+	{
+		res += num[i] - '0';
+
+		if (i != numLength - 1) {
+			res *= 10;
+		}
+	}
+
+	if (num[0] == '-') {
+		res *= -1;
+	}
+
+	return res;
+}
+
 #endif // !STRING_CPP

@@ -14,6 +14,9 @@ class DCPErrors {
 		static const String updateFailedError;
 		static const String innerJoinColumnMissmatchError;
 		static const String innerJoinTypeMissmatchError;
+		static const String expectedNumericTypeError;
+		static const String columnNotFoundError;
+		static const String wrongAggregateCommand;
 };
 
 #endif

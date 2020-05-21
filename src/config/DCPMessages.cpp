@@ -7,3 +7,4 @@ const String DCPMessages::emptyTableMessage = "Table is empty.";
 const String DCPMessages::noRecordsFoundMessage = "No records match the criteria you entered.";
 const String DCPMessages::typeMissmatchMessage = "Incorrect data type entered.";
 const String DCPMessages::innerJoinSuccessMessage = "The new table is: ";
+const String DCPMessages::emptyAggregateOperands = "No values were received for aggregate->";
