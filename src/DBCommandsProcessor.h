@@ -8,7 +8,6 @@
 class DBCommandsProcessor : private FileCommandsProcessor {
 	protected:
 		virtual Vector<String> getAllowedExtensions();
-	private:
 		void parseCommands();
 	public:
 		bool parseDBCommand(const String&, DBFile&);
