@@ -4,7 +4,6 @@
 int main() {
 	DBCommandsProcessor processor;
 	processor.start();
-	//open C:\Users\zotak\Desktop\test.csv
 
 	return 0;
 }
