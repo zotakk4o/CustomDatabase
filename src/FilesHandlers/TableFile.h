@@ -11,7 +11,7 @@ class TableFile : public File {
 		String getColumnType(const unsigned int&) const;
 		int getColumnIndex(const String&) const;
 		bool doesMatchColumnType(const unsigned int&, const String&) const;
-		Vector<unsigned int> getRowsIndexesByCriteria(const String&, const String&, bool = false);
+		Vector<unsigned int> getRowsIndexesByCriteria(const String&, const String&, bool = false) const;
 		String concatData(const Vector<String>&);
 	public:
 		TableFile(const ILogger* = nullptr, const String& = "", const String& = "", bool = false);
@@ -29,6 +29,8 @@ class TableFile : public File {
 		void update(const Vector<String>&);
 		void count(const String&, const String&);
 		void deleteRows(const String&, const String&);
+
+		static TableFile innerJoin(const TableFile&, const TableFile&, const String&, const String&);
 
 		void setTableName(const String&);
 		const Vector<String> getColumnNames(bool = false) const;

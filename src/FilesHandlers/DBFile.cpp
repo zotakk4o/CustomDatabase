@@ -1,6 +1,7 @@
 #include "DBFile.h"
 #include "../config/DCPErrors.h"
 #include "../config/DCPConfig.h"
+#include "../config/DCPMessages.h"
 
 #include<iostream>
 
@@ -92,27 +93,17 @@ void DBFile::countRowsFromTable(const Vector<String>& parameters) {
 }
 
 void DBFile::importTable(const String& fileName) {
-	try
-	{
-		this->getTableWithName(DBFile::getFileName(fileName, false), false);
-	}
-	catch (const String&)
-	{
-		String tableName = DBFile::getFileName(fileName, false);
-		String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
-		TableFile newTable{ this->logger, tableName, fileName, true };
-		
-		this->tableFiles.pushBack(TableFile{this->logger, tableName, newPath});
 
-		newTable.saveAs(newPath);
-	
-		this->data += newTable.getTableName() + DCPConfig::fileDelimiter + newPath + '\n';
-
-		this->save();
-		return;
+	if (this->doesTableExist(DBFile::getFileName(fileName, false))) {
+		throw DCPErrors::tableAlreadyExistsError;
 	}
 
-	throw DCPErrors::tableAlreadyExistsError;
+	String tableName = DBFile::getFileName(fileName, false);
+	String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
+	TableFile newTable{ this->logger, tableName, fileName, true };
+
+	this->tableFiles.pushBack(TableFile{ this->logger, tableName, newPath });
+	this->addTableToData(newTable);
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) {
@@ -121,6 +112,22 @@ void DBFile::exportTable(const String& tableName, const String& fileName) {
 
 void DBFile::describeTable(const String& tableName) {
 	this->getTableWithName(tableName).describe();
+}
+
+void DBFile::innerJoinTables(const Vector<String>& parameters) {
+	if (this->doesTableExist(parameters[0] + DCPConfig::columnConfigDelimiter + parameters[2])
+		|| this->doesTableExist(parameters[2] + DCPConfig::columnConfigDelimiter + parameters[0])) 
+	{
+		throw DCPErrors::tableAlreadyExistsError;
+	}
+
+	TableFile& first = this->getTableWithName(parameters[0]);
+	TableFile& second = this->getTableWithName(parameters[2]);
+
+	TableFile newTable = TableFile::innerJoin(first, second, parameters[1], parameters[3]);
+	this->tableFiles.pushBack(newTable);
+	this->addTableToData(newTable);
+	this->logger->log(DCPMessages::innerJoinSuccessMessage + newTable.getTableName());
 }
 
 void DBFile::deleteFromTable(const Vector<String>& parameters) {
@@ -136,31 +143,30 @@ void DBFile::insertRow(const Vector<String>& parameters) {
 }
 
 void DBFile::renameTable(const String& tableName, const String& newName) {
-	try {
-		this->getTableWithName(newName, false);
-		this->logger->log(DCPErrors::tableAlreadyExistsError);
-	} catch (const String&) {
-		this->data = "";
-		for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
-		{
-			if (this->tableFiles[i].getTableName() == tableName) {
-				this->tableFiles[i].rename(newName);
-				this->data += newName;
-			}
-			else {
-				this->data += tableName;
-			}
-
-			this->data = this->data + DCPConfig::fileDelimiter + this->tableFiles[i].getPath() + '\n';
-		}
+	if (this->doesTableExist(newName)) {
+		throw DCPErrors::tableAlreadyExistsError;
 	}
-}
 
-TableFile& DBFile::getTableWithName(const String& tableName, bool shallOpen) {
+	this->data = "";
 	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
-			if (shallOpen && !this->tableFiles[i].isOpened()) {
+			this->tableFiles[i].rename(newName);
+			this->data += newName;
+		}
+		else {
+			this->data += tableName;
+		}
+
+		this->data = this->data + DCPConfig::fileDelimiter + this->tableFiles[i].getPath() + '\n';
+	}
+}
+
+TableFile& DBFile::getTableWithName(const String& tableName) {
+	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	{
+		if (this->tableFiles[i].getTableName() == tableName) {
+			if (!this->tableFiles[i].isOpened()) {
 				this->tableFiles[i].open();
 			}
 			return this->tableFiles[i];
@@ -168,4 +174,19 @@ TableFile& DBFile::getTableWithName(const String& tableName, bool shallOpen) {
 	}
 
 	throw DCPErrors::tableNotFoundError;
+}
+
+bool DBFile::doesTableExist(const String& tableName) const {
+	for (unsigned int i = 0; i < this->tableFiles.getSize(); i++)
+	{
+		if (this->tableFiles[i].getTableName() == tableName) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void DBFile::addTableToData(const TableFile& table) {
+	this->data += table.getTableName() + DCPConfig::fileDelimiter + table.getPath() + '\n';
 }

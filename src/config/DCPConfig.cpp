@@ -11,6 +11,7 @@
 #include "../commands/CountCommand.h"
 #include "../commands/InsertCommand.h"
 #include "../commands/DeleteCommand.h"
+#include "../commands/InnerJoinCommand.h"
 
 const String DCPConfig::defaultFilesLocation = "C:\\Users\\zotak\\Desktop\\project\\";
 
@@ -55,5 +56,6 @@ const Vector<DBFileCommandParameters*> DCPConfig::dbCommandsParameters{
 	new RenameCommand(),
 	new CountCommand(),
 	new InsertCommand(),
-	new DeleteCommand()
+	new DeleteCommand(),
+	new InnerJoinCommand()
 };

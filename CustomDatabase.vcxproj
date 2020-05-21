@@ -163,6 +163,7 @@
     <ClCompile Include="src\commands\DescribeCommand.cpp" />
     <ClCompile Include="src\commands\ExportCommand.cpp" />
     <ClCompile Include="src\commands\ImportCommand.cpp" />
+    <ClCompile Include="src\commands\InnerJoinCommand.cpp" />
     <ClCompile Include="src\commands\InsertCommand.cpp" />
     <ClCompile Include="src\commands\PrintCommand.cpp" />
     <ClCompile Include="src\commands\RenameCommand.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="src\commands\DescribeCommand.h" />
     <ClInclude Include="src\commands\ExportCommand.h" />
     <ClInclude Include="src\commands\ImportCommand.h" />
+    <ClInclude Include="src\commands\InnerJoinCommand.h" />
     <ClInclude Include="src\commands\InsertCommand.h" />
     <ClInclude Include="src\commands\PrintCommand.h" />
     <ClInclude Include="src\commands\RenameCommand.h" />

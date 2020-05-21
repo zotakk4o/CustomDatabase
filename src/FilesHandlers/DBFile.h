@@ -10,8 +10,10 @@ class DBFile : public File {
 	private:
 		Vector<TableFile> tableFiles;
 
-		TableFile& getTableWithName(const String&, bool = true);
+		TableFile& getTableWithName(const String&);
 		virtual bool saveData(const String&);
+		void addTableToData(const TableFile&);
+		bool doesTableExist(const String& tableName) const;
 	public:
 		DBFile(const ILogger* = nullptr, const String& = "");
 		DBFile(const DBFile&);
@@ -25,6 +27,7 @@ class DBFile : public File {
 		void deleteFromTable(const Vector<String>&);
 		void updateTableEntry(const Vector<String>&);
 		void showTables();
+		void innerJoinTables(const Vector<String>&);
 		void importTable(const String&);
 		void exportTable(const String&, const String&);
 		void describeTable(const String&);
