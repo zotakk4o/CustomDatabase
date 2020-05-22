@@ -6,6 +6,7 @@
 
 class FileLogger : public ILogger {
 	private:
+		const String filePath;
 		std::fstream file;
 	public:
 		virtual ~FileLogger();
