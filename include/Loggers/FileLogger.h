@@ -7,13 +7,12 @@
 class FileLogger : public ILogger {
 	private:
 		std::fstream file;
-		FileLogger(const String&);
 	public:
 		virtual ~FileLogger();
+		FileLogger(const String&);
 		FileLogger(const FileLogger&) = delete;
 		FileLogger& operator=(const FileLogger&) = delete;
 	
-		static FileLogger& getInstance(const String& = "");
 		virtual void log(const String& data, bool withNewLine = true);
 };
 

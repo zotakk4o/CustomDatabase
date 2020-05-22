@@ -28,7 +28,7 @@ class DCPConfig {
 		static const Vector<String> allowedDataTypes;
 		static std::istream& inputStream;
 		static ConsoleLogger& consoleLogger;
-		static FileLogger& fileLogger;
+		static FileLogger fileLogger;
 		static const Vector<DBFileCommand*> dbCommands;
 		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
 		static const Vector<BaseAggregateCommand*> aggregateCommands;
