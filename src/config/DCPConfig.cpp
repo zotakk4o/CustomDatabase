@@ -18,7 +18,7 @@
 #include "../commands/aggregate/ProductCommand.h"
 #include "../commands/aggregate/SumCommand.h"
 
-const String DCPConfig::defaultFilesLocation = "C:\\Users\\zotak\\Desktop\\project\\";
+const String DCPConfig::defaultFilesLocation = "db-files\\";
 
 const char DCPConfig::commandDelimiter = ' ';
 

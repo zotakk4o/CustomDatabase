@@ -105,7 +105,7 @@ void DBFile::importTable(const String& fileName) {
 	String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
 	TableFile newTable{ this->logger, tableName, fileName, true };
 
-	this->tableFiles.pushBack(TableFile{ this->logger, tableName, newPath });
+	this->tableFiles.pushBack(TableFile{ this->logger, tableName, newPath, true });
 	this->addTableToData(newTable);
 }
 
