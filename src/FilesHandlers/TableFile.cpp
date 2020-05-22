@@ -71,16 +71,20 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnNam
 	return res;
 }
 
-void TableFile::select(const String& columnName, const String& columnValue) {
+Vector<String> TableFile::select(const String& columnName, const String& columnValue, bool withoutPagination) {
 	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(columnName, columnValue);
 	
 	if (!rows.getSize()) {
-		return;
+		return Vector<String>{};
 	}
 
 	Vector<String> selected = this->getTableData(rows);
 
-	Pagination tablesList{ *this->logger, selected, DCPConfig::perPageEntries };
+	if (!withoutPagination) {
+		Pagination tablesList{ *this->logger, selected, DCPConfig::perPageEntries };
+	}
+
+	return selected;
 }
 
 void TableFile::update(const Vector<String>& parameters) {

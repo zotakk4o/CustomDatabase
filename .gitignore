@@ -389,5 +389,6 @@ MigrationBackup/
 *.out
 *.app
 
-# CUSTOM DB FILES
+# CUSTOM FILES
 db-files/
+logs/

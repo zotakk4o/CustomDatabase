@@ -75,8 +75,8 @@ void DBFile::addColumnToTable(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).addColumn(parameters[1], parameters[2]);
 }
 
-void DBFile::selectFromTable(const Vector<String>& parameters) {
-	this->getTableWithName(parameters[2]).select(parameters[0], parameters[1]);
+Vector<String> DBFile::selectFromTable(const Vector<String>& parameters) {
+	return this->getTableWithName(parameters[2]).select(parameters[0], parameters[1]);
 }
 
 void DBFile::updateTableEntry(const Vector<String>& parameters) {
