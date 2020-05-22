@@ -20,5 +20,5 @@ void MaximumCommand::execute(const Vector<double>& parameters) const {
 		}
 	}
 
-	DCPConfig::logger.log(String::toString(max));
+	DCPConfig::consoleLogger.log(String::toString(max));
 }

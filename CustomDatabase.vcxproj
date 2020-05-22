@@ -244,6 +244,9 @@
     <ClInclude Include="src\FilesHandlers\DBFile.h" />
     <ClInclude Include="src\FilesHandlers\TableFile.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logs\.gitignore" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

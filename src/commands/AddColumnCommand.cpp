@@ -14,7 +14,7 @@ bool AddColumnCommand::isValid(const Vector<String>& keywords) const {
 	}
 
 	if (DCPConfig::allowedDataTypes.indexOf(keywords[3]) == -1) {
-		DCPConfig::logger.log(DCPMessages::supportedDataTypesMessage + String::join(DCPConfig::allowedDataTypes));
+		DCPConfig::consoleLogger.log(DCPMessages::supportedDataTypesMessage + String::join(DCPConfig::allowedDataTypes));
 		return false;
 	}
 

@@ -20,5 +20,5 @@ void MinimumCommand::execute(const Vector<double>& parameters) const {
 		}
 	}
 
-	DCPConfig::logger.log(String::toString(min));
+	DCPConfig::consoleLogger.log(String::toString(min));
 }

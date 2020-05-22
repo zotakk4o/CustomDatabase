@@ -7,6 +7,7 @@
 #include "../commands/BaseClasses/DBFileCommandParameters.h"
 #include "../commands/aggregate/BaseClasses/BaseAggregateCommand.h"
 #include "include/Loggers/ConsoleLogger.h"
+#include "include/Loggers/FileLogger.h"
 
 #include <iostream>
 
@@ -26,7 +27,8 @@ class DCPConfig {
 		static const Vector<String> fileExtensions;
 		static const Vector<String> allowedDataTypes;
 		static std::istream& inputStream;
-		static ILogger& logger;
+		static ConsoleLogger& consoleLogger;
+		static FileLogger& fileLogger;
 		static const Vector<DBFileCommand*> dbCommands;
 		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
 		static const Vector<BaseAggregateCommand*> aggregateCommands;

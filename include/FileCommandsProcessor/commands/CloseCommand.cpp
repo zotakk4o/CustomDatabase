@@ -1,4 +1,7 @@
 #include "CloseCommand.h"
+#include "../config/FCPMessages.h"
+#include "../config/FCPConfig.h"
+#include "../config/FCPErrors.h"
 
 CloseCommand::~CloseCommand() {};
 
@@ -7,5 +10,12 @@ String CloseCommand::toString() {
 }
 
 void CloseCommand::execute(File& file) {
-	file.close();
+	if (!file.isOpened()) {
+		FCPConfig::consoleLogger.log(FCPErrors::noFileOpened);
+		return;
+	}
+
+	if (file.close()) {
+		FCPConfig::consoleLogger.log(FCPMessages::closeMessage + file.getPath());
+	}
 }

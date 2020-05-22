@@ -19,5 +19,5 @@ void ProductCommand::execute(const Vector<double>& parameters) const {
 		prod *= parameters[i];
 	}
 
-	DCPConfig::logger.log(String::toString(prod));
+	DCPConfig::consoleLogger.log(String::toString(prod));
 }

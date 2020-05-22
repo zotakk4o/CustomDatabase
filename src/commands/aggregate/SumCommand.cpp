@@ -19,5 +19,5 @@ void SumCommand::execute(const Vector<double>& parameters) const {
 		sum += parameters[i];
 	}
 
-	DCPConfig::logger.log(String::toString(sum));
+	DCPConfig::consoleLogger.log(String::toString(sum));
 }

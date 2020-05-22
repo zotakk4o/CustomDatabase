@@ -11,8 +11,6 @@
 
 const char FCPConfig::commandDelimiter = ' ';
 
-ILogger& FCPConfig::logger = ConsoleLogger::getInstance();
-
 ConsoleLogger& FCPConfig::consoleLogger = ConsoleLogger::getInstance();
 
 const Vector<Command*> FCPConfig::commands{

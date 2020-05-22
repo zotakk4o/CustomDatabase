@@ -348,4 +348,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\logs\.gitignore" />
+  </ItemGroup>
 </Project>

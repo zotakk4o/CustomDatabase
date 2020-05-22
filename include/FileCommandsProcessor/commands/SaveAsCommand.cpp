@@ -1,4 +1,7 @@
 #include "SaveAsCommand.h"
+#include "../config/FCPConfig.h"
+#include "../config/FCPMessages.h"
+#include "../config/FCPErrors.h"
 
 SaveAsCommand::~SaveAsCommand() {};
 
@@ -11,5 +14,12 @@ String SaveAsCommand::toString() {
 }
 
 void SaveAsCommand::execute(File& file, const Vector<String>& parameters) {
-	file.saveAs(parameters[0]);
+	if (!file.isOpened()) {
+		FCPConfig::consoleLogger.log(FCPErrors::noFileOpened);
+		return;
+	}
+
+	if (file.saveAs(parameters[0])) {
+		FCPConfig::consoleLogger.log(FCPMessages::saveAsMessage + parameters[0]);
+	}
 }

@@ -10,18 +10,18 @@ Vector<String> DBCommandsProcessor::getAllowedExtensions() {
 
 void DBCommandsProcessor::parseCommands() {
 	String command;
-	DBFile dbFile{&DCPConfig::logger};
+	DBFile dbFile{&DCPConfig::fileLogger};
 
 	while (true)
 	{
 		String::getLine(DCPConfig::inputStream, command);
 		try {
 			if (!this->parseFileCommand(command, dbFile) && !this->parseDBCommand(command, dbFile)) {
-				DCPConfig::logger.log(DCPErrors::wrongCommandError);
+				DCPConfig::consoleLogger.log(DCPErrors::wrongCommandError);
 			}
 		}
 		catch (const String& err) {
-			DCPConfig::logger.log(err);
+			DCPConfig::consoleLogger.log(err);
 		}
 		
 	}
