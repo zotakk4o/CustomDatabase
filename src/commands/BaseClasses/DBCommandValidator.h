@@ -1,8 +1,8 @@
 #ifndef DBCOMMANDVALIDATOR_H
 #define DBCOMMANDVALIDATOR_H
 
-#include "../../../include/String.h"
-#include "../../../include/Vector.cpp"
+#include "include/String.h"
+#include "include/Vector.cpp"
 
 class DBCommandValidator
 {

@@ -5,7 +5,7 @@
 
 #include<iostream>
 
-DBFile::DBFile(const ILogger* _logger, const String& _path) : File(_logger, _path) {};
+DBFile::DBFile(ILogger* _logger, const String& _path) : File(_logger, _path) {};
 
 DBFile::DBFile(const DBFile& other) : File(other), tableFiles(other.tableFiles) {};
 

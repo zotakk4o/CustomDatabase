@@ -1,7 +1,7 @@
 #ifndef FILECOMMAND_H
 #define FILECOMMAND_H
 
-#include "../../../File.h"
+#include "include/File.h"
 #include "CommandValidator.h"
 
 class FileCommand : public CommandValidator

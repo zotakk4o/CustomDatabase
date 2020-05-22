@@ -77,6 +77,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,6 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,6 +147,7 @@
     <ClCompile Include="include\FileCommandsProcessor\config\FCPMessages.cpp" />
     <ClCompile Include="include\FileCommandsProcessor\FileCommandsProcessor.cpp" />
     <ClCompile Include="include\Loggers\ConsoleLogger.cpp" />
+    <ClCompile Include="include\Loggers\FileLogger.cpp" />
     <ClCompile Include="include\Pagination\commands\BaseClasses\PaginationCommand.cpp" />
     <ClCompile Include="include\Pagination\commands\NextCommand.cpp" />
     <ClCompile Include="include\Pagination\commands\PrevCommand.cpp" />
@@ -198,6 +203,7 @@
     <ClInclude Include="include\FileCommandsProcessor\config\FCPErrors.h" />
     <ClInclude Include="include\FileCommandsProcessor\config\FCPMessages.h" />
     <ClInclude Include="include\Loggers\ConsoleLogger.h" />
+    <ClInclude Include="include\Loggers\FileLogger.h" />
     <ClInclude Include="include\Loggers\interfaces\ILogger.h" />
     <ClInclude Include="include\Pagination\commands\BaseClasses\PaginationCommand.h" />
     <ClInclude Include="include\Pagination\commands\NextCommand.h" />

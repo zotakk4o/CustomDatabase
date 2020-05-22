@@ -1,10 +1,10 @@
 #ifndef DBFILE_H
 #define DBFILE_H
 
-#include "../../include/File.h"
+#include "include/File.h"
 #include "TableFile.h"
-#include "../../include/String.h"
-#include "../../include/Vector.cpp"
+#include "include/String.h"
+#include "include/Vector.cpp"
 
 class DBFile : public File {
 	private:
@@ -15,7 +15,7 @@ class DBFile : public File {
 		void addTableToData(const TableFile&);
 		bool doesTableExist(const String& tableName) const;
 	public:
-		DBFile(const ILogger* = nullptr, const String& = "");
+		DBFile(ILogger* = nullptr, const String& = "");
 		DBFile(const DBFile&);
 
 		virtual bool open(const String&);

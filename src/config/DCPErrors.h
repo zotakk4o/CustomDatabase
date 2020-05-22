@@ -1,7 +1,7 @@
 #ifndef DCPERRORS_H
 #define DCPERRORS_H
 
-#include "../../include/String.h"
+#include "include/String.h"
 
 class DCPErrors {
 	public:

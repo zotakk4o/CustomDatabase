@@ -1,8 +1,8 @@
 #ifndef FILECOMMANDPARAMETERS_H
 #define FILECOMMANDPARAMETERS_H
 
-#include "../../../File.h"
-#include "../../../Vector.cpp"
+#include "include/File.h"
+#include "include/Vector.cpp"
 #include "CommandValidator.h"
 
 class FileCommandParameters : public CommandValidator {

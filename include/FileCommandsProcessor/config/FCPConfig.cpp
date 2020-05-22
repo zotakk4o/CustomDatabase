@@ -7,11 +7,13 @@
 #include "../commands/SaveAsCommand.h"
 #include "../commands/SaveCommand.h"
 
-#include "../../Loggers/ConsoleLogger.h"
+#include "include/Loggers/ConsoleLogger.h"
 
 const char FCPConfig::commandDelimiter = ' ';
 
-const ILogger& FCPConfig::logger = ConsoleLogger::getInstance();
+ILogger& FCPConfig::logger = ConsoleLogger::getInstance();
+
+ConsoleLogger& FCPConfig::consoleLogger = ConsoleLogger::getInstance();
 
 const Vector<Command*> FCPConfig::commands{
 	new HelpCommand(),

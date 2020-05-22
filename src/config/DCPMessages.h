@@ -1,7 +1,7 @@
 #ifndef DCPMESSAGES_H
 #define DCPMESSAGES_H
 
-#include "../../include/String.h"
+#include "include/String.h"
 
 class DCPMessages {
 	public:

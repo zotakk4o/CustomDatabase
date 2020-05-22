@@ -9,11 +9,11 @@ class File {
 		String data;
 		String path;
 		bool opened;
-		const ILogger* logger;
+		ILogger* logger;
 
 		virtual bool saveData(const String&);
 	public:
-		File(const ILogger* = nullptr, const String& = "");
+		File(ILogger* = nullptr, const String& = "");
 		File(const File& other);
 
 		virtual ~File();

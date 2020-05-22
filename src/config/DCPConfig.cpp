@@ -44,7 +44,7 @@ const Vector<String> DCPConfig::fileExtensions{ DCPConfig::tableFileExtension };
 
 std::istream& DCPConfig::inputStream = std::cin;
 
-const ILogger& DCPConfig::logger = ConsoleLogger::getInstance();
+ILogger& DCPConfig::logger = ConsoleLogger::getInstance();
 
 const Vector<DBFileCommand*> DCPConfig::dbCommands{
 	new ShowTablesCommand()

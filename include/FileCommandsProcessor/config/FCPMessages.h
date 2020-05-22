@@ -1,7 +1,7 @@
 #ifndef FCPMESSAGES_H
 #define FCPMESSAGES_H
 
-#include "../../String.h"
+#include "include/String.h"
 
 class FCPMessages {
 	public:

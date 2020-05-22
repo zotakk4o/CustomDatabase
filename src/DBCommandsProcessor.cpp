@@ -1,5 +1,5 @@
 #include "DBCommandsProcessor.h"
-#include "../include/FileCommandsProcessor/FileCommandsProcessor.h"
+#include "include/FileCommandsProcessor/FileCommandsProcessor.h"
 #include "FilesHandlers/DBFile.h"
 #include "config/DCPConfig.h"
 #include "config/DCPErrors.h"

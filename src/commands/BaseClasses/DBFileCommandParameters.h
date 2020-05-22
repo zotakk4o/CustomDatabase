@@ -2,7 +2,7 @@
 #define DBFILECOMMANDPARAMETERS_H
 
 #include "../../FilesHandlers/DBFile.h"
-#include "../../../include/Vector.cpp"
+#include "include/Vector.cpp"
 #include "DBCommandValidator.h"
 
 class DBFileCommandParameters : public DBCommandValidator {

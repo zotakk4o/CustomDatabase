@@ -2,9 +2,9 @@
 #include "../config/DCPConfig.h"
 #include "../config/DCPMessages.h"
 #include "../config/DCPErrors.h"
-#include "../../include/Pagination/Pagination.h"
+#include "include/Pagination/Pagination.h"
 
-TableFile::TableFile(const ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name) {
+TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name) {
 	if (openOnCreation) {
 		this->open(_path);
 	}

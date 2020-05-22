@@ -1,8 +1,8 @@
 #ifndef TABLEFILE_H
 #define TABLEFILE_H
 
-#include "../../include/File.h"
-#include "../../include/String.h"
+#include "include/File.h"
+#include "include/String.h"
 
 class TableFile : public File {
 	private:
@@ -14,7 +14,7 @@ class TableFile : public File {
 		Vector<unsigned int> getRowsIndexesByCriteria(const String&, const String&, bool = false) const;
 		String concatData(const Vector<String>&);
 	public:
-		TableFile(const ILogger* = nullptr, const String& = "", const String& = "", bool = false);
+		TableFile(ILogger* = nullptr, const String& = "", const String& = "", bool = false);
 		TableFile(const TableFile&);
 
 		virtual bool open(const String& = "");

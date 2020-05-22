@@ -1,7 +1,7 @@
 #ifndef BASEAGGREGATECOMMAND_H
 #define BASEAGGREGATECOMMAND_H
 
-#include "../../../../include/String.h"
+#include "include/String.h"
 
 class BaseAggregateCommand
 {

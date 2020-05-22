@@ -3,7 +3,7 @@
 #include "config/PaginationErrors.h"
 #include "config/PaginationMessages.h"
 
-Pagination::Pagination(const ILogger& _logger, const Vector<String>& _data, const unsigned int& _itemsPerPage) :
+Pagination::Pagination(ILogger& _logger, const Vector<String>& _data, const unsigned int& _itemsPerPage) :
 	logger(_logger),
 	data(_data),
 	firstItemIndex(0),

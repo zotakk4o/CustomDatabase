@@ -1,12 +1,12 @@
 #ifndef DCPCONFIG_H
 #define DCPCONFIG_H
 
-#include "../../include/String.h"
-#include "../../include/Vector.cpp"
+#include "include/String.h"
+#include "include/Vector.cpp"
 #include "../commands/BaseClasses/DBFileCommand.h"
 #include "../commands/BaseClasses/DBFileCommandParameters.h"
 #include "../commands/aggregate/BaseClasses/BaseAggregateCommand.h"
-#include "../../include/Loggers/ConsoleLogger.h"
+#include "include/Loggers/ConsoleLogger.h"
 
 #include <iostream>
 
@@ -26,7 +26,7 @@ class DCPConfig {
 		static const Vector<String> fileExtensions;
 		static const Vector<String> allowedDataTypes;
 		static std::istream& inputStream;
-		static const ILogger& logger;
+		static ILogger& logger;
 		static const Vector<DBFileCommand*> dbCommands;
 		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
 		static const Vector<BaseAggregateCommand*> aggregateCommands;

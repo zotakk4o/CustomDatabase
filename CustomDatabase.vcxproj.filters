@@ -177,6 +177,9 @@
     <ClCompile Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\Loggers\FileLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\String.h">
@@ -339,6 +342,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Loggers\FileLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

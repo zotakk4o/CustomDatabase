@@ -1,14 +1,16 @@
 #include "ConsoleLogger.h"
 #include<iostream>
 
-ConsoleLogger::ConsoleLogger() {};
+ConsoleLogger::ConsoleLogger() {}
 
-const ConsoleLogger& ConsoleLogger::getInstance() {
+ConsoleLogger::~ConsoleLogger() {}
+
+ConsoleLogger& ConsoleLogger::getInstance() {
 	static ConsoleLogger inst;
 	return inst;
 }
 
-void ConsoleLogger::log(const String& data, bool withNewLine) const {
+void ConsoleLogger::log(const String& data, bool withNewLine) {
 	std::cout << data;
 
 	if (withNewLine) {

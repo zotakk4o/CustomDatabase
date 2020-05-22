@@ -4,7 +4,7 @@
 
 File::~File() {};
 
-File::File(const ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
+File::File(ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
 
 File::File(const File& other) : logger(other.logger), data(other.data), path(other.path), opened(other.opened) {};
 
