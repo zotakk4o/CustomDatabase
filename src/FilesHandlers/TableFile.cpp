@@ -374,7 +374,7 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 	//Adding joined table configuration row
 	for (unsigned int i = 0; i < tableSize; i++)
 	{
-		if (i != firstTableIndex) {
+		if (i != secondTableIndex) {
 			res.data += secondTableColumns[i];
 
 			if (i != tableSize - 1) {
