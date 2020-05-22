@@ -8,3 +8,4 @@ const String DCPMessages::noRecordsFoundMessage = "No records match the criteria
 const String DCPMessages::typeMissmatchMessage = "Incorrect data type entered.";
 const String DCPMessages::innerJoinSuccessMessage = "The new table is: ";
 const String DCPMessages::emptyAggregateOperands = "No values were received for aggregate->";
+const String DCPMessages::emptyDBMessage = "Database is empty.";

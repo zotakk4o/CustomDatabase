@@ -81,7 +81,7 @@ Vector<String> TableFile::select(const String& columnName, const String& columnV
 	Vector<String> selected = this->getTableData(rows);
 
 	if (!withoutPagination) {
-		Pagination tablesList{ *this->logger, selected, DCPConfig::perPageEntries };
+		Pagination tablesList{ DCPConfig::consoleLogger, selected, DCPConfig::perPageEntries };
 	}
 
 	return selected;
@@ -197,7 +197,7 @@ void TableFile::aggregate(const Vector<String>& parameters) {
 void TableFile::count(const String& columnName, const String& columnValue) {
 	String match = String::toString(this->getRowsIndexesByCriteria(columnName, columnValue).getSize());
 	if (match != '0') {
-		this->logger->log(match);
+		DCPConfig::consoleLogger.log(match);
 	}
 }
 
@@ -243,7 +243,7 @@ void TableFile::describe() {
 	unsigned int fieldsSize = fields.getSize();
 	for (unsigned int i = 0; i < fieldsSize; i++)
 	{
-		this->logger->log(fields[i]);
+		DCPConfig::consoleLogger.log(fields[i]);
 	}
 }
 
@@ -251,11 +251,11 @@ void TableFile::print() {
 	Vector<String> rows = this->getTableData();
 
 	if (!rows.getSize()) {
-		this->logger->log(DCPMessages::emptyTableMessage);
+		DCPConfig::consoleLogger.log(DCPMessages::emptyTableMessage);
 		return;
 	}
 
-	Pagination tablesList{*this->logger, rows, DCPConfig::perPageEntries};
+	Pagination tablesList{DCPConfig::consoleLogger, rows, DCPConfig::perPageEntries};
 }
 
 void TableFile::exportData(const String& fileName) {

@@ -85,9 +85,15 @@ void DBFile::updateTableEntry(const Vector<String>& parameters) {
 
 void DBFile::showTables() {
 	unsigned int filesSize = this->tableFiles.getSize();
+
+	if (!filesSize) {
+		DCPConfig::consoleLogger.log(DCPMessages::emptyDBMessage);
+		return;
+	}
+
 	for (unsigned int i = 0; i < filesSize; i++)
 	{
-		this->logger->log(String::toString(i + 1) + ". " + this->tableFiles[i].getTableName());
+		DCPConfig::consoleLogger.log(String::toString(i + 1) + ". " + this->tableFiles[i].getTableName());
 	}
 }
 
