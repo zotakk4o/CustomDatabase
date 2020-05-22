@@ -117,7 +117,7 @@ void DBFile::describeTable(const String& tableName) {
 	this->getTableWithName(tableName).describe();
 }
 
-void DBFile::innerJoinTables(const Vector<String>& parameters) {
+String DBFile::innerJoinTables(const Vector<String>& parameters) {
 	if (this->doesTableExist(parameters[0] + DCPConfig::columnConfigDelimiter + parameters[2])
 		|| this->doesTableExist(parameters[2] + DCPConfig::columnConfigDelimiter + parameters[0])) 
 	{
@@ -131,6 +131,8 @@ void DBFile::innerJoinTables(const Vector<String>& parameters) {
 	this->tableFiles.pushBack(newTable);
 	this->addTableToData(newTable);
 	this->logger->log(DCPMessages::innerJoinSuccessMessage + newTable.getTableName());
+
+	return newTable.getTableName();
 }
 
 void DBFile::deleteFromTable(const Vector<String>& parameters) {

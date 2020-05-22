@@ -27,7 +27,7 @@ class DBFile : public File {
 		void deleteFromTable(const Vector<String>&);
 		void updateTableEntry(const Vector<String>&);
 		void showTables();
-		void innerJoinTables(const Vector<String>&);
+		String innerJoinTables(const Vector<String>&);
 		void importTable(const String&);
 		void exportTable(const String&, const String&);
 		void describeTable(const String&);
