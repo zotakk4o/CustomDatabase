@@ -68,6 +68,8 @@ bool DBFile::close() {
 		}
 	}
 
+	this->tableFiles = {};
+
 	return true;
 }
 
@@ -135,7 +137,6 @@ String DBFile::innerJoinTables(const Vector<String>& parameters) {
 
 	TableFile newTable = TableFile::innerJoin(first, second, parameters[1], parameters[3]);
 	this->tableFiles.pushBack(newTable);
-	this->addTableToData(newTable);
 	this->logger->log(DCPMessages::innerJoinSuccessMessage + newTable.getTableName());
 
 	return newTable.getTableName();
@@ -183,7 +184,7 @@ TableFile& DBFile::getTableWithName(const String& tableName) {
 	for (unsigned int i = 0; i < filesSize; i++)
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
-			if (!this->tableFiles[i].isOpened()) {
+			if (!this->tableFiles[i].isOpened() && !this->tableFiles[i].isJoined()) {
 				this->tableFiles[i].open();
 			}
 			return this->tableFiles[i];

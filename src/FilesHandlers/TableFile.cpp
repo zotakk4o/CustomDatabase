@@ -4,13 +4,13 @@
 #include "../config/DCPErrors.h"
 #include "include/Pagination/Pagination.h"
 
-TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name) {
+TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name), joined(false) {
 	if (openOnCreation) {
 		this->open(_path);
 	}
 };
 
-TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName) {};
+TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName), joined(false) {};
 
 bool TableFile::open(const String& fileName) {
 	String filePath = fileName.getLength() == 0 ? this->path : fileName;
@@ -366,7 +366,7 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 		throw DCPErrors::innerJoinTypeMissmatchError;
 	}
 
-	TableFile res{ first.logger, joinedTableName, DCPConfig::defaultFilesLocation + joinedTableName + DCPConfig::tableFileExtension, true };
+	TableFile res{ first.logger, joinedTableName, DCPConfig::defaultFilesLocation + joinedTableName + DCPConfig::tableFileExtension };
 	res.data += String::join(first.getColumnNames(true), DCPConfig::fileDelimiter) + DCPConfig::fileDelimiter;
 	Vector<String> secondTableColumns = second.getColumnNames(true);
 	unsigned int tableSize = secondTableColumns.getSize();
@@ -418,5 +418,10 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 		}
 	}
 
+	res.joined = true;
 	return res;
+}
+
+bool TableFile::isJoined() const {
+	return this->joined;
 }

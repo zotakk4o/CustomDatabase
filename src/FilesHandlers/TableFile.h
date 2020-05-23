@@ -7,6 +7,7 @@
 class TableFile : public File {
 	private:
 		String tableName;
+		bool joined;
 
 		String getColumnType(const unsigned int&) const;
 		int getColumnIndex(const String&) const;
@@ -32,7 +33,7 @@ class TableFile : public File {
 		void aggregate(const Vector<String>&);
 
 		static TableFile innerJoin(const TableFile&, const TableFile&, const String&, const String&);
-
+		bool isJoined() const;
 		void setTableName(const String&);
 		const Vector<String> getColumnNames(bool = false) const;
 		const Vector<String> getTableData(const Vector<unsigned int>& = {}) const;

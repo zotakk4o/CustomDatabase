@@ -14,8 +14,8 @@ void CloseCommand::execute(File& file) {
 		FCPConfig::consoleLogger.log(FCPErrors::noFileOpened);
 		return;
 	}
-
+	String filePath = file.getPath();
 	if (file.close()) {
-		FCPConfig::consoleLogger.log(FCPMessages::closeMessage + file.getPath());
+		FCPConfig::consoleLogger.log(FCPMessages::closeMessage + filePath);
 	}
 }
