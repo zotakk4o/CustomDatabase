@@ -10,7 +10,6 @@ class DBFile : public File {
 	private:
 		Vector<TableFile> tableFiles;
 
-		TableFile& getTableWithName(const String&);
 		virtual bool saveData(const String&);
 		void addTableToData(const TableFile&);
 		bool doesTableExist(const String& tableName) const;
@@ -33,6 +32,8 @@ class DBFile : public File {
 		void printTable(const String&);
 		void renameTable(const String&, const String&);
 		double aggregate(const Vector<String>&);
+
+		TableFile& getTableWithName(const String&);
 };
 
 #endif
