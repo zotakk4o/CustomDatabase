@@ -16,7 +16,6 @@ class DBFile : public File {
 		bool doesTableExist(const String& tableName) const;
 	public:
 		DBFile(ILogger* = nullptr, const String& = "");
-		DBFile(const DBFile&);
 
 		virtual bool open(const String&);
 		virtual bool close();

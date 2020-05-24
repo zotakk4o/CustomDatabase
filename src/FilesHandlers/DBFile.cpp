@@ -7,8 +7,6 @@
 
 DBFile::DBFile(ILogger* _logger, const String& _path) : File(_logger, _path) {};
 
-DBFile::DBFile(const DBFile& other) : File(other), tableFiles(other.tableFiles) {};
-
 bool DBFile::open(const String& fileName) {
 
 	if (!this->File::open(fileName)) {

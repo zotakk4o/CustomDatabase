@@ -6,8 +6,6 @@ File::~File() {};
 
 File::File(ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
 
-File::File(const File& other) : logger(other.logger), data(other.data), path(other.path), opened(other.opened) {};
-
 bool File::open(const String& fileName) {
 	if (this->opened) {
 		this->logger->log(String{ "Could not open \"" } + fileName + "\". Another file has been opened for processing.");

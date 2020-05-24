@@ -16,7 +16,6 @@ class TableFile : public File {
 		String concatData(const Vector<String>&);
 	public:
 		TableFile(ILogger* = nullptr, const String& = "", const String& = "", bool = false);
-		TableFile(const TableFile&);
 
 		virtual bool open(const String& = "");
 

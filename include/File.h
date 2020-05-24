@@ -14,8 +14,7 @@ class File {
 		virtual bool saveData(const String&);
 	public:
 		File(ILogger* = nullptr, const String& = "");
-		File(const File& other);
-
+		
 		virtual ~File();
 		virtual bool open(const String&) = 0;
 		virtual bool save();

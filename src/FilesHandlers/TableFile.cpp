@@ -10,8 +10,6 @@ TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path,
 	}
 };
 
-TableFile::TableFile(const TableFile& other) : File(other), tableName(other.tableName), joined(false) {};
-
 bool TableFile::open(const String& fileName) {
 	String filePath = fileName.getLength() == 0 ? this->path : fileName;
 
