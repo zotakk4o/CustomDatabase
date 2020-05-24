@@ -12,3 +12,4 @@ const String DCPErrors::innerJoinTypeMissmatchError = "Error: cannot join column
 const String DCPErrors::columnNotFoundError = "Error: column not found!";
 const String DCPErrors::expectedNumericTypeError = "Error: could not execute the current operation, column type is not numeric!";
 const String DCPErrors::wrongAggregateCommand = "Error: unrecognized aggregate command!";
+const String DCPErrors::aggregateFailedError = "Error: aggregate command did not succeed!";

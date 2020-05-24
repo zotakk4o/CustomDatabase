@@ -7,7 +7,7 @@ String MaximumCommand::toString() const{
 	return "maximum";
 }
 
-void MaximumCommand::execute(const Vector<double>& parameters) const {
+double MaximumCommand::execute(const Vector<double>& parameters) const {
 	this->BaseAggregateCommand::execute(parameters);
 
 	double max = parameters[0];
@@ -20,5 +20,5 @@ void MaximumCommand::execute(const Vector<double>& parameters) const {
 		}
 	}
 
-	DCPConfig::consoleLogger.log(String::toString(max));
+	return max;
 }

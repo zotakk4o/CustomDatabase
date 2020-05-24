@@ -7,7 +7,7 @@ String MinimumCommand::toString() const {
 	return "minimum";
 }
 
-void MinimumCommand::execute(const Vector<double>& parameters) const {
+double MinimumCommand::execute(const Vector<double>& parameters) const {
 	this->BaseAggregateCommand::execute(parameters);
 
 	double min = parameters[0];
@@ -20,5 +20,5 @@ void MinimumCommand::execute(const Vector<double>& parameters) const {
 		}
 	}
 
-	DCPConfig::consoleLogger.log(String::toString(min));
+	return min;
 }

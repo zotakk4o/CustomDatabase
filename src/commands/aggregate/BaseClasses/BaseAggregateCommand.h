@@ -9,7 +9,7 @@ class BaseAggregateCommand
 		virtual ~BaseAggregateCommand();
 		virtual bool isValid(const String&) const;
 		virtual String toString() const = 0;
-		virtual void execute(const Vector<double>&) const;
+		virtual double execute(const Vector<double>&) const;
 };
 
 #endif

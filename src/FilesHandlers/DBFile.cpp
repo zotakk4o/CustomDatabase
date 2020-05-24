@@ -152,8 +152,8 @@ void DBFile::insertRow(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).insert(parameters.slice(1, parameters.getSize() - 1));
 }
 
-void DBFile::aggregate(const Vector<String>& parameters) {
-	this->getTableWithName(parameters[0]).aggregate(parameters.slice(1, parameters.getSize() - 1));
+double DBFile::aggregate(const Vector<String>& parameters) {
+	return this->getTableWithName(parameters[0]).aggregate(parameters.slice(1, parameters.getSize() - 1));
 }
 
 void DBFile::renameTable(const String& tableName, const String& newName) {

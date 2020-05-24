@@ -1,4 +1,5 @@
 #include "AggregateCommand.h"
+#include "../config/DCPConfig.h"
 
 AggregateCommand::~AggregateCommand() {}
 
@@ -7,7 +8,7 @@ const unsigned short AggregateCommand::getParametersCount() const {
 }
 
 void AggregateCommand::execute(DBFile& dbFile, const Vector<String>& parameters) const {
-	dbFile.aggregate(parameters);
+	DCPConfig::consoleLogger.log(String::toString(dbFile.aggregate(parameters)));
 }
 
 String AggregateCommand::toString() const {

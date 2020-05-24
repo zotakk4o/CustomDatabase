@@ -7,7 +7,7 @@ bool BaseAggregateCommand::isValid(const String& keyword) const {
 	return this->toString() == keyword;
 }
 
-void BaseAggregateCommand::execute(const Vector<double>& params) const {
+double BaseAggregateCommand::execute(const Vector<double>& params) const {
 	if (!params.getSize()) {
 		throw DCPMessages::emptyAggregateOperands + this->toString();
 	}

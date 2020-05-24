@@ -8,7 +8,7 @@ String ProductCommand::toString() const {
 	return "product";
 }
 
-void ProductCommand::execute(const Vector<double>& parameters) const {
+double ProductCommand::execute(const Vector<double>& parameters) const {
 	this->BaseAggregateCommand::execute(parameters);
 
 	double prod = 1;
@@ -19,5 +19,5 @@ void ProductCommand::execute(const Vector<double>& parameters) const {
 		prod *= parameters[i];
 	}
 
-	DCPConfig::consoleLogger.log(String::toString(prod));
+	return prod;
 }

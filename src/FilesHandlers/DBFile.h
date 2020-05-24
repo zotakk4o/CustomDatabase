@@ -32,7 +32,7 @@ class DBFile : public File {
 		void describeTable(const String&);
 		void printTable(const String&);
 		void renameTable(const String&, const String&);
-		void aggregate(const Vector<String>&);
+		double aggregate(const Vector<String>&);
 };
 
 #endif

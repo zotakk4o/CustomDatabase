@@ -160,6 +160,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\commands\AddColumnCommand.cpp" />
     <ClCompile Include="src\commands\AggregateCommand.cpp" />
+    <ClCompile Include="src\commands\aggregate\AverageCommand.cpp" />
     <ClCompile Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.cpp" />
     <ClCompile Include="src\commands\aggregate\MaximumCommand.cpp" />
     <ClCompile Include="src\commands\aggregate\MinimumCommand.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="src\commands\AddColumnCommand.h" />
     <ClInclude Include="src\commands\AggregateCommand.h" />
+    <ClInclude Include="src\commands\aggregate\AverageCommand.h" />
     <ClInclude Include="src\commands\aggregate\BaseClasses\BaseAggregateCommand.h" />
     <ClInclude Include="src\commands\aggregate\MaximumCommand.h" />
     <ClInclude Include="src\commands\aggregate\MinimumCommand.h" />

@@ -1,11 +1,11 @@
-#ifndef MAXIMUMCOMMAND_H
-#define MAXIMUMCOMMAND_H
+#ifndef AVERAGECOMMAND_H
+#define AVERAGECOMMAND_H
 
 #include "BaseClasses/BaseAggregateCommand.h"
 
-class MaximumCommand : public BaseAggregateCommand {
+class AverageCommand : public BaseAggregateCommand {
 	public:
-		virtual ~MaximumCommand();
+		virtual ~AverageCommand();
 		virtual String toString() const;
 		virtual double execute(const Vector<double>&) const;
 };

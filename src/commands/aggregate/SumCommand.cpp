@@ -8,7 +8,7 @@ String SumCommand::toString() const {
 	return "sum";
 }
 
-void SumCommand::execute(const Vector<double>& parameters) const {
+double SumCommand::execute(const Vector<double>& parameters) const {
 	this->BaseAggregateCommand::execute(parameters);
 
 	double sum = 0;
@@ -19,5 +19,5 @@ void SumCommand::execute(const Vector<double>& parameters) const {
 		sum += parameters[i];
 	}
 
-	DCPConfig::consoleLogger.log(String::toString(sum));
+	return sum;
 }

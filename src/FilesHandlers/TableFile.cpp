@@ -141,11 +141,11 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 	this->data = String::join(lines, '\n') + '\n';
 }
 
-void TableFile::aggregate(const Vector<String>& parameters) {
+double TableFile::aggregate(const Vector<String>& parameters) {
 	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(parameters[0], parameters[1]);
 
 	if (!rows.getSize()) {
-		return;
+		throw DCPErrors::aggregateFailedError;
 	}
 
 	int colIndex = this->getColumnIndex(parameters[2]);
@@ -184,8 +184,7 @@ void TableFile::aggregate(const Vector<String>& parameters) {
 	for (unsigned int i = 0; i < commandsSize; i++)
 	{
 		if (DCPConfig::aggregateCommands[i]->isValid(parameters[3])) {
-			DCPConfig::aggregateCommands[i]->execute(nums);
-			return;
+			return DCPConfig::aggregateCommands[i]->execute(nums);
 		}
 	}
 
