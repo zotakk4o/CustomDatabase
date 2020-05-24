@@ -4,11 +4,7 @@
 #include "../config/DCPErrors.h"
 #include "include/Pagination/Pagination.h"
 
-TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name), joined(false) {
-	if (openOnCreation) {
-		this->open(_path);
-	}
-};
+TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path, openOnCreation), tableName(_name), joined(false) {};
 
 bool TableFile::open(const String& fileName) {
 	String filePath = fileName.getLength() == 0 ? this->path : fileName;

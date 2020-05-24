@@ -15,7 +15,7 @@ class DBFile : public File {
 		void addTableToData(const TableFile&);
 		bool doesTableExist(const String& tableName) const;
 	public:
-		DBFile(ILogger* = nullptr, const String& = "");
+		DBFile(ILogger* = nullptr, const String& = "", bool = false);
 
 		virtual bool open(const String&);
 		virtual bool close();

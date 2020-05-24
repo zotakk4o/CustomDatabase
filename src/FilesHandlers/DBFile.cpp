@@ -5,7 +5,7 @@
 
 #include<iostream>
 
-DBFile::DBFile(ILogger* _logger, const String& _path) : File(_logger, _path) {};
+DBFile::DBFile(ILogger* _logger, const String& _path, bool openOnCreation) : File(_logger, _path, openOnCreation) {};
 
 bool DBFile::open(const String& fileName) {
 

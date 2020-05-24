@@ -4,7 +4,11 @@
 
 File::~File() {};
 
-File::File(ILogger* _logger, const String& _path) : logger(_logger), data(""), path(_path), opened(false) {};
+File::File(ILogger* _logger, const String& _path, bool openOnCreation) : logger(_logger), data(""), path(_path), opened(false) {
+	if (openOnCreation && _path.getLength()) {
+		this->open(_path);
+	}
+};
 
 bool File::open(const String& fileName) {
 	if (this->opened) {
