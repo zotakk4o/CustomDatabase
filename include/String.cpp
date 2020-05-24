@@ -419,7 +419,7 @@ String String::toString(double num, unsigned short precision) {
 
 	res += numToString(num);
 
-	num -= (unsigned int)num;
+	num -= (unsigned long long)num;
 
 	if (num == 0 || precision == 0) {
 		return res;
