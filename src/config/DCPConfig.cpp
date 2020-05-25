@@ -73,3 +73,23 @@ const Vector<BaseAggregateCommand*> DCPConfig::aggregateCommands{
 	new MaximumCommand(),
 	new MinimumCommand()
 };
+
+DCPConfig::~DCPConfig() {
+	unsigned int dbCommandsSize = DCPConfig::dbCommands.getSize();
+	for (unsigned int i = 0; i < dbCommandsSize; i++)
+	{
+		delete DCPConfig::dbCommands[i];
+	}
+
+	unsigned int dbCommandsParametersSize = DCPConfig::dbCommandsParameters.getSize();
+	for (unsigned int i = 0; i < dbCommandsParametersSize; i++)
+	{
+		delete DCPConfig::dbCommandsParameters[i];
+	}
+
+	unsigned int aggregateCommandsSize = DCPConfig::aggregateCommands.getSize();
+	for (unsigned int i = 0; i < aggregateCommandsSize; i++)
+	{
+		delete DCPConfig::aggregateCommands[i];
+	}
+}

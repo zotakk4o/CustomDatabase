@@ -19,11 +19,31 @@ const Vector<Command*> FCPConfig::commands{
 };
 
 const Vector<FileCommand*> FCPConfig::fileCommands{
-	new CloseCommand{},
-	new SaveCommand{},
+	new CloseCommand(),
+	new SaveCommand(),
 };
 
 const Vector<FileCommandParameters*> FCPConfig::fileCommandsParameters{
-	new SaveAsCommand{},
-	new OpenCommand{}
+	new SaveAsCommand(),
+	new OpenCommand()
 };
+
+FCPConfig::~FCPConfig() {
+	unsigned int commandsSize = FCPConfig::commands.getSize();
+	for (unsigned int i = 0; i < commandsSize; i++)
+	{
+		delete FCPConfig::commands[i];
+	}
+
+	unsigned int fileCommandsSize = FCPConfig::fileCommands.getSize();
+	for (unsigned int i = 0; i < fileCommandsSize; i++)
+	{
+		delete FCPConfig::fileCommands[i];
+	}
+
+	unsigned int fileCommandsParametersSize = FCPConfig::fileCommandsParameters.getSize();
+	for (unsigned int i = 0; i < fileCommandsParametersSize; i++)
+	{
+		delete FCPConfig::fileCommandsParameters[i];
+	}
+}

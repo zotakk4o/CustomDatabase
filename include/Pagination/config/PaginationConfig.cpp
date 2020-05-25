@@ -11,3 +11,11 @@ const Vector<PaginationCommand*> PaginationConfig::paginationCommands{
 	new NextCommand(),
 	new PrevCommand()
 };
+
+PaginationConfig::~PaginationConfig() {
+	unsigned int paginationCommandsSize = PaginationConfig::paginationCommands.getSize();
+	for (unsigned int i = 0; i < paginationCommandsSize; i++)
+	{
+		delete PaginationConfig::paginationCommands[i];
+	}
+}

@@ -32,6 +32,8 @@ class DCPConfig {
 		static const Vector<DBFileCommand*> dbCommands;
 		static const Vector<DBFileCommandParameters*> dbCommandsParameters;
 		static const Vector<BaseAggregateCommand*> aggregateCommands;
+
+		~DCPConfig();
 };
  
 #endif

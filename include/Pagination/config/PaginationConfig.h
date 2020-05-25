@@ -12,6 +12,7 @@ class PaginationConfig
 		static const String paginationStopCommand;
 		static std::istream& commandInputStream;
 		static const Vector<PaginationCommand*> paginationCommands;
+		~PaginationConfig();
 };
 
 #endif

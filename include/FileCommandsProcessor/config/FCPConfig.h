@@ -14,6 +14,8 @@ class FCPConfig {
 		static const Vector<Command*> commands;
 		static const Vector<FileCommand*> fileCommands;
 		static const Vector<FileCommandParameters*>fileCommandsParameters;
+
+		~FCPConfig();
 };
 
 #endif
