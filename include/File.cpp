@@ -38,6 +38,12 @@ bool File::open(const String& fileName) {
 	String line;
 
 	while (String::getLine(fs, line)) {
+		if (line.getLength()) {
+			this->data += line + '\n';
+		}
+	}
+
+	if (line.getLength()) {
 		this->data += line + '\n';
 	}
 
