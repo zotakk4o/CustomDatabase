@@ -32,7 +32,11 @@ bool TableFile::open(const String& fileName) {
 	return true;
 }
 
-Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnName, const String& columnValue, bool notEqualTo) const {
+Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const Vector<String>& criteria, const String& logOperator, bool notEqualTo) const {
+	if (logOperator != "AND" && logOperator != "OR") {
+		throw DCPErrors::incorrectLogicalOperatorError;
+	}
+	
 	Vector<String> rows = this->getTableData();
 	Vector<unsigned int> res;
 
@@ -41,18 +45,37 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnNam
 		return res;
 	}
 
-	int columnIndex = this->getColumnIndex(columnName);
-
-	if (columnIndex == -1) {
-		this->logger->log(DCPMessages::noRecordsFoundMessage);
-		return res;
-	}
-
 	unsigned int rowsSize = rows.getSize();
+	unsigned int criteriaSize = criteria.getSize();
 	for (unsigned int i = 0; i < rowsSize; i++)
 	{
-		String data = rows[i].split(DCPConfig::fileDelimiter)[columnIndex];
-		if (notEqualTo ? data != columnValue : data == columnValue) {
+		Vector<String> data = rows[i].split(DCPConfig::fileDelimiter);
+		bool didRowMatch = logOperator == "AND" ? true : false;
+		for (unsigned int j = 0; j < criteriaSize; j += 2)
+		{
+			int columnIndex = this->getColumnIndex(criteria[j]);
+
+			if (columnIndex == -1) {
+				this->logger->log(DCPMessages::noRecordsFoundMessage);
+				return res;
+			}
+
+			if (logOperator == "AND") {
+				if (notEqualTo ? data[columnIndex] == criteria[j + 1] : data[columnIndex] != criteria[j + 1]) {
+					didRowMatch = false;
+					break;
+				}
+			}
+			else if (logOperator == "OR") {
+				if (notEqualTo ? data[columnIndex] != criteria[j + 1] : data[columnIndex] == criteria[j + 1]) {
+					didRowMatch = true;
+					break;
+				}
+			}
+			
+		}
+
+		if (didRowMatch) {
 			res.pushBack(i);
 		}
 
@@ -66,7 +89,7 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const String& columnNam
 }
 
 Vector<String> TableFile::select(const String& columnName, const String& columnValue, bool withoutPagination) {
-	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(columnName, columnValue);
+	Vector<unsigned int> rows = this->getRowsIndexesByCriteria({ columnName, columnValue });
 	
 	if (!rows.getSize()) {
 		return Vector<String>{};
@@ -82,7 +105,7 @@ Vector<String> TableFile::select(const String& columnName, const String& columnV
 }
 
 void TableFile::update(const Vector<String>& parameters) {
-	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(parameters[0], parameters[1]);
+	Vector<unsigned int> selected = this->getRowsIndexesByCriteria({ parameters[0], parameters[1] });
 	
 	if (!selected.getSize()) {
 		return;
@@ -138,7 +161,7 @@ void TableFile::addColumn(const String& columnName, const String& columnType) {
 }
 
 double TableFile::aggregate(const Vector<String>& parameters) {
-	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(parameters[0], parameters[1]);
+	Vector<unsigned int> rows = this->getRowsIndexesByCriteria({ parameters[0], parameters[1] });
 
 	if (!rows.getSize()) {
 		throw DCPErrors::aggregateFailedError;
@@ -188,7 +211,7 @@ double TableFile::aggregate(const Vector<String>& parameters) {
 }
 
 void TableFile::count(const String& columnName, const String& columnValue) {
-	String match = String::toString(this->getRowsIndexesByCriteria(columnName, columnValue).getSize());
+	String match = String::toString(this->getRowsIndexesByCriteria({ columnName, columnValue }).getSize());
 	if (match != '0') {
 		DCPConfig::consoleLogger.log(match);
 	}
@@ -220,7 +243,7 @@ void TableFile::insert(const Vector<String>& parameters) {
 }
 
 void TableFile::deleteRows(const String& columnName, const String& columnValue) {
-	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(columnName, columnValue, true);
+	Vector<unsigned int> selected = this->getRowsIndexesByCriteria({ columnName, columnValue }, true);
 
 	if (!selected.getSize()) {
 		return;

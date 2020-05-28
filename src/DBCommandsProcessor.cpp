@@ -10,7 +10,7 @@ Vector<String> DBCommandsProcessor::getAllowedExtensions() {
 
 void DBCommandsProcessor::parseCommands() {
 	String command;
-	DBFile dbFile{&DCPConfig::fileLogger};
+	DBFile dbFile{&DCPConfig::consoleLogger};
 
 	while (true)
 	{

@@ -18,6 +18,7 @@ class DCPErrors {
 		static const String columnNotFoundError;
 		static const String wrongAggregateCommand;
 		static const String aggregateFailedError;
+		static const String incorrectLogicalOperatorError;
 };
 
 #endif
