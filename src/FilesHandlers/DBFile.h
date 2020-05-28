@@ -19,7 +19,7 @@ class DBFile : public File {
 		virtual bool open(const String&);
 		virtual bool close();
 		void addColumnToTable(const Vector<String>&);
-		Vector<String> selectFromTable(const Vector<String>&);
+		Vector<String> selectFromTable(const Vector<String>&, const String& = "AND", bool = false);
 		void countRowsFromTable(const Vector<String>&);
 		void insertRow(const Vector<String>&);
 		void deleteFromTable(const Vector<String>&);

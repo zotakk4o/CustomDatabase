@@ -88,8 +88,8 @@ Vector<unsigned int> TableFile::getRowsIndexesByCriteria(const Vector<String>& c
 	return res;
 }
 
-Vector<String> TableFile::select(const String& columnName, const String& columnValue, bool withoutPagination) {
-	Vector<unsigned int> rows = this->getRowsIndexesByCriteria({ columnName, columnValue });
+Vector<String> TableFile::select(const Vector<String>& criteria, const String& logOperator, bool withoutPagination) {
+	Vector<unsigned int> rows = this->getRowsIndexesByCriteria(criteria, logOperator);
 	
 	if (!rows.getSize()) {
 		return Vector<String>{};
