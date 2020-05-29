@@ -5,7 +5,11 @@
 
 #include<iostream>
 
-DBFile::DBFile(ILogger* _logger, const String& _path, bool openOnCreation) : File(_logger, _path, openOnCreation) {};
+DBFile::DBFile(ILogger* _logger, const String& _path, bool openOnCreation) : File(_logger, _path) {
+	if (openOnCreation && _path.getLength()) {
+		this->open(_path);
+	}
+};
 
 bool DBFile::open(const String& fileName) {
 
@@ -24,7 +28,7 @@ bool DBFile::open(const String& fileName) {
 		Vector<String> rowData = tableRows[i].split(DCPConfig::fileDelimiter);
 
 		if (rowData.getSize() != 2) {
-			throw DCPErrors::incorrectTableFormatError; 
+			throw DCPErrors::incorrectTableFormatError;
 		}
 
 		this->tableFiles.pushBack(TableFile{this->logger, rowData[0], rowData[1]});
@@ -140,8 +144,8 @@ String DBFile::innerJoinTables(const Vector<String>& parameters) {
 	return newTable.getTableName();
 }
 
-void DBFile::deleteFromTable(const Vector<String>& parameters) {
-	this->getTableWithName(parameters[0]).deleteRows(parameters[1], parameters[2]);
+void DBFile::deleteFromTable(const Vector<String>& parameters, const String& logOperator) {
+	this->getTableWithName(parameters[0]).deleteRows(parameters.slice(1, parameters.getSize() - 1), logOperator);
 }
 
 void DBFile::printTable(const String& tableName) {
@@ -206,5 +210,17 @@ bool DBFile::doesTableExist(const String& tableName) const {
 
 void DBFile::addTableToData(const TableFile& table) {
 	this->data += table.getTableName() + DCPConfig::fileDelimiter + table.getPath() + '\n';
+}
+
+Vector<String> DBFile::generateInCriteria(const String& columnName, const Vector<String>& values) const {
+	Vector<String> res;
+	unsigned int valuesSize = values.getSize();
+	for (unsigned int i = 0; i < valuesSize; i++)
+	{
+		res.pushBack(columnName);
+		res.pushBack(values[i]);
+	}
+
+	return res;
 }
 

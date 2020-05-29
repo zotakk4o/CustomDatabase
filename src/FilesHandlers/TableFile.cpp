@@ -4,7 +4,11 @@
 #include "../config/DCPErrors.h"
 #include "include/Pagination/Pagination.h"
 
-TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path, openOnCreation), tableName(_name), joined(false) {};
+TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name), joined(false) {
+	if (openOnCreation && _path.getLength()) {
+		this->open(_path);
+	}
+};
 
 bool TableFile::open(const String& fileName) {
 	String filePath = fileName.getLength() == 0 ? this->path : fileName;
@@ -242,8 +246,9 @@ void TableFile::insert(const Vector<String>& parameters) {
 	this->data += String::join(newRow, DCPConfig::fileDelimiter) + '\n';
 }
 
-void TableFile::deleteRows(const String& columnName, const String& columnValue) {
-	Vector<unsigned int> selected = this->getRowsIndexesByCriteria({ columnName, columnValue }, true);
+void TableFile::deleteRows(const Vector<String>& criteria, const String& logOperator) {
+	String reversedOperator = logOperator == "AND" ? "OR" : "AND";
+	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(criteria, reversedOperator, true);
 
 	if (!selected.getSize()) {
 		return;
@@ -356,10 +361,9 @@ bool TableFile::doesMatchColumnType(const unsigned int& colIndex, const String& 
 	String type = this->getColumnType(colIndex);
 	int isNumeric = String::isNumeric(value);
 
-	return type == DCPConfig::doubleType && isNumeric == 1
-		|| type == DCPConfig::intType && isNumeric == 0
-		|| type == DCPConfig::stringType && isNumeric == -1;
-	//TODO: separate data types in classes if I have time. SOLID principle is violated rn.
+	return (type == DCPConfig::doubleType && isNumeric == 1)
+		|| (type == DCPConfig::intType && isNumeric == 0)
+		|| (type == DCPConfig::stringType);
 }
 
 String TableFile::concatData(const Vector<String>& data) {

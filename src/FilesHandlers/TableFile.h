@@ -28,7 +28,7 @@ class TableFile : public File {
 		Vector<String> select(const Vector<String>&, const String& = "AND", bool = false);
 		void update(const Vector<String>&);
 		void count(const String&, const String&);
-		void deleteRows(const String&, const String&);
+		void deleteRows(const Vector<String>&, const String& = "AND");
 		double aggregate(const Vector<String>&);
 
 		static TableFile innerJoin(const TableFile&, const TableFile&, const String&, const String&);

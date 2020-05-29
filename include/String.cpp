@@ -6,8 +6,6 @@
 #include<istream>
 #include <stdexcept>
 
-const char* String::noFreeMemErr = "Error: Could not create a string instance, no free memory!";
-
 String numToString(unsigned long long num) {
 	String res;
 
@@ -262,27 +260,32 @@ const char& String::operator[](const unsigned int& index) const {
 
 int String::indexOf(const char* str) const{
 	unsigned int strLength = strLen(str);
+	int index = -1;
 
 	for (unsigned int i = 0; i < this->length; i++)
 	{
 		if (i + strLength - 1 >= this->length) {
-			return -1;
+			return index;
 		}
 
 		if (this->str[i] == str[0]) {
+			index = i;
 			for (unsigned int j = 1; j < strLength; j++)
 			{
 				if (this->str[i + j] != str[j]) {
-					return -1;
+					index = -1;
+					break;
 				}
 			}
 
-			return i;
+			if (index != -1) {
+				return index;
+			}
 		}
 
 	}
 
-	return -1;
+	return index;
 }
 
 int String::indexOf(const char& character) const{

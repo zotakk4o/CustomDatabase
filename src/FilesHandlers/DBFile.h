@@ -22,7 +22,7 @@ class DBFile : public File {
 		Vector<String> selectFromTable(const Vector<String>&, const String& = "AND", bool = false);
 		void countRowsFromTable(const Vector<String>&);
 		void insertRow(const Vector<String>&);
-		void deleteFromTable(const Vector<String>&);
+		void deleteFromTable(const Vector<String>&, const String& = "AND");
 		void updateTableEntry(const Vector<String>&);
 		void showTables();
 		String innerJoinTables(const Vector<String>&);
@@ -34,6 +34,7 @@ class DBFile : public File {
 		double aggregate(const Vector<String>&);
 
 		TableFile& getTableWithName(const String&);
+		Vector<String> generateInCriteria(const String&, const Vector<String>&) const; //:(
 };
 
 #endif
