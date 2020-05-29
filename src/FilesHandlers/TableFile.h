@@ -25,7 +25,7 @@ class TableFile : public File {
 		void rename(const String&);
 		void addColumn(const String&, const String&);
 		void insert(const Vector<String>&);
-		Vector<String> select(const Vector<String>&, const String& = "AND", bool = false);
+		Vector<String> select(const Vector<String>&, const String& = "AND", bool = true);
 		void update(const Vector<String>&);
 		void count(const String&, const String&);
 		void deleteRows(const Vector<String>&, const String& = "AND");

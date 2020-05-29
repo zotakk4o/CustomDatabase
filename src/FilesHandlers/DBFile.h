@@ -11,15 +11,17 @@ class DBFile : public File {
 		Vector<TableFile> tableFiles;
 
 		virtual bool saveData(const String&);
-		void addTableToData(const TableFile&);
 		bool doesTableExist(const String& tableName) const;
 	public:
 		DBFile(ILogger* = nullptr, const String& = "", bool = false);
 
 		virtual bool open(const String&);
 		virtual bool close();
+
+		void addTableToData(const TableFile&);
+
 		void addColumnToTable(const Vector<String>&);
-		Vector<String> selectFromTable(const Vector<String>&, const String& = "AND", bool = false);
+		Vector<String> selectFromTable(const Vector<String>&, const String& = "AND", bool = true);
 		void countRowsFromTable(const Vector<String>&);
 		void insertRow(const Vector<String>&);
 		void deleteFromTable(const Vector<String>&, const String& = "AND");

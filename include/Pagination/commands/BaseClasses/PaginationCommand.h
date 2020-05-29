@@ -1,7 +1,7 @@
 #ifndef PAGINATIONCOMMAND_H
 #define PAGINATIONCOMMAND_H
 
-#include "../../../String.h"
+#include "include/String.h"
 #include "../../Pagination.h"
 
 class PaginationCommand {

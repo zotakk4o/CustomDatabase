@@ -16,7 +16,7 @@ Pagination::Pagination(ILogger& _logger, const Vector<String>& _data, const unsi
 	bool wasCommandExecuted = false;
 
 	while (true) {
-		
+		wasCommandExecuted = false;
 		String::getLine(PaginationConfig::commandInputStream, command);
 
 		if (command == PaginationConfig::paginationStopCommand) {

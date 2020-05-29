@@ -1,9 +1,9 @@
 #ifndef PAGINATION_H
 #define PAGINATION_H
 
-#include "../Vector.cpp"
-#include "../String.h"
-#include "../Loggers/interfaces/ILogger.h"
+#include "include/Vector.cpp"
+#include "include/String.h"
+#include "include/Loggers/interfaces/ILogger.h"
 
 class Pagination
 {

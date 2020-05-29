@@ -6,7 +6,7 @@ const unsigned short SelectCommand::getParametersCount() const {
 }
 
 void SelectCommand::execute(DBFile& dbFile, const Vector<String>& parameters) const {
-	dbFile.selectFromTable(parameters);
+	dbFile.selectFromTable(parameters, "AND", false);
 }
 
 String SelectCommand::toString() const {

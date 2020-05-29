@@ -1,7 +1,7 @@
 #ifndef PAGINATIONERRORS_H
 #define PAGINATIONERRORS_H
 
-#include "../../String.h"
+#include "include/String.h"
 
 class PaginationErrors
 {

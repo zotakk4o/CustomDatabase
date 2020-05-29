@@ -113,10 +113,7 @@ void DBFile::importTable(const String& fileName) {
 
 	String tableName = DBFile::getFileName(fileName, false);
 	String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
-	TableFile newTable{ this->logger, tableName, fileName, true };
-
-	this->tableFiles.pushBack(TableFile{ this->logger, tableName, newPath, true });
-	this->addTableToData(newTable);
+	this->addTableToData({ this->logger, tableName, fileName, true });
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) {
@@ -209,6 +206,7 @@ bool DBFile::doesTableExist(const String& tableName) const {
 }
 
 void DBFile::addTableToData(const TableFile& table) {
+	this->tableFiles.pushBack(table);
 	this->data += table.getTableName() + DCPConfig::fileDelimiter + table.getPath() + '\n';
 }
 

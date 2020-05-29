@@ -1,8 +1,8 @@
 #ifndef PAGINATIONCONFIG_H
 #define PAGINATIONCONFIG_H
 
-#include "../../String.h"
-#include "../../Vector.cpp"
+#include "include/String.h"
+#include "include/Vector.cpp"
 #include "../commands/BaseClasses/PaginationCommand.h"
 #include <istream>
 

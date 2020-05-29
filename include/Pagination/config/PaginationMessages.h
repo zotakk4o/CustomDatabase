@@ -1,7 +1,7 @@
 #ifndef PAGINATIONMESSAGES_H
 #define PAGINATIONMESSAGES_H
 
-#include "../../String.h"
+#include "include/String.h"
 
 class PaginationMessages {
 	public:
