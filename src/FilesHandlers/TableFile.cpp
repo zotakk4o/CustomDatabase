@@ -251,6 +251,7 @@ void TableFile::deleteRows(const Vector<String>& criteria, const String& logOper
 	Vector<unsigned int> selected = this->getRowsIndexesByCriteria(criteria, reversedOperator, true);
 
 	if (!selected.getSize()) {
+		this->data = this->concatData({});
 		return;
 	}
 
@@ -367,10 +368,12 @@ bool TableFile::doesMatchColumnType(const unsigned int& colIndex, const String& 
 }
 
 String TableFile::concatData(const Vector<String>& data) {
-	return String::join(this->getColumnNames(true), DCPConfig::fileDelimiter)
-		+ '\n'
-		+ String::join(data, '\n')
-		+ '\n';
+	String res = String::join(this->getColumnNames(true), DCPConfig::fileDelimiter) + '\n';
+	if (data.getSize()) {
+		res += String::join(data, '\n') + '\n';
+	}
+
+	return res;
 }
 
 TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, const String& firstColumnName, const String& secondColumnName) {
