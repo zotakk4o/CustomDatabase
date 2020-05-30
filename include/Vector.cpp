@@ -135,11 +135,11 @@ template<typename T>
 Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& end) const {
 	Vector<T> res;
 
-	if (this->size == 0 || beginning > end) {
+	if (this->size == 0 || beginning > end || beginning < 0 || end < 0) {
 		return res;
 	}
 
-	assert(beginning >= 0 && end < this->size && beginning <= end);
+	assert(end < this->size && beginning <= end);
 
 	for (unsigned int i = beginning; i <= end; i++)
 	{
@@ -152,6 +152,34 @@ Vector<T> Vector<T>::slice(const unsigned int& beginning, const unsigned int& en
 template<typename T>
 void Vector<T>::deleteInternals() {
 	delete[] this->data;
+}
+
+template<typename T>
+Vector<T>& Vector<T>::merge(const Vector<T>& other) {
+	unsigned int otherSize = other.getSize();
+	for (unsigned int i = 0; i < otherSize; i++)
+	{
+		this->pushBack(other[i]);
+	}
+
+	return *this;
+}
+template<typename T>
+void Vector<T>::removeAtIndex(const unsigned int& index) {
+	if (index < 0 || index >= this->size) {
+		return;
+	}
+
+	Vector<T> newOne;
+
+	for (unsigned int i = 0; i < this->size; i++)
+	{
+		if (i != index) {
+			newOne.pushBack(this->data[i]);
+		}
+	}
+
+	this->copy(newOne);
 }
 
 #endif

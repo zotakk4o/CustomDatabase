@@ -18,8 +18,10 @@ public:
 	Vector(const Vector<T>&);
 	Vector(std::initializer_list<T>);
 	~Vector();
-	Vector<T>& operator=(const Vector<T>&);
 
+	Vector<T>& operator=(const Vector<T>&);
+	Vector<T>& merge(const Vector<T>&);
+	void removeAtIndex(const unsigned int&);
 	T& operator[](const unsigned int&);
 	const T& operator[](const unsigned int&) const;
 
