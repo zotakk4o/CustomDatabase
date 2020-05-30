@@ -361,7 +361,7 @@ bool TableFile::doesMatchColumnType(const unsigned int& colIndex, const String& 
 	String type = this->getColumnType(colIndex);
 	int isNumeric = String::isNumeric(value);
 
-	return (type == DCPConfig::doubleType && isNumeric == 1)
+	return (type == DCPConfig::doubleType && isNumeric != -1)
 		|| (type == DCPConfig::intType && isNumeric == 0)
 		|| (type == DCPConfig::stringType);
 }
