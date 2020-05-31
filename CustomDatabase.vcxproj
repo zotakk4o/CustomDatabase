@@ -247,6 +247,7 @@
     <ClInclude Include="src\FilesHandlers\TableFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="db-files\table.csv" />
     <None Include="src\logs\.gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

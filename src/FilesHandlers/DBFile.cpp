@@ -106,14 +106,15 @@ void DBFile::countRowsFromTable(const Vector<String>& parameters) {
 }
 
 void DBFile::importTable(const String& fileName) {
+	String tableName = DBFile::getFileName(fileName, false);
 
-	if (this->doesTableExist(DBFile::getFileName(fileName, false))) {
+	if (this->doesTableExist(tableName)) {
 		throw DCPErrors::tableAlreadyExistsError;
 	}
 
-	String tableName = DBFile::getFileName(fileName, false);
 	String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
-	this->addTableToData({ this->logger, tableName, fileName, true });
+	this->addTableToData({ this->logger, tableName, newPath, true });
+	this->save();
 }
 
 void DBFile::exportTable(const String& tableName, const String& fileName) {
@@ -168,14 +169,12 @@ void DBFile::renameTable(const String& tableName, const String& newName) {
 	{
 		if (this->tableFiles[i].getTableName() == tableName) {
 			this->tableFiles[i].rename(newName);
-			this->data += newName;
-		}
-		else {
-			this->data += tableName;
 		}
 
-		this->data = this->data + DCPConfig::fileDelimiter + this->tableFiles[i].getPath() + '\n';
+		this->data += this->tableFiles[i].getTableName() + DCPConfig::fileDelimiter + this->tableFiles[i].getPath() + '\n';
 	}
+
+	this->save();
 }
 
 TableFile& DBFile::getTableWithName(const String& tableName) {

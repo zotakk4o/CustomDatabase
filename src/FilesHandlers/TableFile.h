@@ -22,7 +22,7 @@ class TableFile : public File {
 		void describe();
 		void print();
 		void exportData(const String&);
-		void rename(const String&);
+		bool rename(const String&);
 		void addColumn(const String&, const String&);
 		void insert(const Vector<String>&);
 		Vector<String> select(const Vector<String>&, const String& = "AND", bool = true);

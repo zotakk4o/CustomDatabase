@@ -356,5 +356,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\logs\.gitignore" />
+    <None Include="db-files\table.csv" />
   </ItemGroup>
 </Project>

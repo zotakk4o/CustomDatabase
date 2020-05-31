@@ -19,6 +19,7 @@ class DCPErrors {
 		static const String wrongAggregateCommand;
 		static const String aggregateFailedError;
 		static const String incorrectLogicalOperatorError;
+		static const String couldNotRenameTableError;
 };
 
 #endif

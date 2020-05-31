@@ -36,7 +36,7 @@ class DBFile : public File {
 		double aggregate(const Vector<String>&);
 
 		TableFile& getTableWithName(const String&);
-		Vector<String> generateInCriteria(const String&, const Vector<String>&) const; //:(
+		Vector<String> generateInCriteria(const String&, const Vector<String>&) const;
 };
 
 #endif

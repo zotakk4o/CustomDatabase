@@ -3,6 +3,7 @@
 #include "../config/DCPMessages.h"
 #include "../config/DCPErrors.h"
 #include "include/Pagination/Pagination.h"
+#include<stdio.h>
 
 TableFile::TableFile(ILogger* _logger, const String& _name, const String& _path, bool openOnCreation) : File(_logger, _path), tableName(_name), joined(false) {
 	if (openOnCreation && _path.getLength()) {
@@ -284,8 +285,33 @@ void TableFile::exportData(const String& fileName) {
 	this->saveAs(fileName);
 }
 
-void TableFile::rename(const String& newName) {
-	this->setTableName(newName);
+bool TableFile::rename(const String& newName) {
+	if (!newName.getLength()) {
+		return false;
+	}
+
+	String reversedPath = this->path.reverse();
+	int firstLetterOfNameIndex = reversedPath.indexOf('/') == -1 ? reversedPath.indexOf('\\') : reversedPath.indexOf('/');
+
+	if (firstLetterOfNameIndex == -1) {
+		firstLetterOfNameIndex = 0;
+	}
+	else {
+		firstLetterOfNameIndex = this->path.getLength() - firstLetterOfNameIndex;
+	}
+
+	String newPath = 
+		this->path.substring(0, firstLetterOfNameIndex) +
+		newName +
+		path.substring(firstLetterOfNameIndex + this->tableName.getLength(), this->path.getLength() - this->tableName.getLength() - firstLetterOfNameIndex);
+
+	if (std::rename(this->path.getConstChar(), newPath.getConstChar())) {
+		throw DCPErrors::couldNotRenameTableError;
+	}
+
+	this->path = newPath;
+	this->tableName = newName;
+	return true;
 }
 
 const Vector<String> TableFile::getColumnNames(bool getWithTypes) const {
