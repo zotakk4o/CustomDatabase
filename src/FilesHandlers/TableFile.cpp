@@ -445,7 +445,7 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 	{
 		for (unsigned int j = 0; j < secondTableSize; j++)
 		{
-			Vector<String> secondTableRow = secondTableData[i].split(DCPConfig::fileDelimiter);
+			Vector<String> secondTableRow = secondTableData[j].split(DCPConfig::fileDelimiter);
 
 			if (firstTableData[i].split(DCPConfig::fileDelimiter)[firstTableIndex] == secondTableRow[secondTableIndex]) {
 				res.data += firstTableData[i] + DCPConfig::fileDelimiter;
@@ -463,7 +463,6 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 				}
 
 				res.data += '\n';
-				break;
 			}
 		}
 	}
