@@ -451,18 +451,19 @@ TableFile TableFile::innerJoin(const TableFile& first, const TableFile& second, 
 				res.data += firstTableData[i] + DCPConfig::fileDelimiter;
 				rowSize = secondTableRow.getSize();
 
-				for (unsigned int i = 0; i < rowSize; i++)
+				for (unsigned int k = 0; k < rowSize; k++)
 				{
-					if (i != firstTableIndex && i != secondTableIndex) {
-						res.data += secondTableRow[i];
+					if (k != secondTableIndex) {
+						res.data += secondTableRow[k];
 
-						if (i != rowSize - 1) {
+						if (k != rowSize - 1) {
 							res.data += DCPConfig::fileDelimiter;
 						}
 					}
 				}
 
 				res.data += '\n';
+				break;
 			}
 		}
 	}
