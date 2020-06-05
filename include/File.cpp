@@ -135,6 +135,10 @@ void File::setData(const String& newData) {
 	this->data = newData;
 }
 
+void File::setPath(const String& newPath) {
+	this->path = newPath;
+}
+
 String File::getData() const {
 	return this->data;
 }

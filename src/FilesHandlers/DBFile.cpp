@@ -105,15 +105,17 @@ void DBFile::countRowsFromTable(const Vector<String>& parameters) {
 	this->getTableWithName(parameters[0]).count(parameters[1], parameters[2]);
 }
 
-void DBFile::importTable(const String& fileName) {
-	String tableName = DBFile::getFileName(fileName, false);
+void DBFile::importTable(const String& filePath) {
+	String tableName = DBFile::getFileName(filePath, false);
 
 	if (this->doesTableExist(tableName)) {
 		throw DCPErrors::tableAlreadyExistsError;
 	}
 
 	String newPath = DCPConfig::defaultFilesLocation + tableName + DCPConfig::tableFileExtension;
-	this->addTableToData({ this->logger, tableName, newPath, true });
+	TableFile newTable = { this->logger, tableName, filePath, true };
+	newTable.setPath(newPath);
+	this->addTableToData(newTable);
 	this->save();
 }
 
